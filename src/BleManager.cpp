@@ -167,25 +167,25 @@ void BleManager::runLoop() {
     switch(this->currentState) 
     {
       case States::START_ADVERTISING:
-        Serial.println("--- States::START_ADVERTISING ---");
+        Serial.println("--- BLE -> START_ADVERTISING ---");
         this->startAdvertising();
         break;
       case States::LISTENING:
-        Serial.println("--- States::LISTENING ---");
+        Serial.println("--- BLE -> LISTENING ---");
         if (deviceConnected && !oldDeviceConnected) {
           oldDeviceConnected = deviceConnected;
           this->currentState = States::CONNECTED;
         }
         break;
       case States::CONNECTED:
-        Serial.println("--- States::CONNECTED ---");
-        this->notifyEncoder();
+        Serial.println("--- BLE -> CONNECTED ---");
+        //this->notifyEncoder();
         if(!lastReceivedMsg.empty()) {
           this->handleMsg(lastReceivedMsg);
         }
         break;
       case States::DISCONNECTED:
-        Serial.println("--- States::DISCONNECTED ---");
+        Serial.println("--- BLE -> DISCONNECTED ---");
         if (!deviceConnected && oldDeviceConnected) {
           oldDeviceConnected = deviceConnected;
           vTaskDelay(100);

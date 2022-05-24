@@ -18,6 +18,11 @@ typedef struct EncoderData
   uint32_t roundCounter;
 } EncoderData_t;
 
+typedef struct MotorPositionData
+{
+  uint32_t currentStepPosition;
+} MotorPositionData_t;
+
 typedef enum Commands
 {
   START_PROGRAMMING_CMD,
@@ -32,8 +37,8 @@ typedef enum Commands
 typedef struct MotorActionCommand
 {
   Commands_t cmd;
-  EncoderData_t pointA;
-  EncoderData_t pointB;
+  MotorPositionData_t pointA;
+  MotorPositionData_t pointB;
   uint8_t direction;
 } MotorActionCommand_t;
 

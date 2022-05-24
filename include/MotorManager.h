@@ -37,6 +37,7 @@ class MotorManager {
 
     uint32_t value;
     bool hasNewNotify = false;
+    uint32_t currentStepPosition = 0;
     AccelStepper stepper;
     States currentState = States::IDLE;
     StepType stepType;

@@ -2,6 +2,7 @@
 #define MISSION_CONTROLLER_H
 
 #include "Init.h"
+#include "global.h"
 
 class MissionController {
   public:
@@ -16,9 +17,9 @@ class MissionController {
     };
     
     uint32_t value;
+    bool hasNewNotify = false;
     States currentState = States::MANUAL;
-    BaseType_t xStatus;
-    EncoderData_t encoderData;
+    //EncoderData_t encoderData;
     MotorActionCommand_t motorActionCommand;
     MissionControlCommand_t missionControlCommand;
 
@@ -26,6 +27,8 @@ class MissionController {
     void setFinishProgramming();
     void setA();
     void setB();
+
+    MotorPositionData_t receiveMotorPosition();
 };
 
 #endif

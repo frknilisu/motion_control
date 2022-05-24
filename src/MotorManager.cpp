@@ -1,5 +1,7 @@
 #include "MotorManager.h"
 
+QueueHandle_t qMotorTask;
+
 MotorManager::MotorManager() {
   Serial.println(">>>>>>>> MotorManager() >>>>>>>>");
 
@@ -21,6 +23,8 @@ void MotorManager::init() {
   this->stepper.setAcceleration(100);
   this->stepper.setSpeed(200);
   this->stepper.moveTo(20000);
+
+  qMotorTask = xQueueCreate(10, sizeof(MotorPositionData_t));
 }
 
 void MotorManager::setStepResolution(StepType stepType) {
@@ -104,7 +108,7 @@ void MotorManager::runLoop() {
     switch(this->currentState) 
     {
       case States::IDLE:
-        Serial.println("--- States::IDLE ---");
+        Serial.println("--- Motor -> IDLE ---");
         if(hasNewNotify) {
           if(motorActionCommand.cmd == Commands_t::MOTOR_RUN_CMD) {
             this->setMotorStatus("RUN");
@@ -115,7 +119,7 @@ void MotorManager::runLoop() {
         }
         break;
       case States::RUN:
-        Serial.println("--- States::RUN ---");
+        Serial.println("--- Motor -> RUN ---");
         if(hasNewNotify) {
           if(motorActionCommand.cmd == Commands_t::MOTOR_STOP_CMD) {
             this->setMotorStatus("STOP");
@@ -130,7 +134,7 @@ void MotorManager::runLoop() {
         }
         break;
       case States::STOP:
-        Serial.println("--- States::STOP ---");
+        Serial.println("--- Motor -> STOP ---");
         this->stepper.stop();
         vTaskDelay(1000);
         this->setMotorStatus("IDLE");
@@ -138,6 +142,8 @@ void MotorManager::runLoop() {
     }
 
     //Serial.println(this->getCurrentPosition());
+    currentStepPosition = this->getCurrentPosition();
+    xQueueSend(qMotorTask, &currentStepPosition, portMAX_DELAY);
     
     vTaskDelay(1000);
   }
