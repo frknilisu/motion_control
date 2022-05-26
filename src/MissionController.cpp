@@ -6,6 +6,10 @@ bool isStartProgramming = false;
 bool isFinishProgramming = false;
 bool isSetA = false;
 bool isSetB = false;
+bool motorCmdSendFlag = false;
+
+int val = 0;
+int pa, pb;
 
 MissionController::MissionController() {
   Serial.println(">>>>>>>> MissionController() >>>>>>>>");
@@ -13,13 +17,15 @@ MissionController::MissionController() {
 
 void MissionController::setA() {
   //pA = receiveEncoderData();
-  pA = receiveMotorPosition();
+  pa = receiveMotorPosition();
+  Serial.println(pa);
   isSetA = true;
 }
 
 void MissionController::setB() {
   //pB = receiveEncoderData();
-  pB = receiveMotorPosition();
+  pb = receiveMotorPosition();
+  Serial.println(pb);
   isSetB = true;
 }
 
@@ -31,9 +37,13 @@ void MissionController::setFinishProgramming() {
   isFinishProgramming = true;
 }
 
-MotorPositionData_t MissionController::receiveMotorPosition() {
-  xReturn = xQueueReceive(qMotorTask, &value, portMAX_DELAY);
-  return (*(MotorPositionData_t*)(value));
+int MissionController::receiveMotorPosition() {
+  //xReturn = xQueueReceive(qMotorTask, &value, portMAX_DELAY);
+  //xReturn = xQueueReceive(qMotorTask, &val, 0);
+  xReturn = xQueuePeek(qMotorTask, &val, 0);
+  Serial.println("Queue Receive Motor Position");
+  Serial.println(val);
+  return val;//(*(MotorPositionData_t*)(value));
 }
 
 /*
@@ -56,7 +66,7 @@ void MissionController::runLoop() {
     switch(this->currentState) {
       case States::MANUAL:
         Serial.println("--- MC -> MANUAL ---");
-        if(hasNewNotify && missionControlCommand.cmd == Commands_t::START_PROGRAMMING_CMD) {
+        if(hasNewNotify && !isStartProgramming && missionControlCommand.cmd == Commands_t::START_PROGRAMMING_CMD) {
           isStartProgramming = true;
           this->currentState = States::PROGRAMMING;
           hasNewNotify = false;
@@ -65,10 +75,13 @@ void MissionController::runLoop() {
       case States::PROGRAMMING:
         Serial.println("--- MC -> PROGRAMMING ---");
         if(hasNewNotify) {
+          Serial.println("have new notify, let's check");
           if(!isSetA && !isSetB && missionControlCommand.cmd == Commands_t::SET_A_CMD) {
             this->setA();
+            Serial.println("setA done");
           } else if(isSetA && !isSetB && missionControlCommand.cmd == Commands_t::SET_B_CMD) {
             this->setB();
+            Serial.println("setB done");
           } else if(isSetA && isSetB && missionControlCommand.cmd == Commands_t::FINISH_PROGRAMMING_CMD) {
             this->setFinishProgramming();
           }
@@ -81,13 +94,22 @@ void MissionController::runLoop() {
         break;
       case States::ACTION:
         Serial.println("--- MC -> ACTION ---");
-        motorActionCommand.cmd = Commands_t::MOTOR_START_ACTION_CMD;
-        motorActionCommand.pointA = pA;
-        motorActionCommand.pointB = pB;
-        motorActionCommand.direction = 1;
-        xTaskNotify(motorTaskHandle, (uint32_t)&motorActionCommand, eSetValueWithOverwrite);
-        xReturn = xTaskNotifyWait(0, 0, NULL, portMAX_DELAY); // finished
-        this->currentState = States::PROGRAMMING;
+        if(hasNewNotify) {
+          if(missionControlCommand.cmd == Commands_t::ACTION_FINISH_MSG) {
+            this->currentState = States::MANUAL;
+          }
+          hasNewNotify = false;
+        } else if(!motorCmdSendFlag) {
+          motorActionCommand.cmd = Commands_t::MOTOR_START_ACTION_CMD;
+          motorActionCommand.pointA = pa;
+          motorActionCommand.pointB = pb;
+          motorActionCommand.direction = 1;
+          xTaskNotify(motorTaskHandle, (uint32_t)&motorActionCommand, eSetValueWithOverwrite);
+          motorCmdSendFlag = true;
+          isSetA = false;
+          isSetB = false;
+          isFinishProgramming = false;
+        }
         break;
       case States::ERROR:
         Serial.println("Error Occured");

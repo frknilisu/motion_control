@@ -42,6 +42,7 @@ class MotorManager {
     States currentState = States::IDLE;
     StepType stepType;
     MotorActionCommand_t motorActionCommand;
+    MissionControlCommand_t missionControlCommand;
 
     void init();
     void setStepResolution(StepType);

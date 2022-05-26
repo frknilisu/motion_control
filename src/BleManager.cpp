@@ -6,6 +6,8 @@
 bool deviceConnected = false;
 bool oldDeviceConnected = false;
 std::string lastReceivedMsg;
+int val2;
+char str2[80];
 
 TaskHandle_t missionControlTaskHandle;
 TaskHandle_t bleTaskHandle;
@@ -150,13 +152,16 @@ void BleManager::startAdvertising() {
 }
 
 void BleManager::notifyEncoder() {
-  Serial.println("## notifyEncoder() ##");
-  xReturn = xQueueReceive(qEncoderTask, &value, pdMS_TO_TICKS(10));
+  //Serial.println("## notifyEncoder() ##");
+  //xReturn = xQueueReceive(qEncoderTask, &value, pdMS_TO_TICKS(10));
+  xReturn = xQueuePeek(qMotorTask, &val2, 0);
   if(xReturn == pdPASS) {
-    Serial.println("pdPASS");
+    //Serial.println("pdPASS");
+    sprintf(str2, "notfiyEncoder: %d", val2);
+    Serial.println(str2);
     //encoderData = *(EncoderData_t*)(value);
-    int val = 10;
-    this->pTxCharacteristic->setValue(val);
+    //int val = 10;
+    this->pTxCharacteristic->setValue(val2);
     this->pTxCharacteristic->notify();
   }
 }
@@ -179,9 +184,12 @@ void BleManager::runLoop() {
         break;
       case States::CONNECTED:
         Serial.println("--- BLE -> CONNECTED ---");
-        //this->notifyEncoder();
+        this->notifyEncoder();
         if(!lastReceivedMsg.empty()) {
           this->handleMsg(lastReceivedMsg);
+        }
+        if(!deviceConnected) {
+          this->currentState = States::DISCONNECTED;
         }
         break;
       case States::DISCONNECTED:

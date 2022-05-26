@@ -2,6 +2,10 @@
 
 QueueHandle_t qMotorTask;
 
+int counter = 0;
+char str[80];
+bool stateChanged = false;
+
 MotorManager::MotorManager() {
   Serial.println(">>>>>>>> MotorManager() >>>>>>>>");
 
@@ -19,12 +23,15 @@ void MotorManager::init() {
   
   this->stepper = AccelStepper(MotorInterfaceType, stepPin, dirPin);
   this->setStepResolution(StepType::_1_div_8);
-  this->stepper.setMaxSpeed(1000);
-  this->stepper.setAcceleration(100);
+  //this->stepper.setMaxSpeed(1000);
+  //this->stepper.setAcceleration(100);
   this->stepper.setSpeed(200);
   this->stepper.moveTo(20000);
 
-  qMotorTask = xQueueCreate(10, sizeof(MotorPositionData_t));
+  qMotorTask = xQueueCreate(1, sizeof(int));
+  if (qMotorTask == NULL) {
+    Serial.println("Queue can not be created");
+  }
 }
 
 void MotorManager::setStepResolution(StepType stepType) {
@@ -88,10 +95,10 @@ void MotorManager::setMotorStatus(std::string stateName) {
   } else if(stateName == "IDLE") {
     this->currentState = States::IDLE;
   }
+  stateChanged = true;
 }
 
 int MotorManager::getCurrentPosition() {
-  Serial.println(">>>>>>>> getCurrentPosition() >>>>>>>>");
   return this->stepper.currentPosition();
 }
 
@@ -108,18 +115,28 @@ void MotorManager::runLoop() {
     switch(this->currentState) 
     {
       case States::IDLE:
-        Serial.println("--- Motor -> IDLE ---");
+        if(stateChanged) {
+          Serial.println("--- Motor -> IDLE ---");
+          stateChanged = false;
+        }
         if(hasNewNotify) {
           if(motorActionCommand.cmd == Commands_t::MOTOR_RUN_CMD) {
             this->setMotorStatus("RUN");
           } else if(motorActionCommand.cmd == Commands_t::MOTOR_START_ACTION_CMD) {
-            // TODO
+            Serial.println("Motor Start Action");
+            sprintf(str, "pA: %d, pB: %d, dir: %d", motorActionCommand.pointA, motorActionCommand.pointB, motorActionCommand.direction);
+            Serial.println(str);
+            stepper.moveTo(motorActionCommand.pointA);
+            this->setMotorStatus("RUN");
           }
           hasNewNotify = false;
         }
         break;
       case States::RUN:
-        Serial.println("--- Motor -> RUN ---");
+        if(stateChanged) {
+          Serial.println("--- Motor -> RUN ---");
+          stateChanged = false;
+        }
         if(hasNewNotify) {
           if(motorActionCommand.cmd == Commands_t::MOTOR_STOP_CMD) {
             this->setMotorStatus("STOP");
@@ -127,24 +144,35 @@ void MotorManager::runLoop() {
           hasNewNotify = false;
         } else {
           if(stepper.distanceToGo() == 0) {
-            stepper.moveTo(-stepper.currentPosition());
+            //stepper.moveTo(-stepper.currentPosition());
+            Serial.println("--- Motor -> Time To Stop ---");
+            this->setMotorStatus("STOP");
+            missionControlCommand.cmd = Commands_t::ACTION_FINISH_MSG;
+            xTaskNotify(missionControlTaskHandle, (uint32_t)&missionControlCommand, eSetValueWithOverwrite);
+          } else {
+            this->stepper.run();
+            Serial.println("--- Motor -> MOVING ---");
+            //this->stepper.runSpeedToPosition();
           }
-          this->stepper.run();
-          //this->stepper.runSpeedToPosition();
         }
         break;
       case States::STOP:
-        Serial.println("--- Motor -> STOP ---");
+        if(stateChanged) {
+          Serial.println("--- Motor -> STOP ---");
+          stateChanged = false;
+        }
         this->stepper.stop();
         vTaskDelay(1000);
         this->setMotorStatus("IDLE");
         break;
     }
 
-    //Serial.println(this->getCurrentPosition());
+
     currentStepPosition = this->getCurrentPosition();
-    xQueueSend(qMotorTask, &currentStepPosition, portMAX_DELAY);
+    //sprintf(str, "currentPosition: %d", currentStepPosition);
+    //Serial.println(str);
+    xReturn = xQueueOverwrite(qMotorTask, &currentStepPosition);
     
-    vTaskDelay(1000);
+    vTaskDelay(10);
   }
 }

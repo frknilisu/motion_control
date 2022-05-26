@@ -28,7 +28,7 @@ class MissionController {
     void setA();
     void setB();
 
-    MotorPositionData_t receiveMotorPosition();
+    int receiveMotorPosition();
 };
 
 #endif

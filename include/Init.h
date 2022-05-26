@@ -31,14 +31,15 @@ typedef enum Commands
   SET_B_CMD,
   MOTOR_RUN_CMD,
   MOTOR_STOP_CMD,
-  MOTOR_START_ACTION_CMD
+  MOTOR_START_ACTION_CMD,
+  ACTION_FINISH_MSG
 } Commands_t;
 
 typedef struct MotorActionCommand
 {
   Commands_t cmd;
-  MotorPositionData_t pointA;
-  MotorPositionData_t pointB;
+  int pointA;
+  int pointB;
   uint8_t direction;
 } MotorActionCommand_t;
 
