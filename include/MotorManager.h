@@ -8,12 +8,12 @@
 
 // Define the AccelStepper interface type
 #define MotorInterfaceType AccelStepper::DRIVER
-#define dirPin 26
-#define stepPin 25
-#define MS0 27
-#define MS1 16
-#define MS2 17
-#define enablePin 12
+#define dirPin 26 // -> 19
+#define stepPin 25 // -> 18
+#define MS0 27 // -> 14
+#define MS1 16 // -> 27
+#define MS2 17 // -> 26
+#define enablePin 12 // -> 12
 
 class MotorManager {
   public:
@@ -41,13 +41,22 @@ class MotorManager {
     AccelStepper stepper;
     States currentState = States::IDLE;
     StepType stepType;
-    MotorActionCommand_t motorActionCommand;
-    MissionControlCommand_t missionControlCommand;
 
     void init();
     void setStepResolution(StepType);
     void setMotorStatus(std::string stateName);
     int getCurrentPosition();
+
+    void checkQueueForNewMessage();
+    void vTimerCallback(xTimerHandle pxTimer);
+
+  public:
+    void idleEnterFunction();
+    void idleUpdateFunction();
+    void idleExitFunction();
+    void runEnterFunction();
+    void runUpdateFunction();
+    void runExitFunction();
 };
 
 #endif

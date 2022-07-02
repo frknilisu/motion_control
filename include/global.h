@@ -8,6 +8,7 @@ extern TaskHandle_t encoderTaskHandle;
 
 extern QueueHandle_t qEncoderTask;
 extern QueueHandle_t qMotorTask;
+extern QueueHandle_t qMissionControlTask;
 
 extern BaseType_t xReturn;
 

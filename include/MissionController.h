@@ -9,26 +9,32 @@ class MissionController {
     MissionController();
     void runLoop();
   private:
-    enum class States {
-      MANUAL,
-      PROGRAMMING,
-      ACTION,
-      ERROR
-    };
-    
-    uint32_t value;
-    bool hasNewNotify = false;
-    States currentState = States::MANUAL;
-    //EncoderData_t encoderData;
-    MotorActionCommand_t motorActionCommand;
-    MissionControlCommand_t missionControlCommand;
-
+    void init();
     void setStartProgramming();
     void setFinishProgramming();
     void setA();
     void setB();
 
+    void checkQueueForNewMessage();
     int receiveMotorPosition();
+
+    State manualState;
+    State programmingState;
+    State actionState;
+    Fsm fsm;
+
+  public:
+    void manualEnterFunction();
+    void manualUpdateFunction();
+    void manualExitFunction();
+
+    void programmingEnterFunction();
+    void programmingUpdateFunction();
+    void programmingExitFunction();
+
+    void actionEnterFunction();
+    void actionUpdateFunction();
+    void actionExitFunction();
 };
 
 #endif
