@@ -2,21 +2,13 @@
 #define INIT_H
 
 #include <Arduino.h>
+#include "Fsm.h"
+#include <FunctionFSM.h>
+#include <ArduinoJson.h>
 
 #define joyX 2
 #define joyY 4
 #define joySW 14
-
-typedef struct EncoderData
-{
-  uint32_t absoluteStep;
-  uint32_t roundCounter;
-} EncoderData_t;
-
-typedef struct MotorPositionData
-{
-  uint32_t currentStepPosition;
-} MotorPositionData_t;
 
 typedef enum Commands
 {
@@ -29,11 +21,6 @@ typedef enum Commands
   MOTOR_START_ACTION_CMD,
   ACTION_FINISH_MSG
 } Commands_t;
-
-typedef struct QueueJsonMsg
-{
-  char* data;
-} QueueJsonMsg_t;
 
 enum class FPS_Opt
 {

@@ -14,6 +14,7 @@
 class BleManager {
   public:
     BleManager();
+    void init();
     void runLoop();
   private:
     enum class States {
@@ -34,7 +35,6 @@ class BleManager {
     BLECharacteristic* pTxCharacteristic = NULL;
     BLECharacteristic* pRxCharacteristic = NULL;
     
-    void init();
     void startAdvertising();
     void notifyEncoder();
     void handleMsg(std::string receivedMsg);

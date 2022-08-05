@@ -58,6 +58,10 @@ void setup() {
   bleManager = new BleManager();
   missionController = new MissionController();
 
+  motorManager->init();
+  bleManager->init();
+  missionController->init();
+
   xTaskCreatePinnedToCore(
     TaskBLE
     ,  "TaskBLE"

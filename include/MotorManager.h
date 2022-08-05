@@ -18,6 +18,7 @@
 class MotorManager {
   public:
     MotorManager();
+    void init();
     void runLoop();
   private:
     enum class States {
@@ -42,7 +43,6 @@ class MotorManager {
     States currentState = States::IDLE;
     StepType stepType;
 
-    void init();
     void setStepResolution(StepType);
     void setMotorStatus(std::string stateName);
     int getCurrentPosition();
@@ -50,13 +50,17 @@ class MotorManager {
     void checkQueueForNewMessage();
     void vTimerCallback(xTimerHandle pxTimer);
 
-  public:
-    void idleEnterFunction();
-    void idleUpdateFunction();
-    void idleExitFunction();
-    void runEnterFunction();
-    void runUpdateFunction();
-    void runExitFunction();
+    void idle_enter();
+    void idle_on();
+    void idle_exit();
+    void run_enter();
+    void run_on();
+    void run_exit();
+
+    FunctionState stateIdle;
+    FunctionState stateRun;
+
+    FunctionFsm fsm;
 };
 
 #endif

@@ -105,8 +105,6 @@ class MyCharacteristicCallbacks: public BLECharacteristicCallbacks {
 
 BleManager::BleManager() {
   Serial.println(">>>>>>>> BleManager() >>>>>>>>");
-
-  this->init();
 }
 
 void BleManager::init() {
@@ -138,32 +136,6 @@ void BleManager::init() {
 
   this->currentState = States::START_ADVERTISING;
   
-}
-
-void BleManager::startAdvertising() {
-  // Start the service
-  this->pService->start();
-
-  // Start advertising
-  this->pServer->getAdvertising()->start();
-  Serial.println("Waiting a client connection to notify...");
-
-  this->currentState = States::LISTENING;
-}
-
-void BleManager::notifyEncoder() {
-  //Serial.println("## notifyEncoder() ##");
-  //xReturn = xQueueReceive(qEncoderTask, &value, pdMS_TO_TICKS(10));
-  xReturn = xQueuePeek(qMotorTask, &val2, 0);
-  if(xReturn == pdPASS) {
-    //Serial.println("pdPASS");
-    sprintf(str2, "notfiyEncoder: %d", val2);
-    Serial.println(str2);
-    //encoderData = *(EncoderData_t*)(value);
-    //int val = 10;
-    this->pTxCharacteristic->setValue(val2);
-    this->pTxCharacteristic->notify();
-  }
 }
 
 void BleManager::runLoop() {
@@ -205,3 +177,31 @@ void BleManager::runLoop() {
     vTaskDelay(1000);
   }
 }
+
+void BleManager::startAdvertising() {
+  // Start the service
+  this->pService->start();
+
+  // Start advertising
+  this->pServer->getAdvertising()->start();
+  Serial.println("Waiting a client connection to notify...");
+
+  this->currentState = States::LISTENING;
+}
+
+void BleManager::notifyEncoder() {
+  //Serial.println("## notifyEncoder() ##");
+  //xReturn = xQueueReceive(qEncoderTask, &value, pdMS_TO_TICKS(10));
+  xReturn = xQueuePeek(qMotorTask, &val2, 0);
+  if(xReturn == pdPASS) {
+    //Serial.println("pdPASS");
+    sprintf(str2, "notfiyEncoder: %d", val2);
+    Serial.println(str2);
+    //encoderData = *(EncoderData_t*)(value);
+    //int val = 10;
+    this->pTxCharacteristic->setValue(val2);
+    this->pTxCharacteristic->notify();
+  }
+}
+
+

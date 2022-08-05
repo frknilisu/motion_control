@@ -7,34 +7,40 @@
 class MissionController {
   public:
     MissionController();
+    void init();
     void runLoop();
   private:
-    void init();
+    enum class StateEnum {
+      ManualState,
+      ProgrammingState,
+      ActionState
+    };
+
     void setStartProgramming();
     void setFinishProgramming();
     void setA();
     void setB();
 
-    void checkQueueForNewMessage();
-    int receiveMotorPosition();
+    void onValueUpdate();
 
-    State manualState;
-    State programmingState;
-    State actionState;
-    Fsm fsm;
+    void manual_enter();
+    void manual_on();
+    void manual_exit();
 
-  public:
-    void manualEnterFunction();
-    void manualUpdateFunction();
-    void manualExitFunction();
+    void programming_enter();
+    void programming_on();
+    void programming_exit();
 
-    void programmingEnterFunction();
-    void programmingUpdateFunction();
-    void programmingExitFunction();
+    void action_enter();
+    void action_on();
+    void action_exit();
 
-    void actionEnterFunction();
-    void actionUpdateFunction();
-    void actionExitFunction();
+    FunctionState stateManual;
+    FunctionState stateProgramming;
+    FunctionState stateAction;
+
+    FunctionFsm fsm;
+    
 };
 
 #endif
