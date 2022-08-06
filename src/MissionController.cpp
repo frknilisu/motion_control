@@ -32,19 +32,20 @@ MissionController::MissionController() :
   Serial.println(">>>>>>>> MissionController() >>>>>>>>");
 }
 
-template<typename T, typename R>
-void* void_cast(R(T::*f)())
-{
-    union
-    {
-        R(T::*pf)();
-        void* p;
-    };
-    pf = f;
-    return p;
-}
-
 void MissionController::init() {
+  qMissionControlTask = xQueueCreate(1, sizeof(StaticJsonDocument<200>));
+  if (qMissionControlTask == NULL) {
+    Serial.println("Queue can not be created");
+  }
+
+  this->timerHndl1Sec = xTimerCreate(
+      "timer1Sec", /* name */
+      pdMS_TO_TICKS(1000), /* period/time */
+      pdTRUE, /* auto reload */
+      (void*)0, /* timer ID */
+      this->vTimerCallback); /* callback */
+  xTimerStart(this->timerHndl1Sec, 0);
+
   fsm.add_transition(&stateManual, &stateProgramming, START_PROGRAMMING_EVENT, nullptr );
   fsm.add_transition(&stateProgramming, &stateAction, FINISH_PROGRAMMING_EVENT, nullptr );
   fsm.add_transition(&stateAction, &stateManual, FINISH_ACTION_EVENT, nullptr );
@@ -85,10 +86,11 @@ void MissionController::manual_enter() {
 void MissionController::manual_on() {
   Serial.println("--- Update MissionController -> MANUAL ---");
 
-  if(isNewMessageExist && !isStartProgramming && rxJsonDoc["cmd"] == "START_PROGRAMMING_CMD") {
+  if(isNewMessageExist && rxJsonDoc["cmd"] == "START_PROGRAMMING_CMD" && !isStartProgramming) {
     isStartProgramming = true;
-    fsm.trigger(START_PROGRAMMING_EVENT);
     isNewMessageExist = false;
+    rxJsonDoc.clear();
+    fsm.trigger(START_PROGRAMMING_EVENT);
   }
 }
 
@@ -105,13 +107,13 @@ void MissionController::programming_on() {
 
   if(isNewMessageExist) {
     Serial.println("have new notify, let's check");
-    if(!isSetA && !isSetB && rxJsonDoc["cmd"] == "SET_A_CMD") {
+    if(rxJsonDoc["cmd"] == "SET_A_CMD" && !isSetA && !isSetB) {
       this->setA();
       Serial.println("setA done");
-    } else if(isSetA && !isSetB && rxJsonDoc["cmd"] == "SET_B_CMD") {
+    } else if(rxJsonDoc["cmd"] == "SET_B_CMD" && isSetA && !isSetB) {
       this->setB();
       Serial.println("setB done");
-    } else if(isSetA && isSetB && rxJsonDoc["cmd"] == "FINISH_PROGRAMMING_CMD") {
+    } else if(rxJsonDoc["cmd"] == "FINISH_PROGRAMMING_CMD" && isSetA && isSetB) {
       this->setFinishProgramming();
     }
     isNewMessageExist = false;
@@ -130,7 +132,8 @@ void MissionController::programming_exit() {
 void MissionController::action_enter() {
   Serial.println("--- Enter: MissionController -> ACTION ---");
 
-  txJsonDoc["cmd"] = "MOTOR_START_ACTION_CMD";
+  txJsonDoc["target"] = "MotorManager";
+  txJsonDoc["cmd"] = "START_ACTION_CMD";
   txJsonDoc["start"] = -1;
   txJsonDoc["end"] = -1;
   txJsonDoc["direction"] = "a2b";
@@ -145,16 +148,18 @@ void MissionController::action_enter() {
 void MissionController::action_on() {
   Serial.println("--- Update: MissionController -> ACTION ---");
 
-  if(isNewMessageExist) {
-    if(rxJsonDoc["cmd"] == "ACTION_FINISH_MSG") {
-      fsm.trigger(FINISH_ACTION_EVENT);
-    }
+  if(isNewMessageExist && rxJsonDoc["cmd"] == "ACTION_FINISH_MSG") {
     isNewMessageExist = false;
+    fsm.trigger(FINISH_ACTION_EVENT);
   }
 }
 
 void MissionController::action_exit() {
   Serial.println("--- Exit: MissionController -> ACTION ---");
+}
+
+void MissionController::vTimerCallback(xTimerHandle pxTimer) {
+  this->onValueUpdate();
 }
 
 void MissionController::onValueUpdate() {
@@ -170,3 +175,20 @@ void MissionController::onValueUpdate() {
     }
   }
 }
+
+
+/*
+
+template<typename T, typename R>
+void* void_cast(R(T::*f)())
+{
+    union
+    {
+        R(T::*pf)();
+        void* p;
+    };
+    pf = f;
+    return p;
+}
+
+*/

@@ -46,9 +46,7 @@ class MotorManager {
     void setStepResolution(StepType);
     void setMotorStatus(std::string stateName);
     int getCurrentPosition();
-
-    void checkQueueForNewMessage();
-    void vTimerCallback(xTimerHandle pxTimer);
+    void publishPosition();
 
     void idle_enter();
     void idle_on();
@@ -57,10 +55,15 @@ class MotorManager {
     void run_on();
     void run_exit();
 
+    void vTimerCallback(xTimerHandle pxTimer);
+    void onValueUpdate();
+
     FunctionState stateIdle;
     FunctionState stateRun;
 
     FunctionFsm fsm;
+
+    xTimerHandle timerHndl1Sec;
 };
 
 #endif

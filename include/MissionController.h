@@ -16,12 +16,10 @@ class MissionController {
       ActionState
     };
 
-    void setStartProgramming();
-    void setFinishProgramming();
     void setA();
     void setB();
-
-    void onValueUpdate();
+    void setStartProgramming();
+    void setFinishProgramming();
 
     void manual_enter();
     void manual_on();
@@ -35,11 +33,16 @@ class MissionController {
     void action_on();
     void action_exit();
 
+    void vTimerCallback(xTimerHandle pxTimer);
+    void onValueUpdate();
+
     FunctionState stateManual;
     FunctionState stateProgramming;
     FunctionState stateAction;
 
     FunctionFsm fsm;
+
+    xTimerHandle timerHndl1Sec;
     
 };
 
