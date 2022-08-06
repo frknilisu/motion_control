@@ -4,6 +4,10 @@
 #include "Init.h"
 #include "global.h"
 
+#define START_PROGRAMMING_EVENT 0
+#define FINISH_PROGRAMMING_EVENT 1
+#define FINISH_ACTION_EVENT 2
+
 class MissionController {
   public:
     MissionController();
@@ -14,12 +18,23 @@ class MissionController {
       ManualState,
       ProgrammingState,
       ActionState
-    };
+    } currentState;
+
+    bool isStartProgramming = false;
+    bool isFinishProgramming = false;
+    bool isSetA = false;
+    bool isSetB = false;
+    uint32_t value;
+    int pa, pb, lastMotorPosition;
+
+    bool isNewMessageExist = false;
+    StaticJsonDocument<200> txJsonDoc, rxJsonDoc;
 
     void setA();
     void setB();
     void setStartProgramming();
     void setFinishProgramming();
+    void onValueUpdate();
 
     void manual_enter();
     void manual_on();
@@ -33,9 +48,6 @@ class MissionController {
     void action_on();
     void action_exit();
 
-    void vTimerCallback(xTimerHandle pxTimer);
-    void onValueUpdate();
-
     FunctionState stateManual;
     FunctionState stateProgramming;
     FunctionState stateAction;
@@ -43,7 +55,7 @@ class MissionController {
     FunctionFsm fsm;
 
     xTimerHandle timerHndl1Sec;
-    
+
 };
 
 #endif

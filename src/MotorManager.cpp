@@ -1,18 +1,9 @@
 #include "MotorManager.h"
 
-#define START_RUN_EVENT 0
-#define STOP_RUN_EVENT 1
-
 QueueHandle_t qMotorTask;
 QueueHandle_t qMissionControlTask;
 
-int counter = 0;
 char str[80];
-bool stateChanged = false;
-bool isNewMessageExist = false;
-uint32_t value;
-
-StaticJsonDocument<200> txJsonDoc, rxJsonDoc;
 
 MotorManager::MotorManager() :
     stateIdle([this]() { idle_enter(); },
@@ -23,7 +14,8 @@ MotorManager::MotorManager() :
              [this]() { run_on(); },
              [this]() { run_exit(); }),
     
-    fsm(&stateIdle) {
+    fsm(&stateIdle),
+    currentState(StateEnum::IdleState) {
   Serial.println(">>>>>>>> MotorManager() >>>>>>>>");
 }
 
@@ -41,19 +33,24 @@ void MotorManager::init() {
   //this->stepper.setMaxSpeed(1000);
   //this->stepper.setAcceleration(100);
   this->stepper.setSpeed(200);
-  this->stepper.moveTo(20000);
+  //this->stepper.moveTo(20000);
 
   qMotorTask = xQueueCreate(1, sizeof(StaticJsonDocument<200>));
   if (qMotorTask == NULL) {
     Serial.println("Queue can not be created");
   }
 
+  auto onTimer = [](xTimerHandle pxTimer){ 
+    MotorManager* mm = static_cast<MotorManager*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
+    mm->onValueUpdate();
+  };
+
   this->timerHndl1Sec = xTimerCreate(
       "timer1Sec", /* name */
       pdMS_TO_TICKS(1000), /* period/time */
       pdTRUE, /* auto reload */
-      (void*)0, /* timer ID */
-      this->vTimerCallback); /* callback */
+      static_cast<void*>(this), /* timer ID */
+      onTimer); /* callback */
   xTimerStart(this->timerHndl1Sec, 0);
 
   fsm.add_transition(&stateIdle, &stateRun, START_RUN_EVENT, nullptr );
@@ -67,6 +64,10 @@ void MotorManager::runLoop() {
     vTaskDelay(10);
   }
 }
+
+/*--------------------------------------------------------------*/
+/*---------------------- Utility Functions ---------------------*/
+/*--------------------------------------------------------------*/
 
 void MotorManager::setStepResolution(StepType stepType) {
   /*
@@ -121,17 +122,6 @@ void MotorManager::setStepResolution(StepType stepType) {
   }
 }
 
-void MotorManager::setMotorStatus(std::string stateName) {
-  if(stateName == "RUN") {
-    this->currentState = States::RUN;
-  } else if(stateName == "STOP") {
-    this->currentState = States::STOP;
-  } else if(stateName == "IDLE") {
-    this->currentState = States::IDLE;
-  }
-  stateChanged = true;
-}
-
 int MotorManager::getCurrentPosition() {
   return this->stepper.currentPosition();
 }
@@ -146,24 +136,46 @@ void MotorManager::publishPosition() {
   xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
 }
 
+void MotorManager::onValueUpdate() {
+  if(uxQueueMessagesWaiting(qMotorTask) != 0) {
+    xReturn = xQueueReceive(qMotorTask, &rxJsonDoc, 0);
+    if(xReturn == pdTRUE) {
+      isNewMessageExist = true;
+    } else {
+      isNewMessageExist = false;
+    }
+  }
+
+  this->publishPosition();
+}
+
+/*--------------------------------------------------------------*/
+/*---------------------- State Functions -----------------------*/
+/*--------------------------------------------------------------*/
+
 void MotorManager::idle_enter() {
   Serial.println("--- Enter: Motor -> IDLE ---");
 }
 
 void MotorManager::idle_on() {
-  Serial.println("--- Update: Motor -> IDLE ---");
+  //Serial.println("--- Update: Motor -> IDLE ---");
 
   if(isNewMessageExist) {
     if(rxJsonDoc["cmd"] == "MOTOR_RUN_CMD") {
-      //fsm.trigger(runState); // RUN
+      stepper.moveTo(20000);
+      fsm.trigger(START_RUN_EVENT); // RUN
     } else if(rxJsonDoc["cmd"] == "START_ACTION_CMD") {
       Serial.println("Motor Start Action");
-      sprintf(str, "pA: %d, pB: %d, dir: %d", rxJsonDoc["data"]["pointA"], rxJsonDoc["cmd"]["pointB"], rxJsonDoc["cmd"]["direction"]);
+      int pA = rxJsonDoc["start"];
+      int pB = rxJsonDoc["end"];
+      //String dir = rxJsonDoc["direction"];
+      sprintf(str, "pA: %d, pB: %d", pA, pB);
       Serial.println(str);
-      stepper.moveTo(rxJsonDoc["cmd"]["pointA"]);
+      stepper.moveTo(pA);
       fsm.trigger(START_RUN_EVENT); // RUN
     }
     isNewMessageExist = false;
+    rxJsonDoc.clear();
   }
 }
 
@@ -176,14 +188,16 @@ void MotorManager::run_enter() {
 }
 
 void MotorManager::run_on() {
-  Serial.println("--- Update: Motor -> RUN ---");
+  //Serial.println("--- Update: Motor -> RUN ---");
 
   if(isNewMessageExist && rxJsonDoc["cmd"] == "MOTOR_STOP_CMD") {
     isNewMessageExist = false;
+    rxJsonDoc.clear();
     fsm.trigger(STOP_RUN_EVENT); // STOP
   }
 
   if(stepper.distanceToGo() == 0) {
+    Serial.println("--- Update: Motor -> DIST2GO ZERO ---");
     fsm.trigger(STOP_RUN_EVENT); // STOP
   }
   
@@ -201,21 +215,4 @@ void MotorManager::run_exit() {
   xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
 
   vTaskDelay(1000);
-}
-
-void MotorManager::vTimerCallback(xTimerHandle pxTimer) {
-  this->onValueUpdate();
-}
-
-void MotorManager::onValueUpdate() {
-  if(uxQueueMessagesWaiting(qMotorTask) != 0) {
-    xReturn = xQueueReceive(qMotorTask, &rxJsonDoc, 0);
-    if(xReturn == pdTRUE) {
-      isNewMessageExist = true;
-    } else {
-      isNewMessageExist = false;
-    }
-  }
-
-  this->publishPosition();
 }

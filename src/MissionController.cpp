@@ -1,20 +1,5 @@
 #include "MissionController.h"
 
-#define START_PROGRAMMING_EVENT 0
-#define FINISH_PROGRAMMING_EVENT 1
-#define FINISH_ACTION_EVENT 2
-
-bool isNewMessageExist = false;
-bool isStartProgramming = false;
-bool isFinishProgramming = false;
-bool isSetA = false;
-bool isSetB = false;
-uint32_t value;
-int pa, pb, lastMotorPosition;
-
-//StaticJsonBuffer<200> jsonBuffer;
-StaticJsonDocument<200> txJsonDoc, rxJsonDoc;
-
 MissionController::MissionController() :
     stateManual([this]() { manual_enter(); },
             [this]() { manual_on(); },
@@ -28,7 +13,8 @@ MissionController::MissionController() :
             [this]() { action_on(); },
             [this]() { action_exit(); }),
     
-    fsm(&stateManual) {
+    fsm(&stateManual),
+    currentState(StateEnum::ManualState) {
   Serial.println(">>>>>>>> MissionController() >>>>>>>>");
 }
 
@@ -38,12 +24,17 @@ void MissionController::init() {
     Serial.println("Queue can not be created");
   }
 
+  auto onTimer = [](xTimerHandle pxTimer){ 
+    MissionController* mc = static_cast<MissionController*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
+    mc->onValueUpdate();
+  };
+  
   this->timerHndl1Sec = xTimerCreate(
       "timer1Sec", /* name */
       pdMS_TO_TICKS(1000), /* period/time */
       pdTRUE, /* auto reload */
-      (void*)0, /* timer ID */
-      this->vTimerCallback); /* callback */
+      static_cast<void*>(this), /* timer ID */
+      onTimer); /* callback */
   xTimerStart(this->timerHndl1Sec, 0);
 
   fsm.add_transition(&stateManual, &stateProgramming, START_PROGRAMMING_EVENT, nullptr );
@@ -58,6 +49,10 @@ void MissionController::runLoop() {
     vTaskDelay(1000);
   }
 }
+
+/*--------------------------------------------------------------*/
+/*---------------------- Utility Functions ---------------------*/
+/*--------------------------------------------------------------*/
 
 void MissionController::setA() {
   pa = lastMotorPosition;
@@ -79,12 +74,31 @@ void MissionController::setFinishProgramming() {
   isFinishProgramming = true;
 }
 
+void MissionController::onValueUpdate() {
+  if(uxQueueMessagesWaiting(qMissionControlTask) != 0) {
+    xReturn = xQueueReceive(qMissionControlTask, &rxJsonDoc, 0);
+    if(xReturn == pdTRUE) {
+      isNewMessageExist = true;
+      if(rxJsonDoc["msg"] == "motorPosition") {
+        lastMotorPosition = rxJsonDoc["data"];
+      }
+    } else {
+      isNewMessageExist = false;
+    }
+  }
+}
+
+/*--------------------------------------------------------------*/
+/*---------------------- State Functions -----------------------*/
+/*--------------------------------------------------------------*/
+
 void MissionController::manual_enter() {
   Serial.println("--- Enter: MissionController -> MANUAL ---");
+  currentState = StateEnum::ManualState;
 }
 
 void MissionController::manual_on() {
-  Serial.println("--- Update MissionController -> MANUAL ---");
+  //Serial.println("--- Update MissionController -> MANUAL ---");
 
   if(isNewMessageExist && rxJsonDoc["cmd"] == "START_PROGRAMMING_CMD" && !isStartProgramming) {
     isStartProgramming = true;
@@ -100,13 +114,13 @@ void MissionController::manual_exit() {
 
 void MissionController::programming_enter() {
   Serial.println("--- Enter: MissionController -> PROGRAMMING ---");
+  currentState = StateEnum::ProgrammingState;
 }
 
 void MissionController::programming_on() {
-  Serial.println("--- Update: MissionController -> PROGRAMMING ---");
+  //Serial.println("--- Update: MissionController -> PROGRAMMING ---");
 
   if(isNewMessageExist) {
-    Serial.println("have new notify, let's check");
     if(rxJsonDoc["cmd"] == "SET_A_CMD" && !isSetA && !isSetB) {
       this->setA();
       Serial.println("setA done");
@@ -117,6 +131,7 @@ void MissionController::programming_on() {
       this->setFinishProgramming();
     }
     isNewMessageExist = false;
+    rxJsonDoc.clear();
   }
 
   if(isSetA && isSetB && isFinishProgramming) {
@@ -131,11 +146,12 @@ void MissionController::programming_exit() {
 
 void MissionController::action_enter() {
   Serial.println("--- Enter: MissionController -> ACTION ---");
+  currentState = StateEnum::ActionState;
 
   txJsonDoc["target"] = "MotorManager";
   txJsonDoc["cmd"] = "START_ACTION_CMD";
-  txJsonDoc["start"] = -1;
-  txJsonDoc["end"] = -1;
+  txJsonDoc["start"] = pa;
+  txJsonDoc["end"] = pb;
   txJsonDoc["direction"] = "a2b";
 
   xQueueSend(qMotorTask, &txJsonDoc, eSetValueWithOverwrite);
@@ -146,10 +162,12 @@ void MissionController::action_enter() {
 }
 
 void MissionController::action_on() {
-  Serial.println("--- Update: MissionController -> ACTION ---");
+  //Serial.println("--- Update: MissionController -> ACTION ---");
 
   if(isNewMessageExist && rxJsonDoc["cmd"] == "ACTION_FINISH_MSG") {
+    Serial.println("ACTION finished");
     isNewMessageExist = false;
+    rxJsonDoc.clear();
     fsm.trigger(FINISH_ACTION_EVENT);
   }
 }
@@ -157,38 +175,3 @@ void MissionController::action_on() {
 void MissionController::action_exit() {
   Serial.println("--- Exit: MissionController -> ACTION ---");
 }
-
-void MissionController::vTimerCallback(xTimerHandle pxTimer) {
-  this->onValueUpdate();
-}
-
-void MissionController::onValueUpdate() {
-  if(uxQueueMessagesWaiting(qMissionControlTask) != 0) {
-    xReturn = xQueueReceive(qMissionControlTask, &rxJsonDoc, 0);
-    if(xReturn == pdTRUE) {
-      isNewMessageExist = true;
-      if(rxJsonDoc["msg"] == "motorPosition") {
-        lastMotorPosition = rxJsonDoc["data"];
-      }
-    } else {
-      isNewMessageExist = false;
-    }
-  }
-}
-
-
-/*
-
-template<typename T, typename R>
-void* void_cast(R(T::*f)())
-{
-    union
-    {
-        R(T::*pf)();
-        void* p;
-    };
-    pf = f;
-    return p;
-}
-
-*/

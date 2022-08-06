@@ -4,6 +4,10 @@
 #include "MotorManager.h"
 #include "MissionController.h"
 
+TaskHandle_t missionControlTaskHandle;
+TaskHandle_t bleTaskHandle;
+TaskHandle_t motorTaskHandle;
+
 BleManager* bleManager;
 MotorManager* motorManager;
 MissionController* missionController;

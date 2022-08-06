@@ -15,17 +15,19 @@
 #define MS2 17 // -> 26
 #define enablePin 12 // -> 12
 
+#define START_RUN_EVENT 0
+#define STOP_RUN_EVENT 1
+
 class MotorManager {
   public:
     MotorManager();
     void init();
     void runLoop();
   private:
-    enum class States {
-      IDLE,
-      RUN,
-      STOP
-    };
+    enum class StateEnum {
+      IdleState,
+      RunState
+    } currentState;
 
     enum class StepType {
       Full,
@@ -40,23 +42,23 @@ class MotorManager {
     bool hasNewNotify = false;
     uint32_t currentStepPosition = 0;
     AccelStepper stepper;
-    States currentState = States::IDLE;
     StepType stepType;
 
+    bool isNewMessageExist = false;
+    StaticJsonDocument<200> txJsonDoc, rxJsonDoc;
+
     void setStepResolution(StepType);
-    void setMotorStatus(std::string stateName);
     int getCurrentPosition();
     void publishPosition();
+    void onValueUpdate();
 
     void idle_enter();
     void idle_on();
     void idle_exit();
+
     void run_enter();
     void run_on();
     void run_exit();
-
-    void vTimerCallback(xTimerHandle pxTimer);
-    void onValueUpdate();
 
     FunctionState stateIdle;
     FunctionState stateRun;

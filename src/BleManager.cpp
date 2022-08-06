@@ -3,80 +3,14 @@
 #include <BLEDevice.h>
 #include <BLE2902.h>
 
-bool deviceConnected = false;
-bool oldDeviceConnected = false;
-std::string lastReceivedMsg;
 int val2;
 char str2[80];
 
-TaskHandle_t missionControlTaskHandle;
-TaskHandle_t bleTaskHandle;
-TaskHandle_t motorTaskHandle;
-TaskHandle_t encoderTaskHandle;
-QueueHandle_t qEncoderTask;
 BaseType_t xReturn;
 
-enum class BLEMsgsEnum {
-  msg_StartProgramming,
-  msg_FinishProgramming,
-  msg_SetA,
-  msg_SetB,
-  msg_MotorRun,
-  msg_MotorStop
-};
-
-BLEMsgsEnum hashit(std::string const& inString) {
-  if (inString == "startProgramming") return BLEMsgsEnum::msg_StartProgramming;
-  if (inString == "finishProgramming") return BLEMsgsEnum::msg_FinishProgramming;
-  if (inString == "setA") return BLEMsgsEnum::msg_SetA;
-  if (inString == "setB") return BLEMsgsEnum::msg_SetB;
-  if (inString == "motorRun") return BLEMsgsEnum::msg_MotorRun;
-  if (inString == "motorStop") return BLEMsgsEnum::msg_MotorStop;
-}
-
-/*--------------------------------------------------------------*/
-/*---------------------- Utility Functions ---------------------*/
-/*--------------------------------------------------------------*/
-
-void BleManager::handleMsg(std::string receivedMsg) {
-  lastReceivedMsg = "";
-  switch(hashit(receivedMsg)) {
-    case BLEMsgsEnum::msg_StartProgramming:
-      Serial.println("-- Received Msg: startProgramming --");
-      missionControlCommand.cmd = Commands_t::START_PROGRAMMING_CMD;
-      xTaskNotify(missionControlTaskHandle, (uint32_t)(&missionControlCommand), eSetValueWithOverwrite);
-      break;
-    case BLEMsgsEnum::msg_FinishProgramming:
-      Serial.println("-- Received Msg: finishProgramming --");
-      missionControlCommand.cmd = Commands_t::FINISH_PROGRAMMING_CMD;
-      xTaskNotify(missionControlTaskHandle, (uint32_t)(&missionControlCommand), eSetValueWithOverwrite);
-      break;
-    case BLEMsgsEnum::msg_SetA:
-      Serial.println("-- Received Msg: setA --");
-      missionControlCommand.cmd = Commands_t::SET_A_CMD;
-      xTaskNotify(missionControlTaskHandle, (uint32_t)(&missionControlCommand), eSetValueWithOverwrite);
-      break;
-    case BLEMsgsEnum::msg_SetB:
-      Serial.println("-- Received Msg: setB --");
-      missionControlCommand.cmd = Commands_t::SET_B_CMD;
-      xTaskNotify(missionControlTaskHandle, (uint32_t)(&missionControlCommand), eSetValueWithOverwrite);
-      break;
-    case BLEMsgsEnum::msg_MotorRun:
-      Serial.println("-- Received Msg: motorRun --");
-      motorActionCommand.cmd = Commands_t::MOTOR_RUN_CMD;
-      xTaskNotify(motorTaskHandle, (uint32_t)(&motorActionCommand), eSetValueWithOverwrite);
-      break;
-    case BLEMsgsEnum::msg_MotorStop:
-      Serial.println("-- Received Msg: motorStop --");
-      motorActionCommand.cmd = Commands_t::MOTOR_STOP_CMD;
-      xTaskNotify(motorTaskHandle, (uint32_t)(&motorActionCommand), eSetValueWithOverwrite);
-      break;
-  }
-}
-
-bool BleManager::isDeviceConnected() {
-  return this->currentState == States::CONNECTED;
-}
+bool deviceConnected = false;
+bool oldDeviceConnected = false;
+std::string lastReceivedMsg;
 
 /*------------------------------------------------------*/
 /*---------------------- Callbacks ---------------------*/
@@ -103,7 +37,17 @@ class MyCharacteristicCallbacks: public BLECharacteristicCallbacks {
   }
 };
 
-BleManager::BleManager() {
+BleManager::BleManager() :
+  stateAdvertising([this]() { advertising_enter(); },
+            [this]() { advertising_on(); },
+            [this]() { advertising_exit(); }),
+            
+  stateConnected([this]() { connected_enter(); },
+          [this]() { connected_on(); },
+          [this]() { connected_exit(); }),
+  
+  fsm(&stateAdvertising),
+  currentState(StateEnum::ADVERTISING) {
   Serial.println(">>>>>>>> BleManager() >>>>>>>>");
 }
 
@@ -134,59 +78,104 @@ void BleManager::init() {
   
   this->pRxCharacteristic->setCallbacks(new MyCharacteristicCallbacks());
 
-  this->currentState = States::START_ADVERTISING;
+  fsm.add_transition(&stateAdvertising, &stateConnected, CONNECT_EVENT, nullptr );
+  fsm.add_transition(&stateConnected, &stateAdvertising, DISCONNECT_EVENT, nullptr );
   
 }
 
 void BleManager::runLoop() {
   for (;;)
   {
-    switch(this->currentState) 
-    {
-      case States::START_ADVERTISING:
-        Serial.println("--- BLE -> START_ADVERTISING ---");
-        this->startAdvertising();
-        break;
-      case States::LISTENING:
-        Serial.println("--- BLE -> LISTENING ---");
-        if (deviceConnected && !oldDeviceConnected) {
-          oldDeviceConnected = deviceConnected;
-          this->currentState = States::CONNECTED;
-        }
-        break;
-      case States::CONNECTED:
-        Serial.println("--- BLE -> CONNECTED ---");
-        this->notifyEncoder();
-        if(!lastReceivedMsg.empty()) {
-          this->handleMsg(lastReceivedMsg);
-        }
-        if(!deviceConnected) {
-          this->currentState = States::DISCONNECTED;
-        }
-        break;
-      case States::DISCONNECTED:
-        Serial.println("--- BLE -> DISCONNECTED ---");
-        if (!deviceConnected && oldDeviceConnected) {
-          oldDeviceConnected = deviceConnected;
-          vTaskDelay(100);
-          Serial.println("re-start advertising");
-          this->currentState = States::START_ADVERTISING;
-        }
-        break;
-    }
+    fsm.run_machine();
     vTaskDelay(1000);
   }
 }
 
+/*--------------------------------------------------------------*/
+/*---------------------- Utility Functions ---------------------*/
+/*--------------------------------------------------------------*/
+
+void BleManager::handleMsg(std::string receivedMsg) {
+  lastReceivedMsg = "";
+  switch(hashit(receivedMsg)) {
+    case BLEMsgsEnum::msg_StartProgramming:
+      Serial.println("-- Received Msg: startProgramming --");
+
+      txJsonDoc["target"] = "MissionController";
+      txJsonDoc["cmd"] = "START_PROGRAMMING_CMD";
+
+      xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+
+      break;
+    case BLEMsgsEnum::msg_FinishProgramming:
+      Serial.println("-- Received Msg: finishProgramming --");
+
+      txJsonDoc["target"] = "MissionController";
+      txJsonDoc["cmd"] = "FINISH_PROGRAMMING_CMD";
+
+      xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+      
+      break;
+    case BLEMsgsEnum::msg_SetA:
+      Serial.println("-- Received Msg: setA --");
+      
+      txJsonDoc["target"] = "MissionController";
+      txJsonDoc["cmd"] = "SET_A_CMD";
+
+      xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+
+      break;
+    case BLEMsgsEnum::msg_SetB:
+      Serial.println("-- Received Msg: setB --");
+
+      txJsonDoc["target"] = "MissionController";
+      txJsonDoc["cmd"] = "SET_B_CMD";
+
+      xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+
+      break;
+    case BLEMsgsEnum::msg_MotorRun:
+      Serial.println("-- Received Msg: motorRun --");
+
+      txJsonDoc["target"] = "MotorManager";
+      txJsonDoc["cmd"] = "MOTOR_RUN_CMD";
+
+      xQueueSend(qMotorTask, &txJsonDoc, eSetValueWithOverwrite);
+
+      break;
+    case BLEMsgsEnum::msg_MotorStop:
+      Serial.println("-- Received Msg: motorStop --");
+
+      txJsonDoc["target"] = "MotorManager";
+      txJsonDoc["cmd"] = "MOTOR_STOP_CMD";
+
+      xQueueSend(qMotorTask, &txJsonDoc, eSetValueWithOverwrite);
+      
+      break;
+  }
+}
+
+BleManager::BLEMsgsEnum BleManager::hashit(std::string const& inString) {
+  if (inString == "startProgramming") return BLEMsgsEnum::msg_StartProgramming;
+  if (inString == "finishProgramming") return BLEMsgsEnum::msg_FinishProgramming;
+  if (inString == "setA") return BLEMsgsEnum::msg_SetA;
+  if (inString == "setB") return BLEMsgsEnum::msg_SetB;
+  if (inString == "motorRun") return BLEMsgsEnum::msg_MotorRun;
+  if (inString == "motorStop") return BLEMsgsEnum::msg_MotorStop;
+}
+
+bool BleManager::isDeviceConnected() {
+  return this->currentState == StateEnum::CONNECTED;
+}
+
 void BleManager::startAdvertising() {
+  Serial.println("--- BLE -> START_ADVERTISING ---");
+
   // Start the service
   this->pService->start();
 
   // Start advertising
   this->pServer->getAdvertising()->start();
-  Serial.println("Waiting a client connection to notify...");
-
-  this->currentState = States::LISTENING;
 }
 
 void BleManager::notifyEncoder() {
@@ -204,4 +193,50 @@ void BleManager::notifyEncoder() {
   }
 }
 
+/*--------------------------------------------------------------*/
+/*---------------------- State Functions -----------------------*/
+/*--------------------------------------------------------------*/
 
+void BleManager::advertising_enter() {
+  Serial.println("--- Enter: BleManager -> ADVERTISING ---");
+  this->startAdvertising();
+}
+
+void BleManager::advertising_on() {
+  //Serial.println("--- Update: BleManager -> ADVERTISING ---");
+  //Serial.println("--- BLE -> LISTENING ---");
+  if (deviceConnected && !oldDeviceConnected) {
+    oldDeviceConnected = deviceConnected;
+    fsm.trigger(CONNECT_EVENT);
+  }
+}
+
+void BleManager::advertising_exit() {
+  Serial.println("--- Exit: BleManager -> ADVERTISING ---");
+}
+
+void BleManager::connected_enter() {
+  Serial.println("--- Enter: BleManager -> CONNECTED ---");
+}
+
+void BleManager::connected_on() {
+  //Serial.println("--- Update: BleManager -> CONNECTED ---");
+  //Serial.println("--- BLE -> CONNECTED ---");
+  //this->notifyEncoder();
+  if(!lastReceivedMsg.empty()) {
+    this->handleMsg(lastReceivedMsg);
+  }
+  if(!deviceConnected) {
+    fsm.trigger(DISCONNECT_EVENT);
+  }
+}
+
+void BleManager::connected_exit() {
+  Serial.println("--- Exit: BleManager -> CONNECTED ---");
+  Serial.println("--- BLE -> DISCONNECTED ---");
+  if (!deviceConnected && oldDeviceConnected) {
+    oldDeviceConnected = deviceConnected;
+    vTaskDelay(100);
+    Serial.println("re-start advertising");
+  }
+}
