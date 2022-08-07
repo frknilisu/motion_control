@@ -8,23 +8,26 @@
 
 // Define the AccelStepper interface type
 #define MotorInterfaceType AccelStepper::DRIVER
-#define dirPin 26
-#define stepPin 25
-#define MS0 27
-#define MS1 16
-#define MS2 17
-#define enablePin 12
+#define dirPin 26 // -> 19
+#define stepPin 25 // -> 18
+#define MS0 27 // -> 14
+#define MS1 16 // -> 27
+#define MS2 17 // -> 26
+#define enablePin 12 // -> 12
+
+#define START_RUN_EVENT 0
+#define STOP_RUN_EVENT 1
 
 class MotorManager {
   public:
     MotorManager();
+    void init();
     void runLoop();
   private:
-    enum class States {
-      IDLE,
-      RUN,
-      STOP
-    };
+    enum class StateEnum {
+      IdleState,
+      RunState
+    } currentState;
 
     enum class StepType {
       Full,
@@ -35,19 +38,36 @@ class MotorManager {
       _1_div_32
     };
 
+    AccelStepper stepper;
+    StepType stepType;
     uint32_t value;
     bool hasNewNotify = false;
     uint32_t currentStepPosition = 0;
-    AccelStepper stepper;
-    States currentState = States::IDLE;
-    StepType stepType;
-    MotorActionCommand_t motorActionCommand;
-    MissionControlCommand_t missionControlCommand;
+    std::string stopReason;
 
-    void init();
+    bool isNewMessageExist = false;
+    StaticJsonDocument<200> txJsonDoc, rxJsonDoc;
+
     void setStepResolution(StepType);
-    void setMotorStatus(std::string stateName);
     int getCurrentPosition();
+    void printPosition();
+    void publishPosition();
+    void onValueUpdate();
+
+    void idle_enter();
+    void idle_on();
+    void idle_exit();
+
+    void run_enter();
+    void run_on();
+    void run_exit();
+
+    FunctionState stateIdle;
+    FunctionState stateRun;
+
+    FunctionFsm fsm;
+
+    xTimerHandle timerHndl1Sec;
 };
 
 #endif

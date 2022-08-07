@@ -1,19 +1,14 @@
 #include "Init.h"
 #include "global.h"
 #include "BleManager.h"
-//#include "EncoderManager.h"
 #include "MotorManager.h"
 #include "MissionController.h"
 
-//TaskHandle_t missionControlTaskHandle;
-//TaskHandle_t bleTaskHandle;
-//TaskHandle_t motorTaskHandle;
-//TaskHandle_t encoderTaskHandle;
-//QueueHandle_t qEncoderTask;
-//BaseType_t xReturn;
+TaskHandle_t missionControlTaskHandle;
+TaskHandle_t bleTaskHandle;
+TaskHandle_t motorTaskHandle;
 
 BleManager* bleManager;
-//EncoderManager* encoderManager;
 MotorManager* motorManager;
 MissionController* missionController;
 
@@ -26,14 +21,6 @@ void TaskBLE(void* pvParameters) {
   
   bleManager->runLoop();
 }
-
-/*
-void TaskEncoder(void* pvParameters) {
-  Serial.println("Starting Encoder Task...");
-
-  encoderManager->runLoop();
-}
-*/
 
 void TaskMotor(void *pvParameters) {
   Serial.println("Starting Motor Driving Task...");
@@ -53,10 +40,13 @@ void TaskMissionControl(void *pvParameters) {
 void setup() {
   Serial.begin(115200);
 
-  //encoderManager = new EncoderManager();
   motorManager = new MotorManager();
   bleManager = new BleManager();
   missionController = new MissionController();
+
+  motorManager->init();
+  bleManager->init();
+  missionController->init();
 
   xTaskCreatePinnedToCore(
     TaskBLE
@@ -66,17 +56,6 @@ void setup() {
     ,  2
     ,  &bleTaskHandle
     ,  0);
-
-  /*
-  xTaskCreatePinnedToCore(
-    TaskEncoder
-    ,  "TaskEncoder"
-    ,  4096
-    ,  NULL
-    ,  2
-    ,  &encoderTaskHandle
-    ,  0);
-  */
 
   xTaskCreatePinnedToCore(
     TaskMotor
