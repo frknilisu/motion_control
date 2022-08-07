@@ -20,10 +20,10 @@ class MissionController {
       ActionState
     } currentState;
 
-    bool isStartProgramming = false;
-    bool isFinishProgramming = false;
     bool isSetA = false;
     bool isSetB = false;
+    bool isStartProgramming = false;
+    bool isFinishProgramming = false;
     uint32_t value;
     int pa, pb, lastMotorPosition;
 

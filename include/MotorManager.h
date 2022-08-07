@@ -38,17 +38,19 @@ class MotorManager {
       _1_div_32
     };
 
+    AccelStepper stepper;
+    StepType stepType;
     uint32_t value;
     bool hasNewNotify = false;
     uint32_t currentStepPosition = 0;
-    AccelStepper stepper;
-    StepType stepType;
+    std::string stopReason;
 
     bool isNewMessageExist = false;
     StaticJsonDocument<200> txJsonDoc, rxJsonDoc;
 
     void setStepResolution(StepType);
     int getCurrentPosition();
+    void printPosition();
     void publishPosition();
     void onValueUpdate();
 

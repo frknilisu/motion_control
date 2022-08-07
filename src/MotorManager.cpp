@@ -126,6 +126,12 @@ int MotorManager::getCurrentPosition() {
   return this->stepper.currentPosition();
 }
 
+void MotorManager::printPosition() {
+  int currPos = getCurrentPosition();
+  sprintf(str, "currPos: %d", currPos);
+  Serial.println(str);
+}
+
 void MotorManager::publishPosition() {
   currentStepPosition = this->getCurrentPosition();
   
@@ -171,6 +177,7 @@ void MotorManager::idle_on() {
       //String dir = rxJsonDoc["direction"];
       sprintf(str, "pA: %d, pB: %d", pA, pB);
       Serial.println(str);
+      printPosition();
       stepper.moveTo(pA);
       fsm.trigger(START_RUN_EVENT); // RUN
     }
@@ -193,26 +200,35 @@ void MotorManager::run_on() {
   if(isNewMessageExist && rxJsonDoc["cmd"] == "MOTOR_STOP_CMD") {
     isNewMessageExist = false;
     rxJsonDoc.clear();
+    stopReason = "manual";
     fsm.trigger(STOP_RUN_EVENT); // STOP
+    return;
   }
 
   if(stepper.distanceToGo() == 0) {
     Serial.println("--- Update: Motor -> DIST2GO ZERO ---");
+    printPosition();
+    stopReason = "auto";
     fsm.trigger(STOP_RUN_EVENT); // STOP
+    return;
   }
   
-  this->stepper.run();
+  stepper.run();
 
 }
 
 void MotorManager::run_exit() {
   Serial.println("--- Exit: Motor -> RUN ---");
-  this->stepper.stop();
+  stepper.stop();
 
-  txJsonDoc["target"] = "MissionController";
-  txJsonDoc["cmd"] = "ACTION_FINISH_MSG";
-
-  xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+  if(stopReason == "manual") {
+    //txJsonDoc["target"] = "MissionController";
+    //txJsonDoc["cmd"] = "ACTION_FINISH_MSG";
+  } else if(stopReason == "auto") {
+    txJsonDoc["target"] = "MissionController";
+    txJsonDoc["cmd"] = "ACTION_FINISH_MSG";
+    xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+  }
 
   vTaskDelay(1000);
 }
