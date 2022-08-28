@@ -1,7 +1,7 @@
 #include "MotorManager.h"
 
 QueueHandle_t qMotorTask;
-QueueHandle_t qMissionControlTask;
+QueueHandle_t qMissionTask;
 
 char str[80];
 
@@ -15,6 +15,7 @@ MotorManager::MotorManager() :
              [this]() { run_exit(); }),
     
     fsm(&stateIdle),
+
     currentState(StateEnum::IdleState) {
   Serial.println(">>>>>>>> MotorManager() >>>>>>>>");
 }
@@ -45,21 +46,21 @@ void MotorManager::init() {
     mm->onValueUpdate();
   };
 
-  this->timerHndl1Sec = xTimerCreate(
+  this->timerHandle = xTimerCreate(
       "timer1Sec", /* name */
       pdMS_TO_TICKS(1000), /* period/time */
       pdTRUE, /* auto reload */
       static_cast<void*>(this), /* timer ID */
       onTimer); /* callback */
-  xTimerStart(this->timerHndl1Sec, 0);
+  
+  xTimerStart(this->timerHandle, 0);
 
   fsm.add_transition(&stateIdle, &stateRun, START_RUN_EVENT, nullptr );
   fsm.add_transition(&stateRun, &stateIdle, STOP_RUN_EVENT, nullptr );
 }
 
 void MotorManager::runLoop() {
-  for (;;)
-  {
+  for (;;) {
     fsm.run_machine();
     vTaskDelay(10);
   }
@@ -139,7 +140,7 @@ void MotorManager::publishPosition() {
   txJsonDoc["msg"] = "motorPosition";
   txJsonDoc["data"] = currentStepPosition;
 
-  xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+  xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
 }
 
 void MotorManager::onValueUpdate() {
@@ -179,6 +180,14 @@ void MotorManager::idle_on() {
       Serial.println(str);
       printPosition();
       stepper.moveTo(pA);
+      fsm.trigger(START_RUN_EVENT); // RUN
+    } else if(rxJsonDoc["cmd"] == "MOVE_RELATIVE") {
+      int step = rxJsonDoc["step"];
+      stepper.move(step);
+      fsm.trigger(START_RUN_EVENT); // RUN
+    } else if(rxJsonDoc["cmd"] == "MOVE_ABSOULATE") {
+      int position = rxJsonDoc["position"];
+      stepper.moveTo(position);
       fsm.trigger(START_RUN_EVENT); // RUN
     }
     isNewMessageExist = false;
@@ -225,9 +234,7 @@ void MotorManager::run_exit() {
     //txJsonDoc["target"] = "MissionController";
     //txJsonDoc["cmd"] = "ACTION_FINISH_MSG";
   } else if(stopReason == "auto") {
-    txJsonDoc["target"] = "MissionController";
-    txJsonDoc["cmd"] = "ACTION_FINISH_MSG";
-    xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+    xTaskNotifyGive(actionTaskHandle);
   }
 
   vTaskDelay(1000);

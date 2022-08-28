@@ -67,7 +67,7 @@ class MotorManager {
 
     FunctionFsm fsm;
 
-    xTimerHandle timerHndl1Sec;
+    xTimerHandle timerHandle;
 };
 
 #endif

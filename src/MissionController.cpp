@@ -1,5 +1,7 @@
 #include "MissionController.h"
 
+QueueHandle_t qActionTask;
+
 MissionController::MissionController() :
     stateManual([this]() { manual_enter(); },
             [this]() { manual_on(); },
@@ -14,13 +16,16 @@ MissionController::MissionController() :
             [this]() { action_exit(); }),
     
     fsm(&stateManual),
+    
     currentState(StateEnum::ManualState) {
   Serial.println(">>>>>>>> MissionController() >>>>>>>>");
 }
 
 void MissionController::init() {
-  qMissionControlTask = xQueueCreate(1, sizeof(StaticJsonDocument<200>));
-  if (qMissionControlTask == NULL) {
+  Serial.println(">>>>>>>> MissionController::init() >>>>>>>>");
+
+  qMissionTask = xQueueCreate(1, sizeof(StaticJsonDocument<200>));
+  if (qMissionTask == NULL) {
     Serial.println("Queue can not be created");
   }
 
@@ -29,13 +34,14 @@ void MissionController::init() {
     mc->onValueUpdate();
   };
   
-  this->timerHndl1Sec = xTimerCreate(
+  this->timerHandle = xTimerCreate(
       "timer1Sec", /* name */
       pdMS_TO_TICKS(1000), /* period/time */
       pdTRUE, /* auto reload */
       static_cast<void*>(this), /* timer ID */
       onTimer); /* callback */
-  xTimerStart(this->timerHndl1Sec, 0);
+  
+  xTimerStart(this->timerHandle, 0);
 
   fsm.add_transition(&stateManual, &stateProgramming, START_PROGRAMMING_EVENT, nullptr );
   fsm.add_transition(&stateProgramming, &stateAction, FINISH_PROGRAMMING_EVENT, nullptr );
@@ -43,8 +49,7 @@ void MissionController::init() {
 }
 
 void MissionController::runLoop() {
-  for(;;)
-  {
+  for(;;) {
     fsm.run_machine();
     vTaskDelay(1000);
   }
@@ -66,6 +71,17 @@ void MissionController::setB() {
   isSetB = true;
 }
 
+void MissionController::setActionData() {
+  txJsonDoc.clear();
+  txJsonDoc["target"] = "ActionManager";
+  txJsonDoc["data"] = rxJsonDoc["data"];
+
+  // Add Motor Data
+  txJsonDoc["data"]["motor"]["pa"] = pa;
+  txJsonDoc["data"]["motor"]["pb"] = pb;
+  isSetActionData = true;
+}
+
 void MissionController::setStartProgramming() {
   isStartProgramming = true;
 }
@@ -75,8 +91,8 @@ void MissionController::setFinishProgramming() {
 }
 
 void MissionController::onValueUpdate() {
-  if(uxQueueMessagesWaiting(qMissionControlTask) != 0) {
-    xReturn = xQueueReceive(qMissionControlTask, &rxJsonDoc, 0);
+  if(uxQueueMessagesWaiting(qMissionTask) != 0) {
+    xReturn = xQueueReceive(qMissionTask, &rxJsonDoc, 0);
     if(xReturn == pdTRUE) {
       isNewMessageExist = true;
       if(rxJsonDoc["msg"] == "motorPosition") {
@@ -127,14 +143,17 @@ void MissionController::programming_on() {
     } else if(rxJsonDoc["cmd"] == "SET_B_CMD" && isSetA && !isSetB) {
       this->setB();
       Serial.println("setB done");
-    } else if(rxJsonDoc["cmd"] == "FINISH_PROGRAMMING_CMD" && isSetA && isSetB) {
+    } else if(rxJsonDoc["cmd"] == "SET_ACTION_DATA_CMD" && isSetA && isSetB) {
+      this->setActionData();
+      Serial.println("setActionData done");
+    } else if(rxJsonDoc["cmd"] == "FINISH_PROGRAMMING_CMD" && isSetA && isSetB && isSetActionData) {
       this->setFinishProgramming();
     }
     isNewMessageExist = false;
     rxJsonDoc.clear();
   }
 
-  if(isSetA && isSetB && isFinishProgramming) {
+  if(isSetA && isSetB && isSetActionData && isFinishProgramming) {
     Serial.println("Point A and B are set. Finishing action programming..");
     fsm.trigger(FINISH_PROGRAMMING_EVENT);
   }
@@ -148,16 +167,12 @@ void MissionController::action_enter() {
   Serial.println("--- Enter: MissionController -> ACTION ---");
   currentState = StateEnum::ActionState;
 
-  txJsonDoc["target"] = "MotorManager";
-  txJsonDoc["cmd"] = "START_ACTION_CMD";
-  txJsonDoc["start"] = pa;
-  txJsonDoc["end"] = pb;
-  txJsonDoc["direction"] = "a2b";
-
-  xQueueSend(qMotorTask, &txJsonDoc, eSetValueWithOverwrite);
+  xQueueSend(qActionTask, &txJsonDoc, eSetValueWithOverwrite);
 
   isSetA = false;
   isSetB = false;
+  isSetActionData = false;
+  isStartProgramming = false;
   isFinishProgramming = false;
 }
 

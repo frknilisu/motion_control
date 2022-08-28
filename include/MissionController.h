@@ -22,6 +22,7 @@ class MissionController {
 
     bool isSetA = false;
     bool isSetB = false;
+    bool isSetActionData = false;
     bool isStartProgramming = false;
     bool isFinishProgramming = false;
     uint32_t value;
@@ -32,6 +33,7 @@ class MissionController {
 
     void setA();
     void setB();
+    void setActionData();
     void setStartProgramming();
     void setFinishProgramming();
     void onValueUpdate();
@@ -54,7 +56,7 @@ class MissionController {
 
     FunctionFsm fsm;
 
-    xTimerHandle timerHndl1Sec;
+    xTimerHandle timerHandle;
 
 };
 

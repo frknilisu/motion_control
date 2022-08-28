@@ -1,64 +1,105 @@
-PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<200> initParamsJsonDoc) {
-    record_duration = initParamsJsonDoc["record_duration"]; // 60 * 60
-    video_duration = initParamsJsonDoc["video_duration"]; // 30
-    fps = initParamsJsonDoc["fps"]; // 24
-    shutter_speed = initParamsJsonDoc["shutter_speed"]; // "1_500"
-    number_of_photo = video_duration * fps; // 720
-    capture_interval = record_duration / number_of_photo; // 5
+#include "PhotoTimelapse.h"
+
+SemaphoreHandle_t g_Mutex;
+static int iter_count = 0;
+TaskHandle_t captureTaskHandle;
+
+PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<200> initParamsJson) {
+    StaticJsonDocument<200> data = initParamsJson["data"];
+    StaticJsonDocument<200> motor_data = data["motor"];
+    StaticJsonDocument<200> capture_data = data["capture"];
+
+    this->record_duration = capture_data["record_duration"]; // 60 * 60
+    this->video_duration = capture_data["video_duration"]; // 30
+    this->fps = capture_data["fps"]; // 24
+    this->shutter_speed = capture_data["shutter_speed"]; // "1_500"
+    this->number_of_photo = video_duration * fps; // 720
+    this->capture_interval = record_duration / number_of_photo; // 5
     
-    pa = initParamsJsonDoc["pa"];
-    pb = initParamsJsonDoc["pb"];
-    direction = initParamsJsonDoc["direction"];
-    step_diff = direction == "a2b" ? pb - pa : pa - pb;
-    step_interval = step_diff / number_of_photo;
+    this->pa = motor_data["pa"];
+    this->pb = motor_data["pb"];
+    const char* s = motor_data["direction"]; 
+    this->direction = s;
+    this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
+    this->step_interval = this->step_diff / this->number_of_photo;
 }
 
 void PhotoTimelapse::init() {
-    timer = xCreateTimer();
+  g_Mutex = xSemaphoreCreateMutex();
+
+  auto onTimer = [](xTimerHandle pxTimer){ 
+    PhotoTimelapse* pt = static_cast<PhotoTimelapse*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
+    pt->onTimeout();
+  };
+
+  this->timer = xTimerCreate(
+    "timer1Sec", /* name */
+    pdMS_TO_TICKS(1000), /* period/time */
+    pdTRUE, /* auto reload */
+    static_cast<void*>(this), /* timer ID */
+    onTimer); /* callback */
 }
 
-void waitMoveToHome() {
-    if (direction == "a2b")
-        moveTo(pa);
-    else
-        moveTo(pb);
-    waitMotorSync();
-}
-
-void waitMoveToNextPosition() {
-    move(step_interval);
-    waitMotorSync();
-}
-
-void move(int step) {
-    // motor move relative step command
-    // send queue msg
-}
-
-void moveTo(int position) {
-    // motor move absoulate position command
-    // send queue msg
-}
-
-void waitMotorSync() {
-    // wait until motor finish movement
-    // receive queue msg
-}
-
-void prerun() {
-    waitMoveToHome();
-    triggerCapture();
-    timer.start();
-}
-
-void onTimeout() {
-    triggerCapture();
-    unclock();
+void PhotoTimelapse::prerun() {
+    this->waitMoveToHome();
+    this->triggerCapture();
+    xTimerStart(this->timer, 0);
 }
 
 void PhotoTimelapse::run() {
-    for(int i = 0; i < number_of_photo; i++){
-        waitMoveToNextPosition();
-        lock();
-    }
+    if(iter_count >= this->number_of_photo)
+        return;
+    
+    this->waitMoveToNextPosition();
+    xSemaphoreTake(g_Mutex, portMAX_DELAY);
+}
+
+void PhotoTimelapse::waitMoveToHome() {
+    if (this->direction == "a2b")
+        this->moveTo(this->pa);
+    else
+        this->moveTo(this->pb);
+    
+    this->waitMotorSync();
+}
+
+void PhotoTimelapse::waitMoveToNextPosition() {
+    this->move(this->step_interval);
+    this->waitMotorSync();
+}
+
+void PhotoTimelapse::move(int step) {
+    // Send Motor Command
+    txJsonDoc.clear();
+    txJsonDoc["target"] = "MotorManager";
+    txJsonDoc["cmd"] = "MOVE_RELATIVE";
+    txJsonDoc["step"] = step;
+
+    // send queue msg
+    xQueueSend(qMotorTask, &txJsonDoc, 0);
+}
+
+void PhotoTimelapse::moveTo(int position) {
+    // Send Motor Command
+    txJsonDoc.clear();
+    txJsonDoc["target"] = "MotorManager";
+    txJsonDoc["cmd"] = "MOVE_ABSOULATE";
+    txJsonDoc["position"] = position;
+
+    // send queue msg
+    xQueueSend(qMotorTask, &txJsonDoc, 0);
+}
+
+void PhotoTimelapse::waitMotorSync() {
+    // wait until motor finish movement
+    xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
+}
+
+void PhotoTimelapse::onTimeout() {
+    this->triggerCapture();
+    xSemaphoreGive(g_Mutex);
+}
+
+void PhotoTimelapse::triggerCapture() {
+    xTaskNotifyGive(captureTaskHandle);
 }
