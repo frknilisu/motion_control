@@ -1,6 +1,6 @@
 #include "MissionController.h"
 
-QueueHandle_t qActionTask;
+StaticJsonDocument<300> actionDataJson;
 
 MissionController::MissionController() :
     stateManual([this]() { manual_enter(); },
@@ -24,7 +24,7 @@ MissionController::MissionController() :
 void MissionController::init() {
   Serial.println(">>>>>>>> MissionController::init() >>>>>>>>");
 
-  qMissionTask = xQueueCreate(1, sizeof(StaticJsonDocument<200>));
+  qMissionTask = xQueueCreate(1, sizeof(StaticJsonDocument<300>));
   if (qMissionTask == NULL) {
     Serial.println("Queue can not be created");
   }
@@ -73,12 +73,10 @@ void MissionController::setB() {
 
 void MissionController::setActionData() {
   txJsonDoc.clear();
-  txJsonDoc["target"] = "ActionManager";
-  txJsonDoc["data"] = rxJsonDoc["data"];
 
   // Add Motor Data
-  txJsonDoc["data"]["motor"]["pa"] = pa;
-  txJsonDoc["data"]["motor"]["pb"] = pb;
+  actionDataJson["data"]["motor"]["pa"] = pa;
+  actionDataJson["data"]["motor"]["pb"] = pb;
   isSetActionData = true;
 }
 
@@ -97,6 +95,12 @@ void MissionController::onValueUpdate() {
       isNewMessageExist = true;
       if(rxJsonDoc["msg"] == "motorPosition") {
         lastMotorPosition = rxJsonDoc["data"];
+      } else if(rxJsonDoc["cmd"] == "setActionData") {
+        Serial.println("set action data");
+        actionDataJson.clear();
+        actionDataJson = rxJsonDoc;
+      } else {
+        Serial.println("ELSE");
       }
     } else {
       isNewMessageExist = false;
@@ -143,7 +147,7 @@ void MissionController::programming_on() {
     } else if(rxJsonDoc["cmd"] == "SET_B_CMD" && isSetA && !isSetB) {
       this->setB();
       Serial.println("setB done");
-    } else if(rxJsonDoc["cmd"] == "SET_ACTION_DATA_CMD" && isSetA && isSetB) {
+    } else if(rxJsonDoc["cmd"] == "setActionData" && isSetA && isSetB) {
       this->setActionData();
       Serial.println("setActionData done");
     } else if(rxJsonDoc["cmd"] == "FINISH_PROGRAMMING_CMD" && isSetA && isSetB && isSetActionData) {
@@ -167,7 +171,7 @@ void MissionController::action_enter() {
   Serial.println("--- Enter: MissionController -> ACTION ---");
   currentState = StateEnum::ActionState;
 
-  xQueueSend(qActionTask, &txJsonDoc, eSetValueWithOverwrite);
+  xQueueSend(qActionTask, &actionDataJson, eSetValueWithOverwrite);
 
   isSetA = false;
   isSetB = false;

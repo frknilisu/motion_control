@@ -1,7 +1,8 @@
 #include "ActionManager.h"
 #include "PhotoTimelapse.h"
 
-PhotoTimelapse* activeAction;
+QueueHandle_t qActionTask;
+PhotoTimelapse* activeAction = NULL;
 
 ActionManager::ActionManager() {
   Serial.println(">>>>>>>> ActionManager() >>>>>>>>");
@@ -10,7 +11,7 @@ ActionManager::ActionManager() {
 void ActionManager::init() {
   Serial.println(">>>>>>>> ActionManager::init() >>>>>>>>");
 
-  qActionTask = xQueueCreate(1, sizeof(StaticJsonDocument<200>));
+  qActionTask = xQueueCreate(1, sizeof(StaticJsonDocument<300>));
   if (qActionTask == NULL) {
     Serial.println("Queue can not be created");
   }
@@ -33,7 +34,9 @@ void ActionManager::init() {
 void ActionManager::runLoop() {
   for(;;) {
     //fsm.run_machine();
-    activeAction->run();
+    if(activeAction != NULL) {
+      activeAction->run();
+    }
     vTaskDelay(1000);
   }
 }
@@ -44,8 +47,7 @@ void ActionManager::onValueUpdate() {
     xReturn = xQueueReceive(qActionTask, &rxJsonDoc, 0);
     if(xReturn == pdTRUE) {
       isNewMessageExist = true;
-      StaticJsonDocument<200> initParams = rxJsonDoc;
-      activeAction = new PhotoTimelapse(initParams);
+      activeAction = new PhotoTimelapse(rxJsonDoc);
     } else {
       isNewMessageExist = false;
     }

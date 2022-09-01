@@ -3,11 +3,13 @@
 SemaphoreHandle_t g_Mutex;
 static int iter_count = 0;
 TaskHandle_t captureTaskHandle;
+StaticJsonDocument<300> data, motor_data, capture_data;
 
-PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<200> initParamsJson) {
-    StaticJsonDocument<200> data = initParamsJson["data"];
-    StaticJsonDocument<200> motor_data = data["motor"];
-    StaticJsonDocument<200> capture_data = data["capture"];
+PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<300> initParamsJson) {
+    Serial.println(">>>>>>>> PhotoTimelapse(initParams) >>>>>>>>");
+    data = initParamsJson["data"];
+    motor_data = data["motor"];
+    capture_data = data["capture"];
 
     this->record_duration = capture_data["record_duration"]; // 60 * 60
     this->video_duration = capture_data["video_duration"]; // 30
@@ -22,9 +24,19 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<200> initParamsJson) {
     this->direction = s;
     this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
     this->step_interval = this->step_diff / this->number_of_photo;
+
+    Serial.println(this->record_duration);
+    Serial.println(this->video_duration);
+    Serial.println(this->fps);
+
+    Serial.println(this->step_diff);
+    Serial.println(this->step_interval);
+
+    this->init();
 }
 
 void PhotoTimelapse::init() {
+    Serial.println(">>>>>>>> PhotoTimelapse::init() >>>>>>>>");
   g_Mutex = xSemaphoreCreateMutex();
 
   auto onTimer = [](xTimerHandle pxTimer){ 
@@ -41,12 +53,17 @@ void PhotoTimelapse::init() {
 }
 
 void PhotoTimelapse::prerun() {
-    this->waitMoveToHome();
-    this->triggerCapture();
-    xTimerStart(this->timer, 0);
+    
 }
 
 void PhotoTimelapse::run() {
+    /*if(!isReadyToStartAction) {
+        this->waitMoveToHome();
+        this->triggerCapture();
+        xTimerStart(this->timer, 0);
+        isReadyToStartAction = true;
+    }*/
+    
     if(iter_count >= this->number_of_photo)
         return;
     
