@@ -31,7 +31,7 @@ setActionCmdJson = {
         },
         "capture": {
             "record_duration": 3600,
-            "video_duration": 10,
+            "video_duration": 30,
             "fps": 24,
             "shutter_speed": "1_500"
         }

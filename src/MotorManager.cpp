@@ -234,7 +234,11 @@ void MotorManager::run_exit() {
     //txJsonDoc["target"] = "MissionController";
     //txJsonDoc["cmd"] = "ACTION_FINISH_MSG";
   } else if(stopReason == "auto") {
-    xTaskNotifyGive(actionTaskHandle);
+    Serial.println("--- Notify Action Manager to action done ---");
+    xReturn = xTaskNotifyGive(actionTaskHandle);
+    if(xReturn == pdPASS) {
+      Serial.println("--- Notif sent by MotorManager ---");
+    }
   }
 
   vTaskDelay(1000);

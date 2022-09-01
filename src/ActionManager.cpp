@@ -35,6 +35,7 @@ void ActionManager::runLoop() {
   for(;;) {
     //fsm.run_machine();
     if(activeAction != NULL) {
+      Serial.println("--- ActionManager: ActiveAction->run() ---");
       activeAction->run();
     }
     vTaskDelay(1000);
