@@ -6,7 +6,7 @@
 
 class PhotoTimelapse {
   public:
-    PhotoTimelapse(StaticJsonDocument<300> initParamsJsonDoc);
+    PhotoTimelapse(StaticJsonDocument<256> initParamsJsonDoc);
     void init();
     void run();
   private:
@@ -25,7 +25,7 @@ class PhotoTimelapse {
     int step_diff;
     int step_interval;
 
-    StaticJsonDocument<300> txJsonDoc, rxJsonDoc;
+    StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
 
     void prerun();
     void move(int step);

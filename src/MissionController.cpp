@@ -1,6 +1,6 @@
 #include "MissionController.h"
 
-StaticJsonDocument<300> actionDataJson;
+StaticJsonDocument<256> actionDataJson;
 
 MissionController::MissionController() :
     stateManual([this]() { manual_enter(); },
@@ -24,7 +24,7 @@ MissionController::MissionController() :
 void MissionController::init() {
   Serial.println(">>>>>>>> MissionController::init() >>>>>>>>");
 
-  qMissionTask = xQueueCreate(1, sizeof(StaticJsonDocument<300>));
+  qMissionTask = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
   if (qMissionTask == NULL) {
     Serial.println("Queue can not be created");
   }

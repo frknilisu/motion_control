@@ -46,7 +46,7 @@ class MotorManager {
     std::string stopReason;
 
     bool isNewMessageExist = false;
-    StaticJsonDocument<300> txJsonDoc, rxJsonDoc;
+    StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
 
     void setStepResolution(StepType);
     int getCurrentPosition();

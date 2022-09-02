@@ -11,7 +11,7 @@ ActionManager::ActionManager() {
 void ActionManager::init() {
   Serial.println(">>>>>>>> ActionManager::init() >>>>>>>>");
 
-  qActionTask = xQueueCreate(1, sizeof(StaticJsonDocument<300>));
+  qActionTask = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
   if (qActionTask == NULL) {
     Serial.println("Queue can not be created");
   }

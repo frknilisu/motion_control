@@ -36,7 +36,7 @@ void MotorManager::init() {
   this->stepper.setSpeed(200);
   //this->stepper.moveTo(20000);
 
-  qMotorTask = xQueueCreate(1, sizeof(StaticJsonDocument<300>));
+  qMotorTask = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
   if (qMotorTask == NULL) {
     Serial.println("Queue can not be created");
   }

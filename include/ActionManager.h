@@ -11,7 +11,7 @@ class ActionManager {
     void runLoop();
   private:
     bool isNewMessageExist = false;
-    StaticJsonDocument<300> txJsonDoc, rxJsonDoc;
+    StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
 
     void onValueUpdate();
 

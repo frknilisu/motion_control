@@ -11,7 +11,7 @@ BaseType_t xReturn;
 bool deviceConnected = false;
 bool oldDeviceConnected = false;
 std::string lastReceivedMsg;
-StaticJsonDocument<300> receivedDoc;
+StaticJsonDocument<256> receivedDoc;
 
 /*------------------------------------------------------*/
 /*---------------------- Callbacks ---------------------*/

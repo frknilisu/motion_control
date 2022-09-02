@@ -17,5 +17,9 @@ void CaptureManager::runLoop() {
 }
 
 void CaptureManager::waitTrigger() {
-  xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
+  Serial.println(">>>>>>>> CaptureManager::waitTrigger() >>>>>>>>");
+  xReturn = xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
+  if(xReturn == pdPASS) {
+    Serial.println("--- Notif received by CaptureManager ---");
+  }
 }

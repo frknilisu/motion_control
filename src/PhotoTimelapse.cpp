@@ -1,11 +1,9 @@
 #include "PhotoTimelapse.h"
 
-SemaphoreHandle_t g_Mutex;
 static int iter_count = 0;
-TaskHandle_t captureTaskHandle;
-StaticJsonDocument<300> data, motor_data, capture_data;
+StaticJsonDocument<256> data, motor_data, capture_data;
 
-PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<300> initParamsJson) {
+PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
     Serial.println(">>>>>>>> PhotoTimelapse(initParams) >>>>>>>>");
     
     data = initParamsJson["data"];
@@ -39,31 +37,34 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<300> initParamsJson) {
 
 void PhotoTimelapse::init() {
     Serial.println(">>>>>>>> PhotoTimelapse::init() >>>>>>>>");
-  //g_Mutex = xSemaphoreCreateMutex();
 
-  auto onTimer = [](xTimerHandle pxTimer){ 
-    PhotoTimelapse* pt = static_cast<PhotoTimelapse*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
-    pt->onTimeout();
-  };
+    auto onTimer = [](xTimerHandle pxTimer){ 
+        PhotoTimelapse* pt = static_cast<PhotoTimelapse*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
+        pt->onTimeout();
+    };
 
-  this->timer = xTimerCreate(
-    "timer1Sec", /* name */
-    pdMS_TO_TICKS(1000), /* period/time */
-    pdTRUE, /* auto reload */
-    static_cast<void*>(this), /* timer ID */
-    onTimer); /* callback */
-}
-
-void PhotoTimelapse::prerun() {
-    
+    this->timer = xTimerCreate(
+        "timer1Sec", /* name */
+        pdMS_TO_TICKS(30000), /* period/time */
+        pdTRUE, /* auto reload */
+        static_cast<void*>(this), /* timer ID */
+        onTimer); /* callback */
 }
 
 void PhotoTimelapse::run() {
     if(iter_count >= this->number_of_photo)
         return;
+
+    if(xTimerIsTimerActive(this->timer) == pdFALSE) {
+        xTimerStart(this->timer, 0);
+        this->triggerCapture();
+    }
     
     this->waitMoveToNextPosition();
-    //xSemaphoreTake(g_Mutex, portMAX_DELAY);
+    xReturn = xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
+    if(xReturn == pdPASS) {
+      Serial.println("--- Notif received by ActionManager::PhotoTimelapse ---");
+    }
 }
 
 void PhotoTimelapse::waitMoveToHome() {
@@ -123,10 +124,10 @@ void PhotoTimelapse::waitMotorSync() {
 
 void PhotoTimelapse::onTimeout() {
     this->triggerCapture();
-    xSemaphoreGive(g_Mutex);
+    xTaskNotifyGive(actionTaskHandle);
 }
 
 void PhotoTimelapse::triggerCapture() {
     Serial.println(">>>>>>>> PhotoTimelapse::triggerCapture() >>>>>>>>");
-    //xTaskNotifyGive(captureTaskHandle);
+    xTaskNotifyGive(captureTaskHandle);
 }
