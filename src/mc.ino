@@ -3,14 +3,20 @@
 #include "BleManager.h"
 #include "MotorManager.h"
 #include "MissionController.h"
+#include "ActionManager.h"
+#include "CaptureManager.h"
 
 TaskHandle_t missionControlTaskHandle;
 TaskHandle_t bleTaskHandle;
 TaskHandle_t motorTaskHandle;
+TaskHandle_t actionTaskHandle;
+TaskHandle_t captureTaskHandle;
 
 BleManager* bleManager;
 MotorManager* motorManager;
 MissionController* missionController;
+ActionManager* actionManager;
+CaptureManager* captureManager;
 
 /*--------------------------------------------------*/
 /*---------------------- Tasks ---------------------*/
@@ -34,6 +40,18 @@ void TaskMissionControl(void *pvParameters) {
   missionController->runLoop();
 }
 
+void TaskAction(void *pvParameters) {
+  Serial.println("Starting Action Manager Task...");
+
+  actionManager->runLoop();
+}
+
+void TaskCapture(void *pvParameters) {
+  Serial.println("Starting Capture Manager Task...");
+
+  captureManager->runLoop();
+}
+
 /*--------------------------------------------------*/
 /*---------------------- Main ----------------------*/
 /*--------------------------------------------------*/
@@ -43,10 +61,14 @@ void setup() {
   motorManager = new MotorManager();
   bleManager = new BleManager();
   missionController = new MissionController();
+  actionManager = new ActionManager();
+  captureManager = new CaptureManager();
 
   motorManager->init();
   bleManager->init();
   missionController->init();
+  actionManager->init();
+  captureManager->init();
 
   xTaskCreatePinnedToCore(
     TaskBLE
@@ -55,7 +77,7 @@ void setup() {
     ,  NULL
     ,  2
     ,  &bleTaskHandle
-    ,  0);
+    ,  1);
 
   xTaskCreatePinnedToCore(
     TaskMotor
@@ -64,7 +86,7 @@ void setup() {
     ,  NULL
     ,  2
     ,  &motorTaskHandle
-    ,  1);
+    ,  0);
 
   xTaskCreatePinnedToCore(
     TaskMissionControl
@@ -73,6 +95,24 @@ void setup() {
     ,  NULL
     ,  2
     ,  &missionControlTaskHandle
+    ,  1);
+
+  xTaskCreatePinnedToCore(
+    TaskAction
+    ,  "TaskActionManager"
+    ,  4096
+    ,  NULL
+    ,  2
+    ,  &actionTaskHandle
+    ,  1);
+  
+  xTaskCreatePinnedToCore(
+    TaskCapture
+    ,  "TaskCaptureManager"
+    ,  4096
+    ,  NULL
+    ,  2
+    ,  &captureTaskHandle
     ,  1);
   
 }

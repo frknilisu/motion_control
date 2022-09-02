@@ -11,6 +11,7 @@ BaseType_t xReturn;
 bool deviceConnected = false;
 bool oldDeviceConnected = false;
 std::string lastReceivedMsg;
+StaticJsonDocument<256> receivedDoc;
 
 /*------------------------------------------------------*/
 /*---------------------- Callbacks ---------------------*/
@@ -84,8 +85,7 @@ void BleManager::init() {
 }
 
 void BleManager::runLoop() {
-  for (;;)
-  {
+  for (;;) {
     fsm.run_machine();
     vTaskDelay(1000);
   }
@@ -96,15 +96,17 @@ void BleManager::runLoop() {
 /*--------------------------------------------------------------*/
 
 void BleManager::handleMsg(std::string receivedMsg) {
+  deserializeJson(receivedDoc, receivedMsg.c_str());
   lastReceivedMsg = "";
-  switch(hashit(receivedMsg)) {
+  const char* cmd = receivedDoc["cmd"];
+  switch(hashit(cmd)) {
     case BLEMsgsEnum::msg_StartProgramming:
       Serial.println("-- Received Msg: startProgramming --");
 
       txJsonDoc["target"] = "MissionController";
       txJsonDoc["cmd"] = "START_PROGRAMMING_CMD";
 
-      xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
 
       break;
     case BLEMsgsEnum::msg_FinishProgramming:
@@ -113,7 +115,7 @@ void BleManager::handleMsg(std::string receivedMsg) {
       txJsonDoc["target"] = "MissionController";
       txJsonDoc["cmd"] = "FINISH_PROGRAMMING_CMD";
 
-      xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
       
       break;
     case BLEMsgsEnum::msg_SetA:
@@ -122,7 +124,7 @@ void BleManager::handleMsg(std::string receivedMsg) {
       txJsonDoc["target"] = "MissionController";
       txJsonDoc["cmd"] = "SET_A_CMD";
 
-      xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
 
       break;
     case BLEMsgsEnum::msg_SetB:
@@ -131,7 +133,17 @@ void BleManager::handleMsg(std::string receivedMsg) {
       txJsonDoc["target"] = "MissionController";
       txJsonDoc["cmd"] = "SET_B_CMD";
 
-      xQueueSend(qMissionControlTask, &txJsonDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
+
+      break;
+    case BLEMsgsEnum::msg_SetActionData:
+      Serial.println("-- Received Msg: setActionData --");
+
+      //txJsonDoc["target"] = "MissionController";
+      //txJsonDoc["cmd"] = "SET_ACTION_DATA_CMD";
+      //txJsonDoc["data"] = receivedDoc["data"];
+
+      xQueueSend(qMissionTask, &receivedDoc, eSetValueWithOverwrite);
 
       break;
     case BLEMsgsEnum::msg_MotorRun:
@@ -160,6 +172,7 @@ BleManager::BLEMsgsEnum BleManager::hashit(std::string const& inString) {
   if (inString == "finishProgramming") return BLEMsgsEnum::msg_FinishProgramming;
   if (inString == "setA") return BLEMsgsEnum::msg_SetA;
   if (inString == "setB") return BLEMsgsEnum::msg_SetB;
+  if (inString == "setActionData") return BLEMsgsEnum::msg_SetActionData;
   if (inString == "motorRun") return BLEMsgsEnum::msg_MotorRun;
   if (inString == "motorStop") return BLEMsgsEnum::msg_MotorStop;
 }
@@ -188,8 +201,8 @@ void BleManager::notifyEncoder() {
     Serial.println(str2);
     //encoderData = *(EncoderData_t*)(value);
     //int val = 10;
-    this->pTxCharacteristic->setValue(val2);
-    this->pTxCharacteristic->notify();
+    //this->pTxCharacteristic->setValue(val2);
+    //this->pTxCharacteristic->notify();
   }
 }
 

@@ -31,6 +31,7 @@ class BleManager {
       msg_FinishProgramming,
       msg_SetA,
       msg_SetB,
+      msg_SetActionData,
       msg_MotorRun,
       msg_MotorStop
     };
