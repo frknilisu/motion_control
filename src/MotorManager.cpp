@@ -189,6 +189,9 @@ void MotorManager::idle_on() {
       int position = rxJsonDoc["position"];
       stepper.moveTo(position);
       fsm.trigger(START_RUN_EVENT); // RUN
+    } else if(rxJsonDoc["cmd"] == "MOTOR_SET_SPEED_CMD") {
+      stepper.setSpeed(rxJsonDoc["speed"]);
+      fsm.trigger(START_RUN_EVENT); // RUN
     }
     isNewMessageExist = false;
     rxJsonDoc.clear();
@@ -206,12 +209,21 @@ void MotorManager::run_enter() {
 void MotorManager::run_on() {
   //Serial.println("--- Update: Motor -> RUN ---");
 
-  if(isNewMessageExist && rxJsonDoc["cmd"] == "MOTOR_STOP_CMD") {
-    isNewMessageExist = false;
-    rxJsonDoc.clear();
-    stopReason = "manual";
-    fsm.trigger(STOP_RUN_EVENT); // STOP
-    return;
+  if(isNewMessageExist) {
+    if(rxJsonDoc["cmd"] == "MOTOR_STOP_CMD") {
+      isNewMessageExist = false;
+      rxJsonDoc.clear();
+      stopReason = "manual";
+      fsm.trigger(STOP_RUN_EVENT); // STOP
+      return;
+    } else if(rxJsonDoc["cmd"] == "MOTOR_SET_SPEED_CMD") {
+      Serial.println("RUN manualDrive");
+      stepper.setSpeed(rxJsonDoc["speed"]);
+      if(rxJsonDoc["speed"] == 0) {
+        stopReason = "manual";
+        fsm.trigger(STOP_RUN_EVENT);
+      }
+    }
   }
 
   if(stepper.distanceToGo() == 0) {
@@ -222,7 +234,8 @@ void MotorManager::run_on() {
     return;
   }
   
-  stepper.run();
+  stepper.runSpeed();
+  printPosition();
 
 }
 

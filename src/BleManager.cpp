@@ -33,7 +33,7 @@ class MyCharacteristicCallbacks: public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
     std::string rxValue = pCharacteristic->getValue();
     if (!rxValue.empty()) {
-      lastReceivedMsg = rxValue;
+      lastReceivedMsg.append(rxValue);
     }
   }
 };
@@ -48,6 +48,7 @@ BleManager::BleManager() :
           [this]() { connected_exit(); }),
   
   fsm(&stateAdvertising),
+
   currentState(StateEnum::ADVERTISING) {
   Serial.println(">>>>>>>> BleManager() >>>>>>>>");
 }
@@ -97,7 +98,7 @@ void BleManager::runLoop() {
 
 void BleManager::handleMsg(std::string receivedMsg) {
   deserializeJson(receivedDoc, receivedMsg.c_str());
-  lastReceivedMsg = "";
+  lastReceivedMsg.clear();
   const char* cmd = receivedDoc["cmd"];
   switch(hashit(cmd)) {
     case BLEMsgsEnum::msg_StartProgramming:
@@ -164,6 +165,16 @@ void BleManager::handleMsg(std::string receivedMsg) {
       xQueueSend(qMotorTask, &txJsonDoc, eSetValueWithOverwrite);
       
       break;
+    case BLEMsgsEnum::msg_ManualDrive:
+      Serial.println("-- Received Msg: manualDrive --");
+
+      txJsonDoc["target"] = "MotorManager";
+      txJsonDoc["cmd"] = "MOTOR_SET_SPEED_CMD";
+      txJsonDoc["speed"] = receivedDoc["speed"];
+
+      xQueueSend(qMotorTask, &txJsonDoc, eSetValueWithOverwrite);
+      
+      break;
   }
 }
 
@@ -175,6 +186,7 @@ BleManager::BLEMsgsEnum BleManager::hashit(std::string const& inString) {
   if (inString == "setActionData") return BLEMsgsEnum::msg_SetActionData;
   if (inString == "motorRun") return BLEMsgsEnum::msg_MotorRun;
   if (inString == "motorStop") return BLEMsgsEnum::msg_MotorStop;
+  if (inString == "manualDrive") return BLEMsgsEnum::msg_ManualDrive;
 }
 
 bool BleManager::isDeviceConnected() {

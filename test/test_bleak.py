@@ -8,6 +8,13 @@ An example showing how to write a simple program using the Nordic Semiconductor
 import asyncio
 import json
 import sys
+import logging
+from time import sleep
+
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 from bleak import BleakScanner, BleakClient
 from bleak.backends.scanner import AdvertisementData
@@ -23,7 +30,12 @@ UART_TX_CHAR_UUID = "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
 # safely send 20 bytes at a time to any device supporting this service.
 UART_SAFE_SIZE = 20
 
-setActionCmdJson = {
+manualDriveCmdJson = {
+    "cmd": "manualDrive",
+    "speed": 0.01
+}
+
+setActionDataCmdJson = {
     "cmd": "setActionData",
     "data": {
         "motor": {
@@ -44,7 +56,7 @@ messageSeq = [
     "motorRun",
     "motorStop",
     "setB",
-    setActionCmdJson,
+    setActionDataCmdJson,
     "finishProgramming"
 ]
 
@@ -71,16 +83,22 @@ async def uart_terminal():
 
         i = 0
 
+        input("Press Enter to continue...")
+
         while True:
-            input("Press Enter to continue...")
-            currMsgObj = messageSeq[i%len(messageSeq)]
+            #input("Press Enter to continue...")
+            #currMsgObj = messageSeq[i%len(messageSeq)]
+            currMsgObj = manualDriveCmdJson
             currMsgStr = ""
+
             if type(currMsgObj) == dict:
                 currMsgStr = json.dumps(currMsgObj)
             elif type(currMsgObj) == str:
                 currMsgStr = json.dumps({"cmd": currMsgObj})
+            
             await client.write_gatt_char(UART_RX_CHAR_UUID, bytearray(currMsgStr, "utf-8"))
-            print("sent:", currMsgStr)
+            logging.info("sent: {}".format(currMsgStr))
+            await asyncio.sleep(1.0)
             i += 1
 
         #response = await client.disconnect()
