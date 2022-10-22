@@ -1,5 +1,4 @@
-#ifndef MISSION_CONTROLLER_H
-#define MISSION_CONTROLLER_H
+#pragma once
 
 #include "Init.h"
 #include "global.h"
@@ -28,7 +27,7 @@ class MissionController {
     uint32_t value;
     int pa, pb, lastMotorPosition;
 
-    bool isNewMessageExist = false;
+    bool isNewMsgReceived = false;
     StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
 
     void setA();
@@ -36,7 +35,7 @@ class MissionController {
     void setActionData();
     void setStartProgramming();
     void setFinishProgramming();
-    void onValueUpdate();
+    void onMsgReceived();
 
     void manual_enter();
     void manual_on();
@@ -59,5 +58,3 @@ class MissionController {
     xTimerHandle timerHandle;
 
 };
-
-#endif

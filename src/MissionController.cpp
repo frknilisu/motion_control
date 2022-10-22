@@ -1,6 +1,16 @@
 #include "MissionController.h"
 
 StaticJsonDocument<256> actionDataJson;
+static const char* TAG = "MissionController";
+
+//esp_log_level_set("*", ESP_LOG_ERROR);        // set all components to ERROR level
+//esp_log_level_set("wifi", ESP_LOG_WARN);      // enable WARN logs from WiFi stack
+//esp_log_level_set("MissionController", ESP_LOG_INFO);     // enable INFO logs from DHCP client
+
+
+#define LOG_LOCAL_LEVEL ESP_LOG_DEBUG
+#include "esp_log.h"
+
 
 MissionController::MissionController() :
     stateManual([this]() { manual_enter(); },
@@ -18,20 +28,19 @@ MissionController::MissionController() :
     fsm(&stateManual),
     
     currentState(StateEnum::ManualState) {
-  Serial.println(">>>>>>>> MissionController() >>>>>>>>");
+  //Serial.println(">>>>>>>> MissionController() >>>>>>>>");
+  ESP_LOGI(TAG, "");
 }
 
 void MissionController::init() {
-  Serial.println(">>>>>>>> MissionController::init() >>>>>>>>");
+  //Serial.println(">>>>>>>> MissionController::init() >>>>>>>>");
+  ESP_LOGI(TAG, "");
 
   qMissionTask = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
-  if (qMissionTask == NULL) {
-    Serial.println("Queue can not be created");
-  }
 
   auto onTimer = [](xTimerHandle pxTimer){ 
     MissionController* mc = static_cast<MissionController*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
-    mc->onValueUpdate();
+    mc->onMsgReceived();
   };
   
   this->timerHandle = xTimerCreate(
@@ -46,6 +55,8 @@ void MissionController::init() {
   fsm.add_transition(&stateManual, &stateProgramming, START_PROGRAMMING_EVENT, nullptr );
   fsm.add_transition(&stateProgramming, &stateAction, FINISH_PROGRAMMING_EVENT, nullptr );
   fsm.add_transition(&stateAction, &stateManual, FINISH_ACTION_EVENT, nullptr );
+
+  esp_log_level_set("MissionController", ESP_LOG_DEBUG);
 }
 
 void MissionController::runLoop() {
@@ -88,11 +99,11 @@ void MissionController::setFinishProgramming() {
   isFinishProgramming = true;
 }
 
-void MissionController::onValueUpdate() {
+void MissionController::onMsgReceived() {
   if(uxQueueMessagesWaiting(qMissionTask) != 0) {
     xReturn = xQueueReceive(qMissionTask, &rxJsonDoc, 0);
     if(xReturn == pdTRUE) {
-      isNewMessageExist = true;
+      isNewMsgReceived = true;
       if(rxJsonDoc["msg"] == "motorPosition") {
         lastMotorPosition = rxJsonDoc["data"];
       } else if(rxJsonDoc["cmd"] == "setActionData") {
@@ -103,7 +114,7 @@ void MissionController::onValueUpdate() {
         Serial.println("ELSE");
       }
     } else {
-      isNewMessageExist = false;
+      isNewMsgReceived = false;
     }
   }
 }
@@ -113,62 +124,73 @@ void MissionController::onValueUpdate() {
 /*--------------------------------------------------------------*/
 
 void MissionController::manual_enter() {
-  Serial.println("--- Enter: MissionController -> MANUAL ---");
+  ESP_LOGD(TAG, "");
   currentState = StateEnum::ManualState;
 }
 
 void MissionController::manual_on() {
-  //Serial.println("--- Update MissionController -> MANUAL ---");
+  ESP_LOGV(TAG, "--- Update: MissionController -> MANUAL ---");
+  
+  if(!isNewMsgReceived) return;
 
-  if(isNewMessageExist && rxJsonDoc["cmd"] == "START_PROGRAMMING_CMD" && !isStartProgramming) {
+  const char* cmd = rxJsonDoc["cmd"];
+  if(cmd == "START_PROGRAMMING_CMD" && !isStartProgramming) {
     isStartProgramming = true;
-    isNewMessageExist = false;
-    rxJsonDoc.clear();
     fsm.trigger(START_PROGRAMMING_EVENT);
   }
+
+  isNewMsgReceived = false;
+  rxJsonDoc.clear();
 }
 
 void MissionController::manual_exit() {
-  Serial.println("--- Exit: MissionController -> MANUAL ---");
+  ESP_LOGD(TAG, "");
 }
 
 void MissionController::programming_enter() {
-  Serial.println("--- Enter: MissionController -> PROGRAMMING ---");
+  ESP_LOGI(TAG, "--- Enter: MissionController -> PROGRAMMING ---");
   currentState = StateEnum::ProgrammingState;
 }
 
 void MissionController::programming_on() {
-  //Serial.println("--- Update: MissionController -> PROGRAMMING ---");
+  ESP_LOGV(TAG, "--- Update: MissionController -> PROGRAMMING ---");
 
-  if(isNewMessageExist) {
-    if(rxJsonDoc["cmd"] == "SET_A_CMD" && !isSetA && !isSetB) {
-      this->setA();
-      Serial.println("setA done");
-    } else if(rxJsonDoc["cmd"] == "SET_B_CMD" && isSetA && !isSetB) {
-      this->setB();
-      Serial.println("setB done");
-    } else if(rxJsonDoc["cmd"] == "setActionData" && isSetA && isSetB) {
-      this->setActionData();
-      Serial.println("setActionData done");
-    } else if(rxJsonDoc["cmd"] == "FINISH_PROGRAMMING_CMD" && isSetA && isSetB && isSetActionData) {
-      this->setFinishProgramming();
-    }
-    isNewMessageExist = false;
-    rxJsonDoc.clear();
+  if(!isNewMsgReceived) return;
+
+  const char* cmd = rxJsonDoc["cmd"];
+  if(cmd == "SET_A_CMD" && !isSetA && !isSetB) {
+    this->setA();
+    Serial.println("setA done");
+    ESP_LOGI(TAG, "--- Enter: MissionController -> ACTION ---");
+  } else if(cmd == "SET_B_CMD" && isSetA && !isSetB) {
+    this->setB();
+    Serial.println("setB done");
+    ESP_LOGI(TAG, "--- Enter: MissionController -> ACTION ---");
+  } else if(cmd == "SET_ACTION_DATA_CMD" && isSetA && isSetB) {
+    this->setActionData();
+    Serial.println("setActionData done");
+    ESP_LOGI(TAG, "--- Enter: MissionController -> ACTION ---");
+  } else if(cmd == "FINISH_PROGRAMMING_CMD" && isSetA && isSetB && isSetActionData) {
+    this->setFinishProgramming();
+    ESP_LOGI(TAG, "--- Enter: MissionController -> ACTION ---");
   }
+
+  isNewMsgReceived = false;
+  rxJsonDoc.clear();
 
   if(isSetA && isSetB && isSetActionData && isFinishProgramming) {
     Serial.println("Point A and B are set. Finishing action programming..");
+    ESP_LOGI(TAG, "--- Enter: MissionController -> ACTION ---");
     fsm.trigger(FINISH_PROGRAMMING_EVENT);
   }
 }
 
 void MissionController::programming_exit() {
-  Serial.println("--- Exit: MissionController -> PROGRAMMING ---");
+  ESP_LOGI(TAG, "--- Enter: MissionController -> ACTION ---");
 }
 
 void MissionController::action_enter() {
-  Serial.println("--- Enter: MissionController -> ACTION ---");
+  ESP_LOGI(TAG, "--- Enter: MissionController -> ACTION ---");
   currentState = StateEnum::ActionState;
 
   xQueueSend(qActionTask, &actionDataJson, eSetValueWithOverwrite);
@@ -181,16 +203,20 @@ void MissionController::action_enter() {
 }
 
 void MissionController::action_on() {
-  //Serial.println("--- Update: MissionController -> ACTION ---");
+  ESP_LOGV(TAG, "--- Update: MissionController -> ACTION ---");
 
-  if(isNewMessageExist && rxJsonDoc["cmd"] == "ACTION_FINISH_MSG") {
+  if(!isNewMsgReceived) return;
+
+  const char* cmd = rxJsonDoc["cmd"];
+  if(cmd == "ACTION_FINISH_MSG") {
     Serial.println("ACTION finished");
-    isNewMessageExist = false;
-    rxJsonDoc.clear();
     fsm.trigger(FINISH_ACTION_EVENT);
   }
+  
+  isNewMsgReceived = false;
+  rxJsonDoc.clear();
 }
 
 void MissionController::action_exit() {
-  Serial.println("--- Exit: MissionController -> ACTION ---");
+  ESP_LOGI(TAG, "--- Exit: MissionController -> ACTION ---");
 }

@@ -86,9 +86,9 @@ async def uart_terminal():
         input("Press Enter to continue...")
 
         while True:
-            #input("Press Enter to continue...")
-            #currMsgObj = messageSeq[i%len(messageSeq)]
-            currMsgObj = manualDriveCmdJson
+            input("Press Enter to continue...")
+            currMsgObj = messageSeq[i%len(messageSeq)]
+            #currMsgObj = manualDriveCmdJson
             currMsgStr = ""
 
             if type(currMsgObj) == dict:

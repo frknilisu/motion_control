@@ -1,5 +1,4 @@
-#ifndef MOTOR_MANAGER_H
-#define MOTOR_MANAGER_H
+#pragma once
 
 #include "Init.h"
 #include "global.h"
@@ -45,14 +44,19 @@ class MotorManager {
     uint32_t currentStepPosition = 0;
     std::string stopReason;
 
-    bool isNewMessageExist = false;
+    bool isNewMsgReceived = false;
     StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
+
+    xTimerHandle qMsgTimer;
+    xTimerHandle stepRunTimer;
 
     void setStepResolution(StepType);
     int getCurrentPosition();
     void printPosition();
     void publishPosition();
-    void onValueUpdate();
+
+    void onMsgReceived();
+    void onStepRun();
 
     void idle_enter();
     void idle_on();
@@ -62,12 +66,7 @@ class MotorManager {
     void run_on();
     void run_exit();
 
+    FunctionFsm fsm;
     FunctionState stateIdle;
     FunctionState stateRun;
-
-    FunctionFsm fsm;
-
-    xTimerHandle timerHandle;
 };
-
-#endif

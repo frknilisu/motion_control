@@ -6,8 +6,6 @@
 int val2;
 char str2[80];
 
-BaseType_t xReturn;
-
 bool deviceConnected = false;
 bool oldDeviceConnected = false;
 std::string lastReceivedMsg;
@@ -141,7 +139,7 @@ void BleManager::handleMsg(std::string receivedMsg) {
       Serial.println("-- Received Msg: setActionData --");
 
       //txJsonDoc["target"] = "MissionController";
-      //txJsonDoc["cmd"] = "SET_ACTION_DATA_CMD";
+      receivedDoc["cmd"] = "SET_ACTION_DATA_CMD";
       //txJsonDoc["data"] = receivedDoc["data"];
 
       xQueueSend(qMissionTask, &receivedDoc, eSetValueWithOverwrite);
@@ -203,21 +201,6 @@ void BleManager::startAdvertising() {
   this->pServer->getAdvertising()->start();
 }
 
-void BleManager::notifyEncoder() {
-  //Serial.println("## notifyEncoder() ##");
-  //xReturn = xQueueReceive(qEncoderTask, &value, pdMS_TO_TICKS(10));
-  xReturn = xQueuePeek(qMotorTask, &val2, 0);
-  if(xReturn == pdPASS) {
-    //Serial.println("pdPASS");
-    sprintf(str2, "notfiyEncoder: %d", val2);
-    Serial.println(str2);
-    //encoderData = *(EncoderData_t*)(value);
-    //int val = 10;
-    //this->pTxCharacteristic->setValue(val2);
-    //this->pTxCharacteristic->notify();
-  }
-}
-
 /*--------------------------------------------------------------*/
 /*---------------------- State Functions -----------------------*/
 /*--------------------------------------------------------------*/
@@ -229,7 +212,7 @@ void BleManager::advertising_enter() {
 
 void BleManager::advertising_on() {
   //Serial.println("--- Update: BleManager -> ADVERTISING ---");
-  //Serial.println("--- BLE -> LISTENING ---");
+
   if (deviceConnected && !oldDeviceConnected) {
     oldDeviceConnected = deviceConnected;
     fsm.trigger(CONNECT_EVENT);
@@ -246,8 +229,7 @@ void BleManager::connected_enter() {
 
 void BleManager::connected_on() {
   //Serial.println("--- Update: BleManager -> CONNECTED ---");
-  //Serial.println("--- BLE -> CONNECTED ---");
-  //this->notifyEncoder();
+
   if(!lastReceivedMsg.empty()) {
     this->handleMsg(lastReceivedMsg);
   }
@@ -258,10 +240,8 @@ void BleManager::connected_on() {
 
 void BleManager::connected_exit() {
   Serial.println("--- Exit: BleManager -> CONNECTED ---");
-  Serial.println("--- BLE -> DISCONNECTED ---");
   if (!deviceConnected && oldDeviceConnected) {
     oldDeviceConnected = deviceConnected;
     vTaskDelay(100);
-    Serial.println("re-start advertising");
   }
 }

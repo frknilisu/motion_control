@@ -10,10 +10,10 @@ class ActionManager {
     void init();
     void runLoop();
   private:
-    bool isNewMessageExist = false;
+    bool isNewMsgReceived = false;
     StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
 
-    void onValueUpdate();
+    void onMsgReceived();
 
     xTimerHandle timerHandle;
 };

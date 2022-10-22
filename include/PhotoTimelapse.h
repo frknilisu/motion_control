@@ -1,5 +1,4 @@
-#ifndef PHOTO_TIMELAPSE_H
-#define PHOTO_TIMELAPSE_H
+#pragma once
 
 #include "Init.h"
 #include "global.h"
@@ -37,5 +36,3 @@ class PhotoTimelapse {
     void onTimeout();
     
 };
-
-#endif
