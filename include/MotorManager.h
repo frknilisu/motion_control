@@ -56,6 +56,7 @@ class MotorManager {
     void publishPosition();
 
     void onMsgReceived();
+    void handleMsg();
     void onStepRun();
 
     void idle_enter();
@@ -66,7 +67,7 @@ class MotorManager {
     void run_on();
     void run_exit();
 
-    FunctionFsm fsm;
-    FunctionState stateIdle;
-    FunctionState stateRun;
+    //FunctionFsm fsm;
+    //FunctionState stateIdle;
+    //FunctionState stateRun;
 };

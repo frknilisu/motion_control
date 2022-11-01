@@ -9,19 +9,19 @@
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
-volatile QueueHandle_t qMotorTask;
-volatile QueueHandle_t qMissionTask;
-volatile QueueHandle_t qCaptureTask;
-volatile QueueHandle_t qBleTask;
-volatile QueueHandle_t qActionTask;
+QueueHandle_t qMotorTask;
+QueueHandle_t qMissionTask;
+QueueHandle_t qCaptureTask;
+QueueHandle_t qBleTask;
+QueueHandle_t qActionTask;
 
-volatile TaskHandle_t missionControlTaskHandle;
-volatile TaskHandle_t bleTaskHandle;
-volatile TaskHandle_t motorTaskHandle;
-volatile TaskHandle_t actionTaskHandle;
-volatile TaskHandle_t captureTaskHandle;
+TaskHandle_t missionControlTaskHandle;
+TaskHandle_t bleTaskHandle;
+TaskHandle_t motorTaskHandle;
+TaskHandle_t actionTaskHandle;
+TaskHandle_t captureTaskHandle;
 
-volatile BaseType_t xReturn;
+BaseType_t xReturn;
 
 BleManager* bleManager;
 MotorManager* motorManager;
