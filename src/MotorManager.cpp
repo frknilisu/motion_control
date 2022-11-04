@@ -21,6 +21,9 @@ void MotorManager::init() {
   
   this->stepper = AccelStepper(MotorInterfaceType, stepPin, dirPin);
   this->setStepResolution(StepType::_1_div_8);
+  this->stepper.setMaxSpeed(8000);
+  //this->stepper.setAcceleration(100);
+  //this->stepper.setSpeed(200);
 
   qMotorTask = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
 
@@ -164,6 +167,7 @@ void MotorManager::handleMsg() {
 
 void MotorManager::onStepRun() {
   this->stepper.runSpeed();
+  Serial.println(this->stepper.speed());
   this->printPosition();
   this->publishPosition();
 }

@@ -32,7 +32,7 @@ UART_SAFE_SIZE = 20
 
 manualDriveCmdJson = {
     "cmd": "manualDrive",
-    "speed": 0.01
+    "speed": 200
 }
 
 setActionDataCmdJson = {
@@ -87,8 +87,9 @@ async def uart_terminal():
 
         while True:
             input("Press Enter to continue...")
-            currMsgObj = messageSeq[i%len(messageSeq)]
-            #currMsgObj = manualDriveCmdJson
+            #currMsgObj = messageSeq[i%len(messageSeq)]
+            manualDriveCmdJson["speed"] += 100
+            currMsgObj = manualDriveCmdJson
             currMsgStr = ""
 
             if type(currMsgObj) == dict:
