@@ -1,15 +1,12 @@
-"""
-UART Service
--------------
-An example showing how to write a simple program using the Nordic Semiconductor
-(nRF) UART service.
-"""
+#! /usr/bin/python3
 
 import asyncio
 import json
 import sys
 import logging
 from time import sleep
+import tkinter as tk
+from tkinter import Tk, Scale
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
@@ -60,75 +57,83 @@ messageSeq = [
     "finishProgramming"
 ]
 
-async def uart_terminal():
-    """This is a simple "terminal" program that uses the Nordic Semiconductor
-    (nRF) UART service. It reads from stdin and sends each line of data to the
-    remote device. Any data received from the device is printed to stdout.
-    """
+class AsyncTk(Tk):
 
-    device = None
-    devices = await BleakScanner.discover()
-    for d in devices:
-        print(d)
-        if d.name == MY_DEVICE_NAME:
-            device = d
+    def __init__(self):
+        super().__init__()
+        self.geometry('400x300')
+        self.title('Slider Demo')
+        self.running = True
+        self.runners = [self.tk_loop()]
+
+    async def tk_loop(self):
+        while self.running:
+            self.update()
+            await asyncio.sleep(0.05)
+
+    def stop(self):
+        self.running = False
+
+    async def run(self):
+        await asyncio.gather(*self.runners)
+
+
+class App(AsyncTk):
+
+    def __init__(self):
+        super().__init__()
+        self.create_interface()
+        self.runners.append(self.uart_terminal())
     
-    print(device)
+    def create_interface(self):
 
-    async with BleakClient(device) as client:
-        print(client)
-        print("Connected, start typing and press ENTER...")
+        self.slider_value = tk.IntVar()
 
-        loop = asyncio.get_running_loop()
+        def setZero(event):
+            slider.set(0)
 
-        i = 0
+        slider = Scale(
+            master=self,
+            from_=-1000,
+            to=1000,
+            orient='horizontal',
+            variable=self.slider_value
+        )
 
-        input("Press Enter to continue...")
+        slider.set(0)
+        slider.bind('<ButtonRelease-1>', setZero)
+        slider.pack()
 
-        while True:
-            input("Press Enter to continue...")
-            #currMsgObj = messageSeq[i%len(messageSeq)]
-            manualDriveCmdJson["speed"] += 100
-            currMsgObj = manualDriveCmdJson
-            currMsgStr = ""
+    async def uart_terminal(self):
+        device = None
+        devices = await BleakScanner.discover()
+        for d in devices:
+            print(d)
+            if d.name == MY_DEVICE_NAME:
+                device = d
+        
+        print(device)
 
-            if type(currMsgObj) == dict:
-                currMsgStr = json.dumps(currMsgObj)
-            elif type(currMsgObj) == str:
-                currMsgStr = json.dumps({"cmd": currMsgObj})
-            
-            await client.write_gatt_char(UART_RX_CHAR_UUID, bytearray(currMsgStr, "utf-8"))
-            logging.info("sent: {}".format(currMsgStr))
-            await asyncio.sleep(1.0)
-            i += 1
+        async with BleakClient(device) as client:
+            print(client)
 
-        #response = await client.disconnect()
-        #print("DISCONNECT RESPONSE", response)
+            while self.running:
+                manualDriveCmdJson["speed"] = self.slider_value.get()
+                currMsgObj = manualDriveCmdJson
+                currMsgStr = ""
 
+                if type(currMsgObj) == dict:
+                    currMsgStr = json.dumps(currMsgObj)
+                elif type(currMsgObj) == str:
+                    currMsgStr = json.dumps({"cmd": currMsgObj})
+                
+                await client.write_gatt_char(UART_RX_CHAR_UUID, bytearray(currMsgStr, "utf-8"))
+                logging.info("sent: {}".format(currMsgStr))
+                await asyncio.sleep(0.05)
+
+async def main():
+    app = App()
+    await app.run()
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(uart_terminal())
-    except asyncio.CancelledError:
-        # task is cancelled on disconnect, so we ignore this error
-        pass
-
-
-"""
-while True:
-    # This waits until you type a line and press ENTER.
-    # A real terminal program might put stdin in raw mode so that things
-    # like CTRL+C get passed to the remote device.
-    data = await loop.run_in_executor(None, sys.stdin.buffer.readline)
-
-    # data will be empty on EOF (e.g. CTRL+D on *nix)
-    if not data:
-        break
-
-    # some devices, like devices running MicroPython, expect Windows
-    # line endings (uncomment line below if needed)
-    # data = data.replace(b"\n", b"\r\n")
-
-    await client.write_gatt_char(UART_RX_CHAR_UUID, data)
-    print("sent:", data)
-"""
+    asyncio.run(main())
