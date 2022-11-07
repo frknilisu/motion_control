@@ -1,6 +1,6 @@
 #include "MissionController.h"
 
-StaticJsonDocument<256> actionDataJson;
+StaticJsonDocument<1024> actionDataJson;
 static const char* TAG = "MissionController";
 
 //esp_log_level_set("*", ESP_LOG_ERROR);        // set all components to ERROR level
@@ -106,7 +106,7 @@ void MissionController::onMsgReceived() {
       isNewMsgReceived = true;
       if(rxJsonDoc["msg"] == "motorPosition") {
         lastMotorPosition = rxJsonDoc["data"];
-      } else if(rxJsonDoc["cmd"] == "setActionData") {
+      } else if(rxJsonDoc["cmd"] == "SET_ACTION_DATA_CMD") {
         Serial.println("set action data");
         actionDataJson.clear();
         actionDataJson = rxJsonDoc;
@@ -169,6 +169,7 @@ void MissionController::programming_on() {
   } else if(cmd == "SET_ACTION_DATA_CMD" && isSetA && isSetB) {
     this->setActionData();
     Serial.println("setActionData done");
+    serializeJson(actionDataJson, Serial);
     ESP_LOGI(TAG, "--- Enter: MissionController -> ACTION ---");
   } else if(cmd == "FINISH_PROGRAMMING_CMD" && isSetA && isSetB && isSetActionData) {
     this->setFinishProgramming();

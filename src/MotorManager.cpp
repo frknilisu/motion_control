@@ -167,7 +167,7 @@ void MotorManager::handleMsg() {
 
 void MotorManager::onStepRun() {
   this->stepper.runSpeed();
-  Serial.println(this->stepper.speed());
-  this->printPosition();
+  //Serial.println(this->stepper.speed());
+  //this->printPosition();
   this->publishPosition();
 }

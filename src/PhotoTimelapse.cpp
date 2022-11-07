@@ -5,6 +5,7 @@ StaticJsonDocument<256> data, motor_data, capture_data;
 
 PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
     Serial.println(">>>>>>>> PhotoTimelapse(initParams) >>>>>>>>");
+    serializeJson(initParamsJson, Serial);
     
     data = initParamsJson["data"];
     motor_data = data["motor"];
@@ -19,9 +20,11 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
     
     this->pa = motor_data["pa"];
     this->pb = motor_data["pb"];
+    Serial.println(this->pa);
+    Serial.println(this->pb);
     const char* s = motor_data["direction"]; 
     this->direction = s;
-    this->step_diff = 720*50; //this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
+    this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
     this->step_interval = this->step_diff / this->number_of_photo;
 
     Serial.println(this->record_duration);

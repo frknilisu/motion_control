@@ -6,7 +6,7 @@ import sys
 import logging
 from time import sleep
 import tkinter as tk
-from tkinter import Tk, Scale
+from tkinter import Tk, Scale, Button, ttk
 
 logging.basicConfig(
     format='%(asctime)s %(levelname)-8s %(message)s',
@@ -50,11 +50,11 @@ setActionDataCmdJson = {
 messageSeq = [
     "startProgramming",
     "setA",
-    "motorRun",
-    "motorStop",
     "setB",
     setActionDataCmdJson,
-    "finishProgramming"
+    "finishProgramming",
+    "motorRun",
+    "motorStop"
 ]
 
 class AsyncTk(Tk):
@@ -63,6 +63,28 @@ class AsyncTk(Tk):
         super().__init__()
         self.geometry('400x300')
         self.title('Slider Demo')
+
+        self.slider_value = tk.IntVar()
+        self.next_msg = ""
+
+        self.slider = ttk.Scale(
+            master=self,
+            from_=-1000,
+            to=1000,
+            orient='horizontal',
+            variable=self.slider_value
+        )
+
+        self.slider.set(0)
+        self.slider.bind('<ButtonRelease-1>', self.setZero)
+        self.slider.pack()
+
+        ttk.Button(self, text='Start Programming', command=lambda: self.assign_next_msg(0)).pack()
+        ttk.Button(self, text='SetA', command=lambda: self.assign_next_msg(1)).pack()
+        ttk.Button(self, text='SetB', command=lambda: self.assign_next_msg(2)).pack()
+        ttk.Button(self, text='Set Action Data', command=lambda: self.assign_next_msg(3)).pack()
+        ttk.Button(self, text='Finish Programming', command=lambda: self.assign_next_msg(4)).pack()
+
         self.running = True
         self.runners = [self.tk_loop()]
 
@@ -70,6 +92,16 @@ class AsyncTk(Tk):
         while self.running:
             self.update()
             await asyncio.sleep(0.05)
+
+    def select(self, option):
+        print(option)
+
+    def setZero(self, event):
+        self.slider.set(0)
+
+    def assign_next_msg(self, idx):
+        print("assign_next_msg:", idx)
+        self.next_msg = messageSeq[idx]
 
     def stop(self):
         self.running = False
@@ -82,29 +114,12 @@ class App(AsyncTk):
 
     def __init__(self):
         super().__init__()
-        self.create_interface()
+        #self.create_interface()
         self.runners.append(self.uart_terminal())
-    
-    def create_interface(self):
-
-        self.slider_value = tk.IntVar()
-
-        def setZero(event):
-            slider.set(0)
-
-        slider = Scale(
-            master=self,
-            from_=-1000,
-            to=1000,
-            orient='horizontal',
-            variable=self.slider_value
-        )
-
-        slider.set(0)
-        slider.bind('<ButtonRelease-1>', setZero)
-        slider.pack()
 
     async def uart_terminal(self):
+        print("uart_terminal")
+        zeroSpeedCounter = 0
         device = None
         devices = await BleakScanner.discover()
         for d in devices:
@@ -118,8 +133,22 @@ class App(AsyncTk):
             print(client)
 
             while self.running:
-                manualDriveCmdJson["speed"] = self.slider_value.get()
-                currMsgObj = manualDriveCmdJson
+                #next_msg = self.next_msg.get()
+                if self.next_msg:
+                    currMsgObj = self.next_msg
+                    self.next_msg = ""
+                    #self.next_msg.set("")
+                else:
+                    speed = int(self.slider_value.get())
+                    if speed == 0:
+                        zeroSpeedCounter += 1
+                    else:
+                        zeroSpeedCounter = 0
+                    if zeroSpeedCounter > 2:
+                        await asyncio.sleep(1.0)
+                        continue
+                    manualDriveCmdJson["speed"] = speed
+                    currMsgObj = manualDriveCmdJson
                 currMsgStr = ""
 
                 if type(currMsgObj) == dict:
@@ -129,7 +158,7 @@ class App(AsyncTk):
                 
                 await client.write_gatt_char(UART_RX_CHAR_UUID, bytearray(currMsgStr, "utf-8"))
                 logging.info("sent: {}".format(currMsgStr))
-                await asyncio.sleep(0.05)
+                await asyncio.sleep(1.0)
 
 async def main():
     app = App()
