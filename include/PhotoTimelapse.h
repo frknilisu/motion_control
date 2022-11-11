@@ -9,7 +9,7 @@ class PhotoTimelapse {
     void init();
     void run();
   private:
-    xTimerHandle timer;
+    xTimerHandle intervalDelayTimer;
 
     int record_duration;
     int video_duration;
@@ -24,15 +24,21 @@ class PhotoTimelapse {
     int step_diff;
     int step_interval;
 
+    bool isIntervalDelayFinished;
+
     StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
 
-    void prerun();
-    void move(int step);
-    void moveTo(int position);
-    void waitMoveToHome();
-    void waitMoveToNextPosition();
-    void waitMotorSync();
-    void triggerCapture();
-    void onTimeout();
+    void moveToStartPosition();
+    void gotoNextTargetPosition();
+    bool checkIsTargetReached();
+    void capturePhoto();
+    void startIntervalDelayTimer();
+    bool checkIsIntervalDelayFinished();
+
+    void onIntervalDelayTimeout();
     
+    void IMotor_move(long step);
+    void IMotor_moveTo(long targetPosition);
+    bool IMotor_checkMotorSyncNotification();
+    void ICamera_triggerCapture();
 };
