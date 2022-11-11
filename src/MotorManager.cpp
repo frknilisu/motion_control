@@ -6,6 +6,8 @@ char str[80];
 
 static int zeroSpeedCounter = 0;
 
+std::string controlType = "speed";
+
 MotorManager::MotorManager() {
   Serial.println(">>>>>>>> MotorManager() >>>>>>>>");
 }
@@ -66,6 +68,55 @@ void MotorManager::runLoop() {
     vTaskDelay(100);
   }
 }
+
+void MotorManager::onMsgReceived() {
+  if(uxQueueMessagesWaiting(qMotorTask) != 0) {
+    xReturn = xQueueReceive(qMotorTask, &rxJsonDoc, 0);
+    isNewMsgReceived = (xReturn == pdTRUE);
+  }
+}
+
+void MotorManager::handleMsg() {
+  if(!isNewMsgReceived) return;
+
+  const char* cmd = rxJsonDoc["cmd"];
+  if(cmd == "MOTOR_SET_SPEED_CMD") {
+    controlType = "speed";
+
+    float speed = rxJsonDoc["speed"];
+    this->stepper.setSpeed(speed);
+
+    if(speed == 0) 
+      ++zeroSpeedCounter;
+  } else if(cmd == "MOTOR_MOVE_CMD") {
+    controlType = "position";
+
+    long targetPositionRelative = rxJsonDoc["relative"];
+    float speed = rxJsonDoc["speed"];
+    this->stepper.move(targetPositionRelative);
+    this->stepper.setSpeed(speed);
+  } else if(cmd == "MOTOR_MOVE_TO_CMD") {
+    controlType = "position";
+    
+    long targetPositionAbsolute = rxJsonDoc["absolute"];
+    float speed = rxJsonDoc["speed"];
+    this->stepper.move(targetPositionAbsolute);
+    this->stepper.setSpeed(speed);
+  }
+  isNewMsgReceived = false;
+  rxJsonDoc.clear();
+}
+
+void MotorManager::onStepRun() {
+  if (controlType == "speed")
+    this->stepper.runSpeed();
+  else if (controlType == "position")
+    this->stepper.runSpeedToPosition();
+  //Serial.println(this->stepper.speed());
+  //this->printPosition();
+  //this->publishPosition();
+}
+
 
 /*--------------------------------------------------------------*/
 /*---------------------- Utility Functions ---------------------*/
@@ -144,30 +195,3 @@ void MotorManager::publishPosition() {
   xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
 }
 
-void MotorManager::onMsgReceived() {
-  if(uxQueueMessagesWaiting(qMotorTask) != 0) {
-    xReturn = xQueueReceive(qMotorTask, &rxJsonDoc, 0);
-    isNewMsgReceived = (xReturn == pdTRUE);
-  }
-}
-
-void MotorManager::handleMsg() {
-  if(!isNewMsgReceived) return;
-
-  const char* cmd = rxJsonDoc["cmd"];
-  if(cmd == "MOTOR_SET_SPEED_CMD") {
-    int speed = rxJsonDoc["speed"];
-    this->stepper.setSpeed(speed);
-
-    if(speed == 0) ++zeroSpeedCounter;
-  }
-  isNewMsgReceived = false;
-  rxJsonDoc.clear();
-}
-
-void MotorManager::onStepRun() {
-  this->stepper.runSpeed();
-  //Serial.println(this->stepper.speed());
-  //this->printPosition();
-  this->publishPosition();
-}
