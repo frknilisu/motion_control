@@ -65,6 +65,11 @@ void MotorManager::runLoop() {
       zeroSpeedCounter = 0;
     }
     this->onStepRun();
+    Serial.print("distanceToGo: ");
+    Serial.println(this->stepper.distanceToGo());
+    if(this->stepper.distanceToGo() == 0) {
+      xTaskNotifyGive(actionTaskHandle);
+    }
     vTaskDelay(100);
   }
 }
@@ -81,25 +86,28 @@ void MotorManager::handleMsg() {
 
   const char* cmd = rxJsonDoc["cmd"];
   if(cmd == "MOTOR_SET_SPEED_CMD") {
+    Serial.println(">>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>");
     controlType = "speed";
 
-    float speed = rxJsonDoc["speed"];
+    int speed = rxJsonDoc["speed"];
     this->stepper.setSpeed(speed);
 
     if(speed == 0) 
       ++zeroSpeedCounter;
   } else if(cmd == "MOTOR_MOVE_CMD") {
+    Serial.println(">>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>");
     controlType = "position";
 
-    long targetPositionRelative = rxJsonDoc["relative"];
-    float speed = rxJsonDoc["speed"];
+    int targetPositionRelative = rxJsonDoc["relative"];
+    int speed = 500;
     this->stepper.move(targetPositionRelative);
     this->stepper.setSpeed(speed);
   } else if(cmd == "MOTOR_MOVE_TO_CMD") {
+    Serial.println(">>>>>>>> MotorManager MOTOR_MOVE_TO_CMD >>>>>>>>");
     controlType = "position";
     
-    long targetPositionAbsolute = rxJsonDoc["absolute"];
-    float speed = rxJsonDoc["speed"];
+    int targetPositionAbsolute = rxJsonDoc["absolute"];
+    int speed = 500;
     this->stepper.move(targetPositionAbsolute);
     this->stepper.setSpeed(speed);
   }
@@ -114,7 +122,7 @@ void MotorManager::onStepRun() {
     this->stepper.runSpeedToPosition();
   //Serial.println(this->stepper.speed());
   //this->printPosition();
-  //this->publishPosition();
+  this->publishPosition();
 }
 
 
