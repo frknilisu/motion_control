@@ -33,10 +33,11 @@ class BleManager {
       msg_SetB,
       msg_SetActionData,
       msg_MotorRun,
-      msg_MotorStop
+      msg_MotorStop,
+      msg_ManualDrive
     };
 
-    bool isNewMessageExist = false;
+    bool isNewMsgReceived = false;
     StaticJsonDocument<200> txJsonDoc, rxJsonDoc;
     
     BLEServer* pServer = NULL;
@@ -48,7 +49,6 @@ class BleManager {
     BLEMsgsEnum hashit(std::string const& inString);
     bool isDeviceConnected();
     void startAdvertising();
-    void notifyEncoder();
 
     void advertising_enter();
     void advertising_on();

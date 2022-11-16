@@ -1,10 +1,13 @@
 #include "PhotoTimelapse.h"
 
+const size_t CAPACITY = 256;
+
 static int iter_count = 0;
-StaticJsonDocument<256> data, motor_data, capture_data;
+StaticJsonDocument<CAPACITY> data, motor_data, capture_data;
 
 PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
     Serial.println(">>>>>>>> PhotoTimelapse(initParams) >>>>>>>>");
+    serializeJson(initParamsJson, Serial);
     
     data = initParamsJson["data"];
     motor_data = data["motor"];
@@ -19,9 +22,11 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
     
     this->pa = motor_data["pa"];
     this->pb = motor_data["pb"];
+    Serial.println(this->pa);
+    Serial.println(this->pb);
     const char* s = motor_data["direction"]; 
     this->direction = s;
-    this->step_diff = 720*50; //this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
+    this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
     this->step_interval = this->step_diff / this->number_of_photo;
 
     Serial.println(this->record_duration);
@@ -38,96 +43,159 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
 void PhotoTimelapse::init() {
     Serial.println(">>>>>>>> PhotoTimelapse::init() >>>>>>>>");
 
+    this->capture_interval = 5;
+
+    // create timer and its callback
     auto onTimer = [](xTimerHandle pxTimer){ 
         PhotoTimelapse* pt = static_cast<PhotoTimelapse*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
-        pt->onTimeout();
+        pt->onCaptureIntervalDelayTimeout();
     };
 
-    this->timer = xTimerCreate(
-        "timer1Sec", /* name */
-        pdMS_TO_TICKS(30000), /* period/time */
-        pdTRUE, /* auto reload */
-        static_cast<void*>(this), /* timer ID */
-        onTimer); /* callback */
+    this->captureIntervalDelayTimer = xTimerCreate(
+        "CaptureIntervalDelayTimer",
+        pdMS_TO_TICKS(this->capture_interval * 1000),
+        pdFALSE,
+        static_cast<void*>(this),
+        onTimer);
+
+    this->currentState = State::GOTO_NEXT;
+
+    this->record_duration = 60 * 60;
+    this->video_duration = 30;
+    this->fps = 24;
+    //this->shutter_speed = "1_500";
+    this->number_of_photo = 720;
+    
+
+    this->pa = 0;
+    this->pb = 100*40*8;
+    this->direction = "a2b";
+    this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
+    this->step_interval = 100;
+
 }
 
 void PhotoTimelapse::run() {
     if(iter_count >= this->number_of_photo)
         return;
 
-    if(xTimerIsTimerActive(this->timer) == pdFALSE) {
-        xTimerStart(this->timer, 0);
-        this->triggerCapture();
-    }
-    
-    this->waitMoveToNextPosition();
-    xReturn = xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
-    if(xReturn == pdPASS) {
-      Serial.println("--- Notif received by ActionManager::PhotoTimelapse ---");
+    switch (this->currentState)
+    {
+        case State::GOTO_NEXT:
+            Serial.println(">>>>>>>> State::GOTO_NEXT >>>>>>>>");
+            startCaptureIntervalDelayTimer();
+            gotoNextTargetPosition();
+            this->changeStateTo(State::MOVING_UNTIL_TARGET);
+            break;
+        case State::MOVING_UNTIL_TARGET:
+            Serial.println(">>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>");
+            if(checkIsTargetReached()) {
+                this->changeStateTo(State::TARGET_REACHED);
+            }
+            break;
+        case State::TARGET_REACHED:
+            Serial.println(">>>>>>>> State::TARGET_REACHED >>>>>>>>");
+            capturePhoto();
+            this->changeStateTo(State::WAIT_FOR_NEXT);
+            break;
+        case State::WAIT_FOR_NEXT:
+            Serial.println(">>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>");
+            if(checkIsCaptureIntervalDelayFinished()) {
+                this->changeStateTo(State::GOTO_NEXT);
+            }
+            break;
+        default:
+            break;
     }
 }
 
-void PhotoTimelapse::waitMoveToHome() {
-    Serial.println(">>>>>>>> PhotoTimelapse::waitMoveToHome() >>>>>>>>");
+/*
+void PhotoTimelapse::moveToStartPosition() {
+    Serial.println(">>>>>>>> PhotoTimelapse::moveToStartPosition() >>>>>>>>");
 
     if (this->direction == "a2b")
-        this->moveTo(this->pa);
+        IMotor_moveTo(this->pa);
     else
-        this->moveTo(this->pb);
+        IMotor_moveTo(this->pb);
     
     this->waitMotorSync();
 }
+*/
 
-void PhotoTimelapse::waitMoveToNextPosition() {
-    Serial.println(">>>>>>>> PhotoTimelapse::waitMoveToNextPosition() >>>>>>>>");
-
-    this->move(this->step_interval);
-    this->waitMotorSync();
-    Serial.println(">>>>>>>> PhotoTimelapse -> motor sync is done >>>>>>>>");
+void PhotoTimelapse::gotoNextTargetPosition() {
+    Serial.println(">>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>");
+    IMotor_move(this->step_interval);
 }
 
-void PhotoTimelapse::move(int step) {
-    Serial.println(">>>>>>>> PhotoTimelapse::move() >>>>>>>>");
+bool PhotoTimelapse::checkIsTargetReached() {
+    Serial.println(">>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>");
+    return IMotor_checkMotorSyncNotification();
+}
 
-    // Send Motor Command
+void PhotoTimelapse::capturePhoto() {
+    Serial.println(">>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>");
+    ICamera_triggerCapture();
+}
+
+void PhotoTimelapse::startCaptureIntervalDelayTimer() {
+    Serial.println(">>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>");
+    this->isCaptureIntervalDelayFinished = false;
+    if(xTimerIsTimerActive(this->captureIntervalDelayTimer) == pdFALSE) {
+        xTimerStart(this->captureIntervalDelayTimer, 0);
+    }
+}
+
+bool PhotoTimelapse::checkIsCaptureIntervalDelayFinished() {
+    Serial.println(">>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>");
+    return this->isCaptureIntervalDelayFinished;
+}
+
+void PhotoTimelapse::changeStateTo(State nextState) {
+    Serial.println(">>>>>>>> PhotoTimelapse::changeStateTo() >>>>>>>>");
+    this->currentState = nextState;
+}
+
+void PhotoTimelapse::onCaptureIntervalDelayTimeout() {
+    Serial.println(">>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>");
+    this->isCaptureIntervalDelayFinished = true;
+}
+
+void PhotoTimelapse::IMotor_move(int step) {
+    Serial.println(">>>>>>>> IMotor_move() >>>>>>>>");
+
+    //StaticJsonDocument<CAPACITY> motorCommand;
     txJsonDoc.clear();
-    txJsonDoc["target"] = "MotorManager";
-    txJsonDoc["cmd"] = "MOVE_RELATIVE";
-    txJsonDoc["step"] = step;
+    txJsonDoc["cmd"] = "MOTOR_MOVE_CMD";
+    txJsonDoc["relative"] = step;
 
-    // send queue msg
     xQueueSend(qMotorTask, &txJsonDoc, 0);
 }
 
-void PhotoTimelapse::moveTo(int position) {
-    Serial.println(">>>>>>>> PhotoTimelapse::moveTo() >>>>>>>>");
+void PhotoTimelapse::IMotor_moveTo(int targetPosition) {
+    Serial.println(">>>>>>>> IMotor_moveTo() >>>>>>>>");
 
-    // Send Motor Command
+    //StaticJsonDocument<CAPACITY> motorCommand;
     txJsonDoc.clear();
-    txJsonDoc["target"] = "MotorManager";
-    txJsonDoc["cmd"] = "MOVE_ABSOULATE";
-    txJsonDoc["position"] = position;
+    txJsonDoc["cmd"] = "MOTOR_MOVE_TO_CMD";
+    txJsonDoc["absolute"] = targetPosition;
 
-    // send queue msg
     xQueueSend(qMotorTask, &txJsonDoc, 0);
 }
 
-void PhotoTimelapse::waitMotorSync() {
-    Serial.println(">>>>>>>> PhotoTimelapse::waitMotorSync() >>>>>>>>");
+bool PhotoTimelapse::IMotor_checkMotorSyncNotification() {
+    Serial.println(">>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>");
 
     // wait until motor finish movement
     xReturn = xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
     if(xReturn == pdPASS) {
       Serial.println("--- Notif received by ActionManager::PhotoTimelapse ---");
-    }
+      return true;
+    } else return false;
 }
 
-void PhotoTimelapse::onTimeout() {
-    this->triggerCapture();
-    xTaskNotifyGive(actionTaskHandle);
-}
-
-void PhotoTimelapse::triggerCapture() {
-    Serial.println(">>>>>>>> PhotoTimelapse::triggerCapture() >>>>>>>>");
+void PhotoTimelapse::ICamera_triggerCapture() {
+    Serial.println(">>>>>>>> ICamera_triggerCapture() >>>>>>>>");
     xTaskNotifyGive(captureTaskHandle);
+
+    //xTaskNotifyGive(actionTaskHandle);
 }

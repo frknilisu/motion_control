@@ -1,7 +1,6 @@
 #include "ActionManager.h"
 #include "PhotoTimelapse.h"
 
-QueueHandle_t qActionTask;
 PhotoTimelapse* activeAction = NULL;
 
 ActionManager::ActionManager() {
@@ -12,13 +11,10 @@ void ActionManager::init() {
   Serial.println(">>>>>>>> ActionManager::init() >>>>>>>>");
 
   qActionTask = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
-  if (qActionTask == NULL) {
-    Serial.println("Queue can not be created");
-  }
 
   auto onTimer = [](xTimerHandle pxTimer){ 
     ActionManager* am = static_cast<ActionManager*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
-    am->onValueUpdate();
+    am->onMsgReceived();
   };
   
   this->timerHandle = xTimerCreate(
@@ -43,20 +39,14 @@ void ActionManager::runLoop() {
 }
 
 
-void ActionManager::onValueUpdate() {
+void ActionManager::onMsgReceived() {
   if(uxQueueMessagesWaiting(qActionTask) != 0) {
     xReturn = xQueueReceive(qActionTask, &rxJsonDoc, 0);
     if(xReturn == pdTRUE) {
-      isNewMessageExist = true;
+      isNewMsgReceived = true;
       activeAction = new PhotoTimelapse(rxJsonDoc);
     } else {
-      isNewMessageExist = false;
+      isNewMsgReceived = false;
     }
   }
 }
-
-/*
-txJsonDoc["target"] = "MissionController";
-txJsonDoc["cmd"] = "ACTION_FINISH_MSG";
-xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
-*/

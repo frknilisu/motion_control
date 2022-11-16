@@ -6,11 +6,22 @@
 #include "ActionManager.h"
 #include "CaptureManager.h"
 
+#define LOG_LOCAL_LEVEL ESP_LOG_INFO
+#include "esp_log.h"
+
+QueueHandle_t qMotorTask;
+QueueHandle_t qMissionTask;
+QueueHandle_t qCaptureTask;
+QueueHandle_t qBleTask;
+QueueHandle_t qActionTask;
+
 TaskHandle_t missionControlTaskHandle;
 TaskHandle_t bleTaskHandle;
 TaskHandle_t motorTaskHandle;
 TaskHandle_t actionTaskHandle;
 TaskHandle_t captureTaskHandle;
+
+BaseType_t xReturn;
 
 BleManager* bleManager;
 MotorManager* motorManager;
@@ -69,6 +80,9 @@ void setup() {
   missionController->init();
   actionManager->init();
   captureManager->init();
+
+  esp_log_level_set("MissionController", ESP_LOG_DEBUG);
+  esp_log_level_set("MotorManager", ESP_LOG_INFO);
 
   xTaskCreatePinnedToCore(
     TaskBLE

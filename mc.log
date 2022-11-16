@@ -1,0 +1,2835 @@
+--- Terminal on /dev/ttyUSB0 | 115200 8-N-1
+--- Available filters and text transformations: colorize, debug, default, direct, esp32_exception_decoder, hexlify, log2file, nocontrol, printable, send_on_enter, time
+--- More details at https://bit.ly/pio-monitor-filters
+--- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:12776
+load:0x40080400,len:3032
+entry 0x400805e4
+>>>>>>>> MotorManager() >>>>>>>>
+>>>>>>>> BleManager() >>>>>>>>
+>>>>>>>> ActionManager() >>>>>>>>
+>>>>>>>> CaptureManager() >>>>>>>>
+>>>>>>>> MotorManager::init() >>>>>>>>
+>>>>>>>> setStepResolution() >>>>>>>>
+>>>>>>>> BleManager::init() >>>>>>>>
+>>>>>>>> ActionManager::init() >>>>>>>>
+>>>>>>>> CaptureManager::init() >>>>>>>>
+Starting BLE Task...
+--- Enter: BleManager -> ADVERTISING ---
+--- BLE -> START_ADVERTISING ---Starting Mission Control Task...
+Starting Motor Driving Task...
+Starting Action Manager Task...
+Starting Capture Manager Task...
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+***onConnect***
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+--- Exit: BleManager -> ADVERTISING ---
+--- Enter: BleManager -> CONNECTED ---
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+-- Received Msg: startProgramming --
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+ELSE
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+distanceToGo: 0, currentPosition: 0
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -1, currentPosition: 1
+distanceToGo: -2, currentPosition: 2
+distanceToGo: -3, currentPosition: 3
+distanceToGo: -4, currentPosition: 4
+distanceToGo: -5, currentPosition: 5
+distanceToGo: -6, currentPosition: 6
+distanceToGo: -7, currentPosition: 7
+distanceToGo: -8, currentPosition: 8
+distanceToGo: -9, currentPosition: 9
+distanceToGo: -10, currentPosition: 10
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -11, currentPosition: 11
+distanceToGo: -12, currentPosition: 12
+distanceToGo: -13, currentPosition: 13
+distanceToGo: -14, currentPosition: 14
+distanceToGo: -15, currentPosition: 15
+distanceToGo: -16, currentPosition: 16
+distanceToGo: -17, currentPosition: 17
+distanceToGo: -18, currentPosition: 18
+distanceToGo: -19, currentPosition: 19
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -20, currentPosition: 20
+distanceToGo: -21, currentPosition: 21
+distanceToGo: -22, currentPosition: 22
+distanceToGo: -23, currentPosition: 23
+distanceToGo: -24, currentPosition: 24
+distanceToGo: -25, currentPosition: 25
+distanceToGo: -26, currentPosition: 26
+distanceToGo: -27, currentPosition: 27
+distanceToGo: -28, currentPosition: 28
+distanceToGo: -29, currentPosition: 29
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -30, currentPosition: 30
+distanceToGo: -31, currentPosition: 31
+distanceToGo: -32, currentPosition: 32
+distanceToGo: -33, currentPosition: 33
+distanceToGo: -34, currentPosition: 34
+distanceToGo: -35, currentPosition: 35
+distanceToGo: -36, currentPosition: 36
+distanceToGo: -37, currentPosition: 37
+distanceToGo: -38, currentPosition: 38
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -39, currentPosition: 39
+distanceToGo: -40, currentPosition: 40
+distanceToGo: -41, currentPosition: 41
+distanceToGo: -42, currentPosition: 42
+distanceToGo: -43, currentPosition: 43
+distanceToGo: -44, currentPosition: 44
+distanceToGo: -45, currentPosition: 45
+distanceToGo: -46, currentPosition: 46
+distanceToGo: -47, currentPosition: 47
+distanceToGo: -48, currentPosition: 48
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -49, currentPosition: 49
+distanceToGo: -50, currentPosition: 50
+distanceToGo: -51, currentPosition: 51
+distanceToGo: -52, currentPosition: 52
+distanceToGo: -53, currentPosition: 53
+distanceToGo: -54, currentPosition: 54
+distanceToGo: -55, currentPosition: 55
+distanceToGo: -56, currentPosition: 56
+distanceToGo: -57, currentPosition: 57
+distanceToGo: -58, currentPosition: 58
+distanceToGo: -59, currentPosition: 59
+distanceToGo: -60, currentPosition: 60
+distanceToGo: -61, currentPosition: 61
+distanceToGo: -62, currentPosition: 62
+distanceToGo: -63, currentPosition: 63
+distanceToGo: -64, currentPosition: 64
+distanceToGo: -65, currentPosition: 65
+distanceToGo: -66, currentPosition: 66
+distanceToGo: -67, currentPosition: 67
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+-- Received Msg: setA --
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+ELSE
+distanceToGo: -67, currentPosition: 67
+67
+setA done
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+distanceToGo: -67, currentPosition: 67
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -68, currentPosition: 68
+distanceToGo: -69, currentPosition: 69
+distanceToGo: -70, currentPosition: 70
+distanceToGo: -71, currentPosition: 71
+distanceToGo: -72, currentPosition: 72
+distanceToGo: -73, currentPosition: 73
+distanceToGo: -74, currentPosition: 74
+distanceToGo: -75, currentPosition: 75
+distanceToGo: -76, currentPosition: 76
+distanceToGo: -77, currentPosition: 77
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -78, currentPosition: 78
+distanceToGo: -79, currentPosition: 79
+distanceToGo: -80, currentPosition: 80
+distanceToGo: -81, currentPosition: 81
+distanceToGo: -82, currentPosition: 82
+distanceToGo: -83, currentPosition: 83
+distanceToGo: -84, currentPosition: 84
+distanceToGo: -85, currentPosition: 85
+distanceToGo: -86, currentPosition: 86
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -87, currentPosition: 87
+distanceToGo: -88, currentPosition: 88
+distanceToGo: -89, currentPosition: 89
+distanceToGo: -90, currentPosition: 90
+distanceToGo: -91, currentPosition: 91
+distanceToGo: -92, currentPosition: 92
+distanceToGo: -93, currentPosition: 93
+distanceToGo: -94, currentPosition: 94
+distanceToGo: -95, currentPosition: 95
+distanceToGo: -96, currentPosition: 96
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -97, currentPosition: 97
+distanceToGo: -98, currentPosition: 98
+distanceToGo: -99, currentPosition: 99
+distanceToGo: -100, currentPosition: 100
+distanceToGo: -101, currentPosition: 101
+distanceToGo: -102, currentPosition: 102
+distanceToGo: -103, currentPosition: 103
+distanceToGo: -104, currentPosition: 104
+distanceToGo: -105, currentPosition: 105
+distanceToGo: -106, currentPosition: 106
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -107, currentPosition: 107
+distanceToGo: -108, currentPosition: 108
+distanceToGo: -109, currentPosition: 109
+distanceToGo: -110, currentPosition: 110
+distanceToGo: -111, currentPosition: 111
+distanceToGo: -112, currentPosition: 112
+distanceToGo: -113, currentPosition: 113
+distanceToGo: -114, currentPosition: 114
+distanceToGo: -115, currentPosition: 115
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -116, currentPosition: 116
+distanceToGo: -117, currentPosition: 117
+distanceToGo: -118, currentPosition: 118
+distanceToGo: -119, currentPosition: 119
+distanceToGo: -120, currentPosition: 120
+distanceToGo: -121, currentPosition: 121
+distanceToGo: -122, currentPosition: 122
+distanceToGo: -123, currentPosition: 123
+distanceToGo: -124, currentPosition: 124
+distanceToGo: -125, currentPosition: 125
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -126, currentPosition: 126
+distanceToGo: -127, currentPosition: 127
+distanceToGo: -128, currentPosition: 128
+distanceToGo: -129, currentPosition: 129
+distanceToGo: -130, currentPosition: 130
+distanceToGo: -131, currentPosition: 131
+distanceToGo: -132, currentPosition: 132
+distanceToGo: -133, currentPosition: 133
+distanceToGo: -134, currentPosition: 134
+distanceToGo: -135, currentPosition: 135
+distanceToGo: -136, currentPosition: 136
+distanceToGo: -137, currentPosition: 137
+distanceToGo: -138, currentPosition: 138
+distanceToGo: -139, currentPosition: 139
+distanceToGo: -140, currentPosition: 140
+distanceToGo: -141, currentPosition: 141
+distanceToGo: -142, currentPosition: 142
+distanceToGo: -143, currentPosition: 143
+distanceToGo: -144, currentPosition: 144
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+-- Received Msg: manualDrive --
+>>>>>>>> MotorManager MOTOR_SET_SPEED_CMD >>>>>>>>
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+-- Received Msg: setB --
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+ELSE
+144
+setB done
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+-- Received Msg: setActionData --
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+set action data
+distanceToGo: -144, currentPosition: 144
+setActionData done
+{"cmd":"SET_ACTION_DATA_CMD","data":{"motor":{"direction":"a2b","pa":67,"pb":144},"capture":{"record_duration":3600,"video_duration":30,"fps":24,"shutter_speed":"1_500"}}}distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+-- Received Msg: finishProgramming --
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+-- Received Msg: finishProgramming --
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+ELSE
+distanceToGo: -144, currentPosition: 144
+Point A and B are set. Finishing action programming..
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+>>>>>>>> PhotoTimelapse(initParams) >>>>>>>>
+{"cmd":"SET_ACTION_DATA_CMD","data":{"motor":{"direction":"a2b","pa":67,"pb":144},"capture":{"record_duration":3600,"video_duration":30,"fps":24}}}67
+144
+3600
+30
+24
+720
+77
+0
+>>>>>>>> PhotoTimelapse::init() >>>>>>>>
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+distanceToGo: -144, currentPosition: 144
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 145
+distanceToGo: 98, currentPosition: 146
+distanceToGo: 97, currentPosition: 147
+distanceToGo: 96, currentPosition: 148
+distanceToGo: 95, currentPosition: 149
+distanceToGo: 94, currentPosition: 150
+distanceToGo: 93, currentPosition: 151
+distanceToGo: 92, currentPosition: 152
+distanceToGo: 91, currentPosition: 153
+distanceToGo: --- ActionManager: ActiveAction->run() ---
+90, currentPosition: 154
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+--- Notif received by ActionManager::PhotoTimelapse ---
+distanceToGo: 89, currentPosition: 155
+distanceToGo: 88, currentPosition: 156
+distanceToGo: 87, currentPosition: 157
+distanceToGo: 86, currentPosition: 158
+distanceToGo: 85, currentPosition: 159
+distanceToGo: 84, currentPosition: 160
+distanceToGo: 83, currentPosition: 161
+distanceToGo: 82, currentPosition: 162
+distanceToGo: 81, currentPosition: 163
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 80, currentPosition: 164
+distanceToGo: 79, currentPosition: 165
+distanceToGo: 78, currentPosition: 166
+distanceToGo: 77, currentPosition: 167
+distanceToGo: 76, currentPosition: 168
+distanceToGo: 75, currentPosition: 169
+distanceToGo: 74, currentPosition: 170
+distanceToGo: 73, currentPosition: 171
+distanceToGo: 72, currentPosition: 172
+distanceToGo: 71, currentPosition: 173
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 70, currentPosition: 174
+distanceToGo: 69, currentPosition: 175
+distanceToGo: 68, currentPosition: 176
+distanceToGo: 67, currentPosition: 177
+distanceToGo: 66, currentPosition: 178
+distanceToGo: 65, currentPosition: 179
+distanceToGo: 64, currentPosition: 180
+distanceToGo: 63, currentPosition: 181
+distanceToGo: 62, currentPosition: 182
+distanceToGo: 61, currentPosition: 183
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 60, currentPosition: 184
+distanceToGo: 59, currentPosition: 185
+distanceToGo: 58, currentPosition: 186
+distanceToGo: 57, currentPosition: 187
+distanceToGo: 56, currentPosition: 188
+distanceToGo: 55, currentPosition: 189
+distanceToGo: 54, currentPosition: 190
+distanceToGo: 53, currentPosition: 191
+distanceToGo: 52, currentPosition: 192
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+distanceToGo: 51, currentPosition: 193
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 50, currentPosition: 194
+distanceToGo: 49, currentPosition: 195
+distanceToGo: 48, currentPosition: 196
+distanceToGo: 47, currentPosition: 197
+distanceToGo: 46, currentPosition: 198
+distanceToGo: 45, currentPosition: 199
+distanceToGo: 44, currentPosition: 200
+distanceToGo: 43, currentPosition: 201
+distanceToGo: 42, currentPosition: 202
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+distanceToGo: 41, currentPosition: 203
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 204
+distanceToGo: 98, currentPosition: 205
+distanceToGo: 97, currentPosition: 206
+distanceToGo: 96, currentPosition: 207
+distanceToGo: 95, currentPosition: 208
+distanceToGo: 94, currentPosition: 209
+distanceToGo: 93, currentPosition: 210
+distanceToGo: 92, currentPosition: 211
+distanceToGo: 91, currentPosition: 212
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: 90, currentPosition: 213
+distanceToGo: 89, currentPosition: 214
+distanceToGo: 88, currentPosition: 215
+distanceToGo: 87, currentPosition: 216
+distanceToGo: 86, currentPosition: 217
+distanceToGo: 85, currentPosition: 218
+distanceToGo: 84, currentPosition: 219
+distanceToGo: 83, currentPosition: 220
+distanceToGo: 82, currentPosition: 221
+distanceToGo: 81, currentPosition: 222
+distanceToGo: 80, currentPosition: 223
+distanceToGo: 79, currentPosition: 224
+distanceToGo: 78, currentPosition: 225
+distanceToGo: 77, currentPosition: 226
+distanceToGo: 76, currentPosition: 227
+distanceToGo: 75, currentPosition: 228
+distanceToGo: 74, currentPosition: 229
+distanceToGo: 73, currentPosition: 230
+distanceToGo: 72, currentPosition: 231
+distanceToGo: 71, currentPosition: 232
+distanceToGo: 70, currentPosition: 233
+distanceToGo: 69, currentPosition: 234
+distanceToGo: 68, currentPosition: 235
+distanceToGo: 67, currentPosition: 236
+distanceToGo: 66, currentPosition: 237
+distanceToGo: 65, currentPosition: 238
+distanceToGo: 64, currentPosition: 239
+distanceToGo: 63, currentPosition: 240
+distanceToGo: 62, currentPosition: 241
+distanceToGo: 61, currentPosition: 242
+distanceToGo: 60, currentPosition: 243
+distanceToGo: 59, currentPosition: 244
+distanceToGo: 58, currentPosition: 245
+distanceToGo: 57, currentPosition: 246
+distanceToGo: 56, currentPosition: 247
+distanceToGo: 55, currentPosition: 248
+distanceToGo: 54, currentPosition: 249
+distanceToGo: 53, currentPosition: 250
+distanceToGo: 52, currentPosition: 251
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+distanceToGo: 51, currentPosition: 252
+distanceToGo: 50, currentPosition: 253
+distanceToGo: 49, currentPosition: 254
+distanceToGo: 48, currentPosition: 255
+distanceToGo: 47, currentPosition: 256
+distanceToGo: 46, currentPosition: 257
+distanceToGo: 45, currentPosition: 258
+distanceToGo: 44, currentPosition: 259
+distanceToGo: 43, currentPosition: 260
+distanceToGo: 42, currentPosition: 261
+distanceToGo: 41, currentPosition: 262
+distanceToGo: 40, currentPosition: 263
+distanceToGo: 39, currentPosition: 264
+distanceToGo: 38, currentPosition: 265
+distanceToGo: 37, currentPosition: 266
+distanceToGo: 36, currentPosition: 267
+distanceToGo: 35, currentPosition: 268
+distanceToGo: 34, currentPosition: 269
+distanceToGo: 33, currentPosition: 270
+distanceToGo: 32, currentPosition: 271
+distanceToGo: 31, currentPosition: 272
+distanceToGo: 30, currentPosition: 273
+distanceToGo: 29, currentPosition: 274
+distanceToGo: 28, currentPosition: 275
+distanceToGo: 27, currentPosition: 276
+distanceToGo: 26, currentPosition: 277
+distanceToGo: 25, currentPosition: 278
+distanceToGo: 24, currentPosition: 279
+distanceToGo: 23, currentPosition: 280
+distanceToGo: 22, currentPosition: 281
+distanceToGo: 21, currentPosition: 282
+distanceToGo: 20, currentPosition: 283
+distanceToGo: 19, currentPosition: 284
+distanceToGo: 18, currentPosition: 285
+distanceToGo: 17, currentPosition: 286
+distanceToGo: 16, currentPosition: 287
+distanceToGo: 15, currentPosition: 288
+distanceToGo: 14, currentPosition: 289
+distanceToGo: 13, currentPosition: 290
+distanceToGo: 12, currentPosition: 291
+distanceToGo: 11, currentPosition: 292
+distanceToGo: 10, currentPosition: 293
+distanceToGo: 9, currentPosition: 294
+distanceToGo: 8, currentPosition: 295
+distanceToGo: 7, currentPosition: 296
+distanceToGo: 6, currentPosition: 297
+distanceToGo: 5, currentPosition: 298
+distanceToGo: 4, currentPosition: 299
+distanceToGo: 3, currentPosition: 300
+distanceToGo: 2, currentPosition: 301
+distanceToGo: 1, currentPosition: 302
+distanceToGo: 0, currentPosition: 303
+--- Notif received by ActionManager::PhotoTimelapse ---
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+distanceToGo: 0, currentPosition: 303
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 304
+distanceToGo: 98, currentPosition: 305
+distanceToGo: 97, currentPosition: 306
+distanceToGo: 96, currentPosition: 307
+distanceToGo: 95, currentPosition: 308
+distanceToGo: 94, currentPosition: 309
+distanceToGo: 93, currentPosition: 310
+distanceToGo: 92, currentPosition: 311
+distanceToGo: 91, currentPosition: 312
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: --- Notif received by ActionManager::PhotoTimelapse ---
+90, currentPosition: 313
+distanceToGo: 89, currentPosition: 314
+distanceToGo: 88, currentPosition: 315
+distanceToGo: 87, currentPosition: 316
+distanceToGo: 86, currentPosition: 317
+distanceToGo: 85, currentPosition: 318
+distanceToGo: 84, currentPosition: 319
+distanceToGo: 83, currentPosition: 320
+distanceToGo: 82, currentPosition: 321
+distanceToGo: 81, currentPosition: 322
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 80, currentPosition: 323
+distanceToGo: 79, currentPosition: 324
+distanceToGo: 78, currentPosition: 325
+distanceToGo: 77, currentPosition: 326
+distanceToGo: 76, currentPosition: 327
+distanceToGo: 75, currentPosition: 328
+distanceToGo: 74, currentPosition: 329
+distanceToGo: 73, currentPosition: 330
+distanceToGo: 72, currentPosition: 331
+distanceToGo: 71, currentPosition: 332
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 70, currentPosition: 333
+distanceToGo: 69, currentPosition: 334
+distanceToGo: 68, currentPosition: 335
+distanceToGo: 67, currentPosition: 336
+distanceToGo: 66, currentPosition: 337
+distanceToGo: 65, currentPosition: 338
+distanceToGo: 64, currentPosition: 339
+distanceToGo: 63, currentPosition: 340
+distanceToGo: 62, currentPosition: 341
+distanceToGo: 61, currentPosition: 342
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 60, currentPosition: 343
+distanceToGo: 59, currentPosition: 344
+distanceToGo: 58, currentPosition: 345
+distanceToGo: 57, currentPosition: 346
+distanceToGo: 56, currentPosition: 347
+distanceToGo: 55, currentPosition: 348
+distanceToGo: 54, currentPosition: 349
+distanceToGo: 53, currentPosition: 350
+distanceToGo: 52, currentPosition: 351
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 51, currentPosition: 352
+distanceToGo: 50, currentPosition: 353
+distanceToGo: 49, currentPosition: 354
+distanceToGo: 48, currentPosition: 355
+distanceToGo: 47, currentPosition: 356
+distanceToGo: 46, currentPosition: 357
+distanceToGo: 45, currentPosition: 358
+distanceToGo: 44, currentPosition: 359
+distanceToGo: 43, currentPosition: 360
+distanceToGo: 42, currentPosition: 361
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 362
+distanceToGo: 98, currentPosition: 363
+distanceToGo: 97, currentPosition: 364
+distanceToGo: 96, currentPosition: 365
+distanceToGo: 95, currentPosition: 366
+distanceToGo: 94, currentPosition: 367
+distanceToGo: 93, currentPosition: 368
+distanceToGo: 92, currentPosition: 369
+distanceToGo: 91, currentPosition: 370
+distanceToGo: 90, currentPosition: 371
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: 89, currentPosition: 372
+distanceToGo: 88, currentPosition: 373
+distanceToGo: 87, currentPosition: 374
+distanceToGo: 86, currentPosition: 375
+distanceToGo: 85, currentPosition: 376
+distanceToGo: 84, currentPosition: 377
+distanceToGo: 83, currentPosition: 378
+distanceToGo: 82, currentPosition: 379
+distanceToGo: 81, currentPosition: 380
+distanceToGo: 80, currentPosition: 381
+distanceToGo: 79, currentPosition: 382
+distanceToGo: 78, currentPosition: 383
+distanceToGo: 77, currentPosition: 384
+distanceToGo: 76, currentPosition: 385
+distanceToGo: 75, currentPosition: 386
+distanceToGo: 74, currentPosition: 387
+distanceToGo: 73, currentPosition: 388
+distanceToGo: 72, currentPosition: 389
+distanceToGo: 71, currentPosition: 390
+distanceToGo: 70, currentPosition: 391
+distanceToGo: 69, currentPosition: 392
+distanceToGo: 68, currentPosition: 393
+distanceToGo: 67, currentPosition: 394
+distanceToGo: 66, currentPosition: 395
+distanceToGo: 65, currentPosition: 396
+distanceToGo: 64, currentPosition: 397
+distanceToGo: 63, currentPosition: 398
+distanceToGo: 62, currentPosition: 399
+distanceToGo: 61, currentPosition: 400
+distanceToGo: 60, currentPosition: 401
+distanceToGo: 59, currentPosition: 402
+distanceToGo: 58, currentPosition: 403
+distanceToGo: 57, currentPosition: 404
+distanceToGo: 56, currentPosition: 405
+distanceToGo: 55, currentPosition: 406
+distanceToGo: 54, currentPosition: 407
+distanceToGo: 53, currentPosition: 408
+distanceToGo: 52, currentPosition: 409
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+distanceToGo: 51, currentPosition: 410
+distanceToGo: 50, currentPosition: 411
+distanceToGo: 49, currentPosition: 412
+distanceToGo: 48, currentPosition: 413
+distanceToGo: 47, currentPosition: 414
+distanceToGo: 46, currentPosition: 415
+distanceToGo: 45, currentPosition: 416
+distanceToGo: 44, currentPosition: 417
+distanceToGo: 43, currentPosition: 418
+distanceToGo: 42, currentPosition: 419
+distanceToGo: 41, currentPosition: 420
+distanceToGo: 40, currentPosition: 421
+distanceToGo: 39, currentPosition: 422
+distanceToGo: 38, currentPosition: 423
+distanceToGo: 37, currentPosition: 424
+distanceToGo: 36, currentPosition: 425
+distanceToGo: 35, currentPosition: 426
+distanceToGo: 34, currentPosition: 427
+distanceToGo: 33, currentPosition: 428
+distanceToGo: 32, currentPosition: 429
+distanceToGo: 31, currentPosition: 430
+distanceToGo: 30, currentPosition: 431
+distanceToGo: 29, currentPosition: 432
+distanceToGo: 28, currentPosition: 433
+distanceToGo: 27, currentPosition: 434
+distanceToGo: 26, currentPosition: 435
+distanceToGo: 25, currentPosition: 436
+distanceToGo: 24, currentPosition: 437
+distanceToGo: 23, currentPosition: 438
+distanceToGo: 22, currentPosition: 439
+distanceToGo: 21, currentPosition: 440
+distanceToGo: 20, currentPosition: 441
+distanceToGo: 19, currentPosition: 442
+distanceToGo: 18, currentPosition: 443
+distanceToGo: 17, currentPosition: 444
+distanceToGo: 16, currentPosition: 445
+distanceToGo: 15, currentPosition: 446
+distanceToGo: 14, currentPosition: 447
+distanceToGo: 13, currentPosition: 448
+distanceToGo: 12, currentPosition: 449
+distanceToGo: 11, currentPosition: 450
+distanceToGo: 10, currentPosition: 451
+distanceToGo: 9, currentPosition: 452
+distanceToGo: 8, currentPosition: 453
+distanceToGo: 7, currentPosition: 454
+distanceToGo: 6, currentPosition: 455
+distanceToGo: 5, currentPosition: 456
+distanceToGo: 4, currentPosition: 457
+distanceToGo: 3, currentPosition: 458
+distanceToGo: 2, currentPosition: 459
+distanceToGo: 1, currentPosition: 460
+distanceToGo: 0, currentPosition: 461
+--- Notif received by ActionManager::PhotoTimelapse ---
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+distanceToGo: 0, currentPosition: 461
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 462
+distanceToGo: 98, currentPosition: 463
+distanceToGo: 97, currentPosition: 464
+distanceToGo: 96, currentPosition: 465
+distanceToGo: 95, currentPosition: 466
+distanceToGo: 94, currentPosition: 467
+distanceToGo: 93, currentPosition: 468
+distanceToGo: 92, currentPosition: 469
+distanceToGo: 91, currentPosition: 470
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: --- Notif received by ActionManager::PhotoTimelapse ---
+90, currentPosition: 471
+distanceToGo: 89, currentPosition: 472
+distanceToGo: 88, currentPosition: 473
+distanceToGo: 87, currentPosition: 474
+distanceToGo: 86, currentPosition: 475
+distanceToGo: 85, currentPosition: 476
+distanceToGo: 84, currentPosition: 477
+distanceToGo: 83, currentPosition: 478
+distanceToGo: 82, currentPosition: 479
+distanceToGo: 81, currentPosition: 480
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 80, currentPosition: 481
+distanceToGo: 79, currentPosition: 482
+distanceToGo: 78, currentPosition: 483
+distanceToGo: 77, currentPosition: 484
+distanceToGo: 76, currentPosition: 485
+distanceToGo: 75, currentPosition: 486
+distanceToGo: 74, currentPosition: 487
+distanceToGo: 73, currentPosition: 488
+distanceToGo: 72, currentPosition: 489
+distanceToGo: 71, currentPosition: 490
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 70, currentPosition: 491
+distanceToGo: 69, currentPosition: 492
+distanceToGo: 68, currentPosition: 493
+distanceToGo: 67, currentPosition: 494
+distanceToGo: 66, currentPosition: 495
+distanceToGo: 65, currentPosition: 496
+distanceToGo: 64, currentPosition: 497
+distanceToGo: 63, currentPosition: 498
+distanceToGo: 62, currentPosition: 499
+distanceToGo: 61, currentPosition: 500
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 60, currentPosition: 501
+distanceToGo: 59, currentPosition: 502
+distanceToGo: 58, currentPosition: 503
+distanceToGo: 57, currentPosition: 504
+distanceToGo: 56, currentPosition: 505
+distanceToGo: 55, currentPosition: 506
+distanceToGo: 54, currentPosition: 507
+distanceToGo: 53, currentPosition: 508
+distanceToGo: 52, currentPosition: 509
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 51, currentPosition: 510
+distanceToGo: 50, currentPosition: 511
+distanceToGo: 49, currentPosition: 512
+distanceToGo: 48, currentPosition: 513
+distanceToGo: 47, currentPosition: 514
+distanceToGo: 46, currentPosition: 515
+distanceToGo: 45, currentPosition: 516
+distanceToGo: 44, currentPosition: 517
+distanceToGo: 43, currentPosition: 518
+distanceToGo: 42, currentPosition: 519
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 520
+distanceToGo: 98, currentPosition: 521
+distanceToGo: 97, currentPosition: 522
+distanceToGo: 96, currentPosition: 523
+distanceToGo: 95, currentPosition: 524
+distanceToGo: 94, currentPosition: 525
+distanceToGo: 93, currentPosition: 526
+distanceToGo: 92, currentPosition: 527
+distanceToGo: 91, currentPosition: 528
+distanceToGo: 90, currentPosition: 529
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: 89, currentPosition: 530
+distanceToGo: 88, currentPosition: 531
+distanceToGo: 87, currentPosition: 532
+distanceToGo: 86, currentPosition: 533
+distanceToGo: 85, currentPosition: 534
+distanceToGo: 84, currentPosition: 535
+distanceToGo: 83, currentPosition: 536
+distanceToGo: 82, currentPosition: 537
+distanceToGo: 81, currentPosition: 538
+distanceToGo: 80, currentPosition: 539
+distanceToGo: 79, currentPosition: 540
+distanceToGo: 78, currentPosition: 541
+distanceToGo: 77, currentPosition: 542
+distanceToGo: 76, currentPosition: 543
+distanceToGo: 75, currentPosition: 544
+distanceToGo: 74, currentPosition: 545
+distanceToGo: 73, currentPosition: 546
+distanceToGo: 72, currentPosition: 547
+distanceToGo: 71, currentPosition: 548
+distanceToGo: 70, currentPosition: 549
+distanceToGo: 69, currentPosition: 550
+distanceToGo: 68, currentPosition: 551
+distanceToGo: 67, currentPosition: 552
+distanceToGo: 66, currentPosition: 553
+distanceToGo: 65, currentPosition: 554
+distanceToGo: 64, currentPosition: 555
+distanceToGo: 63, currentPosition: 556
+distanceToGo: 62, currentPosition: 557
+distanceToGo: 61, currentPosition: 558
+distanceToGo: 60, currentPosition: 559
+distanceToGo: 59, currentPosition: 560
+distanceToGo: 58, currentPosition: 561
+distanceToGo: 57, currentPosition: 562
+distanceToGo: 56, currentPosition: 563
+distanceToGo: 55, currentPosition: 564
+distanceToGo: 54, currentPosition: 565
+distanceToGo: 53, currentPosition: 566
+distanceToGo: 52, currentPosition: 567
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+distanceToGo: 51, currentPosition: 568
+distanceToGo: 50, currentPosition: 569
+distanceToGo: 49, currentPosition: 570
+distanceToGo: 48, currentPosition: 571
+distanceToGo: 47, currentPosition: 572
+distanceToGo: 46, currentPosition: 573
+distanceToGo: 45, currentPosition: 574
+distanceToGo: 44, currentPosition: 575
+distanceToGo: 43, currentPosition: 576
+distanceToGo: 42, currentPosition: 577
+distanceToGo: 41, currentPosition: 578
+distanceToGo: 40, currentPosition: 579
+distanceToGo: 39, currentPosition: 580
+distanceToGo: 38, currentPosition: 581
+distanceToGo: 37, currentPosition: 582
+distanceToGo: 36, currentPosition: 583
+distanceToGo: 35, currentPosition: 584
+distanceToGo: 34, currentPosition: 585
+distanceToGo: 33, currentPosition: 586
+distanceToGo: 32, currentPosition: 587
+distanceToGo: 31, currentPosition: 588
+distanceToGo: 30, currentPosition: 589
+distanceToGo: 29, currentPosition: 590
+distanceToGo: 28, currentPosition: 591
+distanceToGo: 27, currentPosition: 592
+distanceToGo: 26, currentPosition: 593
+distanceToGo: 25, currentPosition: 594
+distanceToGo: 24, currentPosition: 595
+distanceToGo: 23, currentPosition: 596
+distanceToGo: 22, currentPosition: 597
+distanceToGo: 21, currentPosition: 598
+distanceToGo: 20, currentPosition: 599
+distanceToGo: 19, currentPosition: 600
+distanceToGo: 18, currentPosition: 601
+distanceToGo: 17, currentPosition: 602
+distanceToGo: 16, currentPosition: 603
+distanceToGo: 15, currentPosition: 604
+distanceToGo: 14, currentPosition: 605
+distanceToGo: 13, currentPosition: 606
+distanceToGo: 12, currentPosition: 607
+distanceToGo: 11, currentPosition: 608
+distanceToGo: 10, currentPosition: 609
+distanceToGo: 9, currentPosition: 610
+distanceToGo: 8, currentPosition: 611
+distanceToGo: 7, currentPosition: 612
+distanceToGo: 6, currentPosition: 613
+distanceToGo: 5, currentPosition: 614
+distanceToGo: 4, currentPosition: 615
+distanceToGo: 3, currentPosition: 616
+distanceToGo: 2, currentPosition: 617
+distanceToGo: 1, currentPosition: 618
+distanceToGo: 0, currentPosition: 619
+--- Notif received by ActionManager::PhotoTimelapse ---
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+distanceToGo: 0, currentPosition: 619
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 620
+distanceToGo: 98, currentPosition: 621
+distanceToGo: 97, currentPosition: 622
+distanceToGo: 96, currentPosition: 623
+distanceToGo: 95, currentPosition: 624
+distanceToGo: 94, currentPosition: 625
+distanceToGo: 93, currentPosition: 626
+distanceToGo: 92, currentPosition: 627
+distanceToGo: 91, currentPosition: 628
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: --- Notif received by ActionManager::PhotoTimelapse ---
+90, currentPosition: 629
+distanceToGo: 89, currentPosition: 630
+distanceToGo: 88, currentPosition: 631
+distanceToGo: 87, currentPosition: 632
+distanceToGo: 86, currentPosition: 633
+distanceToGo: 85, currentPosition: 634
+distanceToGo: 84, currentPosition: 635
+distanceToGo: 83, currentPosition: 636
+distanceToGo: 82, currentPosition: 637
+distanceToGo: 81, currentPosition: 638
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 80, currentPosition: 639
+distanceToGo: 79, currentPosition: 640
+distanceToGo: 78, currentPosition: 641
+distanceToGo: 77, currentPosition: 642
+distanceToGo: 76, currentPosition: 643
+distanceToGo: 75, currentPosition: 644
+distanceToGo: 74, currentPosition: 645
+distanceToGo: 73, currentPosition: 646
+distanceToGo: 72, currentPosition: 647
+distanceToGo: 71, currentPosition: 648
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 70, currentPosition: 649
+distanceToGo: 69, currentPosition: 650
+distanceToGo: 68, currentPosition: 651
+distanceToGo: 67, currentPosition: 652
+distanceToGo: 66, currentPosition: 653
+distanceToGo: 65, currentPosition: 654
+distanceToGo: 64, currentPosition: 655
+distanceToGo: 63, currentPosition: 656
+distanceToGo: 62, currentPosition: 657
+distanceToGo: 61, currentPosition: 658
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 60, currentPosition: 659
+distanceToGo: 59, currentPosition: 660
+distanceToGo: 58, currentPosition: 661
+distanceToGo: 57, currentPosition: 662
+distanceToGo: 56, currentPosition: 663
+distanceToGo: 55, currentPosition: 664
+distanceToGo: 54, currentPosition: 665
+distanceToGo: 53, currentPosition: 666
+distanceToGo: 52, currentPosition: 667
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 51, currentPosition: 668
+distanceToGo: 50, currentPosition: 669
+distanceToGo: 49, currentPosition: 670
+distanceToGo: 48, currentPosition: 671
+distanceToGo: 47, currentPosition: 672
+distanceToGo: 46, currentPosition: 673
+distanceToGo: 45, currentPosition: 674
+distanceToGo: 44, currentPosition: 675
+distanceToGo: 43, currentPosition: 676
+distanceToGo: 42, currentPosition: 677
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 678
+distanceToGo: 98, currentPosition: 679
+distanceToGo: 97, currentPosition: 680
+distanceToGo: 96, currentPosition: 681
+distanceToGo: 95, currentPosition: 682
+distanceToGo: 94, currentPosition: 683
+distanceToGo: 93, currentPosition: 684
+distanceToGo: 92, currentPosition: 685
+distanceToGo: 91, currentPosition: 686
+distanceToGo: 90, currentPosition: 687
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: 89, currentPosition: 688
+distanceToGo: 88, currentPosition: 689
+distanceToGo: 87, currentPosition: 690
+distanceToGo: 86, currentPosition: 691
+distanceToGo: 85, currentPosition: 692
+distanceToGo: 84, currentPosition: 693
+distanceToGo: 83, currentPosition: 694
+distanceToGo: 82, currentPosition: 695
+distanceToGo: 81, currentPosition: 696
+distanceToGo: 80, currentPosition: 697
+distanceToGo: 79, currentPosition: 698
+distanceToGo: 78, currentPosition: 699
+distanceToGo: 77, currentPosition: 700
+distanceToGo: 76, currentPosition: 701
+distanceToGo: 75, currentPosition: 702
+distanceToGo: 74, currentPosition: 703
+distanceToGo: 73, currentPosition: 704
+distanceToGo: 72, currentPosition: 705
+distanceToGo: 71, currentPosition: 706
+distanceToGo: 70, currentPosition: 707
+distanceToGo: 69, currentPosition: 708
+distanceToGo: 68, currentPosition: 709
+distanceToGo: 67, currentPosition: 710
+distanceToGo: 66, currentPosition: 711
+distanceToGo: 65, currentPosition: 712
+distanceToGo: 64, currentPosition: 713
+distanceToGo: 63, currentPosition: 714
+distanceToGo: 62, currentPosition: 715
+distanceToGo: 61, currentPosition: 716
+distanceToGo: 60, currentPosition: 717
+distanceToGo: 59, currentPosition: 718
+distanceToGo: 58, currentPosition: 719
+distanceToGo: 57, currentPosition: 720
+distanceToGo: 56, currentPosition: 721
+distanceToGo: 55, currentPosition: 722
+distanceToGo: 54, currentPosition: 723
+distanceToGo: 53, currentPosition: 724
+distanceToGo: 52, currentPosition: 725
+distanceToGo: 51, currentPosition: 726
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+distanceToGo: 50, currentPosition: 727
+distanceToGo: 49, currentPosition: 728
+distanceToGo: 48, currentPosition: 729
+distanceToGo: 47, currentPosition: 730
+distanceToGo: 46, currentPosition: 731
+distanceToGo: 45, currentPosition: 732
+distanceToGo: 44, currentPosition: 733
+distanceToGo: 43, currentPosition: 734
+distanceToGo: 42, currentPosition: 735
+distanceToGo: 41, currentPosition: 736
+distanceToGo: 40, currentPosition: 737
+distanceToGo: 39, currentPosition: 738
+distanceToGo: 38, currentPosition: 739
+distanceToGo: 37, currentPosition: 740
+distanceToGo: 36, currentPosition: 741
+distanceToGo: 35, currentPosition: 742
+distanceToGo: 34, currentPosition: 743
+distanceToGo: 33, currentPosition: 744
+distanceToGo: 32, currentPosition: 745
+distanceToGo: 31, currentPosition: 746
+distanceToGo: 30, currentPosition: 747
+distanceToGo: 29, currentPosition: 748
+distanceToGo: 28, currentPosition: 749
+distanceToGo: 27, currentPosition: 750
+distanceToGo: 26, currentPosition: 751
+distanceToGo: 25, currentPosition: 752
+distanceToGo: 24, currentPosition: 753
+distanceToGo: 23, currentPosition: 754
+distanceToGo: 22, currentPosition: 755
+distanceToGo: 21, currentPosition: 756
+distanceToGo: 20, currentPosition: 757
+distanceToGo: 19, currentPosition: 758
+distanceToGo: 18, currentPosition: 759
+distanceToGo: 17, currentPosition: 760
+distanceToGo: 16, currentPosition: 761
+distanceToGo: 15, currentPosition: 762
+distanceToGo: 14, currentPosition: 763
+distanceToGo: 13, currentPosition: 764
+distanceToGo: 12, currentPosition: 765
+distanceToGo: 11, currentPosition: 766
+distanceToGo: 10, currentPosition: 767
+distanceToGo: 9, currentPosition: 768
+distanceToGo: 8, currentPosition: 769
+distanceToGo: 7, currentPosition: 770
+distanceToGo: 6, currentPosition: 771
+distanceToGo: 5, currentPosition: 772
+distanceToGo: 4, currentPosition: 773
+distanceToGo: 3, currentPosition: 774
+distanceToGo: 2, currentPosition: 775
+distanceToGo: 1, currentPosition: 776
+distanceToGo: 0, currentPosition: 777
+--- Notif received by ActionManager::PhotoTimelapse ---
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+distanceToGo: 0, currentPosition: 777
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 778
+distanceToGo: 98, currentPosition: 779
+distanceToGo: 97, currentPosition: 780
+distanceToGo: 96, currentPosition: 781
+distanceToGo: 95, currentPosition: 782
+distanceToGo: 94, currentPosition: 783
+distanceToGo: 93, currentPosition: 784
+distanceToGo: 92, currentPosition: 785
+distanceToGo: 91, currentPosition: 786
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: --- Notif received by ActionManager::PhotoTimelapse ---
+90, currentPosition: 787
+distanceToGo: 89, currentPosition: 788
+distanceToGo: 88, currentPosition: 789
+distanceToGo: 87, currentPosition: 790
+distanceToGo: 86, currentPosition: 791
+distanceToGo: 85, currentPosition: 792
+distanceToGo: 84, currentPosition: 793
+distanceToGo: 83, currentPosition: 794
+distanceToGo: 82, currentPosition: 795
+distanceToGo: 81, currentPosition: 796
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 80, currentPosition: 797
+distanceToGo: 79, currentPosition: 798
+distanceToGo: 78, currentPosition: 799
+distanceToGo: 77, currentPosition: 800
+distanceToGo: 76, currentPosition: 801
+distanceToGo: 75, currentPosition: 802
+distanceToGo: 74, currentPosition: 803
+distanceToGo: 73, currentPosition: 804
+distanceToGo: 72, currentPosition: 805
+distanceToGo: 71, currentPosition: 806
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 70, currentPosition: 807
+distanceToGo: 69, currentPosition: 808
+distanceToGo: 68, currentPosition: 809
+distanceToGo: 67, currentPosition: 810
+distanceToGo: 66, currentPosition: 811
+distanceToGo: 65, currentPosition: 812
+distanceToGo: 64, currentPosition: 813
+distanceToGo: 63, currentPosition: 814
+distanceToGo: 62, currentPosition: 815
+distanceToGo: 61, currentPosition: 816
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 60, currentPosition: 817
+distanceToGo: 59, currentPosition: 818
+distanceToGo: 58, currentPosition: 819
+distanceToGo: 57, currentPosition: 820
+distanceToGo: 56, currentPosition: 821
+distanceToGo: 55, currentPosition: 822
+distanceToGo: 54, currentPosition: 823
+distanceToGo: 53, currentPosition: 824
+distanceToGo: 52, currentPosition: 825
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 51, currentPosition: 826
+distanceToGo: 50, currentPosition: 827
+distanceToGo: 49, currentPosition: 828
+distanceToGo: 48, currentPosition: 829
+distanceToGo: 47, currentPosition: 830
+distanceToGo: 46, currentPosition: 831
+distanceToGo: 45, currentPosition: 832
+distanceToGo: 44, currentPosition: 833
+distanceToGo: 43, currentPosition: 834
+distanceToGo: 42, currentPosition: 835
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 836
+distanceToGo: 98, currentPosition: 837
+distanceToGo: 97, currentPosition: 838
+distanceToGo: 96, currentPosition: 839
+distanceToGo: 95, currentPosition: 840
+distanceToGo: 94, currentPosition: 841
+distanceToGo: 93, currentPosition: 842
+distanceToGo: 92, currentPosition: 843
+distanceToGo: 91, currentPosition: 844
+distanceToGo: 90, currentPosition: 845
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: 89, currentPosition: 846
+distanceToGo: 88, currentPosition: 847
+distanceToGo: 87, currentPosition: 848
+distanceToGo: 86, currentPosition: 849
+distanceToGo: 85, currentPosition: 850
+distanceToGo: 84, currentPosition: 851
+distanceToGo: 83, currentPosition: 852
+distanceToGo: 82, currentPosition: 853
+distanceToGo: 81, currentPosition: 854
+distanceToGo: 80, currentPosition: 855
+distanceToGo: 79, currentPosition: 856
+distanceToGo: 78, currentPosition: 857
+distanceToGo: 77, currentPosition: 858
+distanceToGo: 76, currentPosition: 859
+distanceToGo: 75, currentPosition: 860
+distanceToGo: 74, currentPosition: 861
+distanceToGo: 73, currentPosition: 862
+distanceToGo: 72, currentPosition: 863
+distanceToGo: 71, currentPosition: 864
+distanceToGo: 70, currentPosition: 865
+distanceToGo: 69, currentPosition: 866
+distanceToGo: 68, currentPosition: 867
+distanceToGo: 67, currentPosition: 868
+distanceToGo: 66, currentPosition: 869
+distanceToGo: 65, currentPosition: 870
+distanceToGo: 64, currentPosition: 871
+distanceToGo: 63, currentPosition: 872
+distanceToGo: 62, currentPosition: 873
+distanceToGo: 61, currentPosition: 874
+distanceToGo: 60, currentPosition: 875
+distanceToGo: 59, currentPosition: 876
+distanceToGo: 58, currentPosition: 877
+distanceToGo: 57, currentPosition: 878
+distanceToGo: 56, currentPosition: 879
+distanceToGo: 55, currentPosition: 880
+distanceToGo: 54, currentPosition: 881
+distanceToGo: 53, currentPosition: 882
+distanceToGo: 52, currentPosition: 883
+distanceToGo: 51, currentPosition: 884
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+distanceToGo: 50, currentPosition: 885
+distanceToGo: 49, currentPosition: 886
+distanceToGo: 48, currentPosition: 887
+distanceToGo: 47, currentPosition: 888
+distanceToGo: 46, currentPosition: 889
+distanceToGo: 45, currentPosition: 890
+distanceToGo: 44, currentPosition: 891
+distanceToGo: 43, currentPosition: 892
+distanceToGo: 42, currentPosition: 893
+distanceToGo: 41, currentPosition: 894
+distanceToGo: 40, currentPosition: 895
+distanceToGo: 39, currentPosition: 896
+distanceToGo: 38, currentPosition: 897
+distanceToGo: 37, currentPosition: 898
+distanceToGo: 36, currentPosition: 899
+distanceToGo: 35, currentPosition: 900
+distanceToGo: 34, currentPosition: 901
+distanceToGo: 33, currentPosition: 902
+distanceToGo: 32, currentPosition: 903
+distanceToGo: 31, currentPosition: 904
+distanceToGo: 30, currentPosition: 905
+distanceToGo: 29, currentPosition: 906
+distanceToGo: 28, currentPosition: 907
+distanceToGo: 27, currentPosition: 908
+distanceToGo: 26, currentPosition: 909
+distanceToGo: 25, currentPosition: 910
+distanceToGo: 24, currentPosition: 911
+distanceToGo: 23, currentPosition: 912
+distanceToGo: 22, currentPosition: 913
+distanceToGo: 21, currentPosition: 914
+distanceToGo: 20, currentPosition: 915
+distanceToGo: 19, currentPosition: 916
+distanceToGo: 18, currentPosition: 917
+distanceToGo: 17, currentPosition: 918
+distanceToGo: 16, currentPosition: 919
+distanceToGo: 15, currentPosition: 920
+distanceToGo: 14, currentPosition: 921
+distanceToGo: 13, currentPosition: 922
+distanceToGo: 12, currentPosition: 923
+distanceToGo: 11, currentPosition: 924
+distanceToGo: 10, currentPosition: 925
+distanceToGo: 9, currentPosition: 926
+distanceToGo: 8, currentPosition: 927
+distanceToGo: 7, currentPosition: 928
+distanceToGo: 6, currentPosition: 929
+distanceToGo: 5, currentPosition: 930
+distanceToGo: 4, currentPosition: 931
+distanceToGo: 3, currentPosition: 932
+distanceToGo: 2, currentPosition: 933
+distanceToGo: 1, currentPosition: 934
+distanceToGo: 0, currentPosition: 935
+--- Notif received by ActionManager::PhotoTimelapse ---
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+distanceToGo: 0, currentPosition: 935
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 936
+distanceToGo: 98, currentPosition: 937
+distanceToGo: 97, currentPosition: 938
+distanceToGo: 96, currentPosition: 939
+distanceToGo: 95, currentPosition: 940
+distanceToGo: 94, currentPosition: 941
+distanceToGo: 93, currentPosition: 942
+distanceToGo: 92, currentPosition: 943
+distanceToGo: 91, currentPosition: 944
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+--- Notif received by ActionManager::PhotoTimelapse ---
+distanceToGo: 90, currentPosition: 945
+distanceToGo: 89, currentPosition: 946
+distanceToGo: 88, currentPosition: 947
+distanceToGo: 87, currentPosition: 948
+distanceToGo: 86, currentPosition: 949
+distanceToGo: 85, currentPosition: 950
+distanceToGo: 84, currentPosition: 951
+distanceToGo: 83, currentPosition: 952
+distanceToGo: 82, currentPosition: 953
+distanceToGo: 81, currentPosition: 954
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 80, currentPosition: 955
+distanceToGo: 79, currentPosition: 956
+distanceToGo: 78, currentPosition: 957
+distanceToGo: 77, currentPosition: 958
+distanceToGo: 76, currentPosition: 959
+distanceToGo: 75, currentPosition: 960
+distanceToGo: 74, currentPosition: 961
+distanceToGo: 73, currentPosition: 962
+distanceToGo: 72, currentPosition: 963
+distanceToGo: 71, currentPosition: 964
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+>>>>>>>> CaptureManager::waitTrigger() >>>>>>>>
+distanceToGo: 70, currentPosition: 965
+distanceToGo: 69, currentPosition: 966
+distanceToGo: 68, currentPosition: 967
+distanceToGo: 67, currentPosition: 968
+distanceToGo: 66, currentPosition: 969
+distanceToGo: 65, currentPosition: 970
+distanceToGo: 64, currentPosition: 971
+distanceToGo: 63, currentPosition: 972
+distanceToGo: 62, currentPosition: 973
+distanceToGo: 61, currentPosition: 974
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 60, currentPosition: 975
+distanceToGo: 59, currentPosition: 976
+distanceToGo: 58, currentPosition: 977
+distanceToGo: 57, currentPosition: 978
+distanceToGo: 56, currentPosition: 979
+distanceToGo: 55, currentPosition: 980
+distanceToGo: 54, currentPosition: 981
+distanceToGo: 53, currentPosition: 982
+distanceToGo: 52, currentPosition: 983
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::WAIT_FOR_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsCaptureIntervalDelayFinished() >>>>>>>>
+distanceToGo: 51, currentPosition: 984
+distanceToGo: 50, currentPosition: 985
+distanceToGo: 49, currentPosition: 986
+distanceToGo: 48, currentPosition: 987
+distanceToGo: 47, currentPosition: 988
+distanceToGo: 46, currentPosition: 989
+distanceToGo: 45, currentPosition: 990
+distanceToGo: 44, currentPosition: 991
+distanceToGo: 43, currentPosition: 992
+distanceToGo: 42, currentPosition: 993
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::GOTO_NEXT >>>>>>>>
+>>>>>>>> PhotoTimelapse::startCaptureIntervalDelayTimer() >>>>>>>>
+>>>>>>>> PhotoTimelapse::gotoNextTargetPosition() >>>>>>>>
+>>>>>>>> IMotor_move() >>>>>>>>
+>>>>>>>> MotorManager MOTOR_MOVE_CMD >>>>>>>>
+distanceToGo: 99, currentPosition: 994
+distanceToGo: 98, currentPosition: 995
+distanceToGo: 97, currentPosition: 996
+distanceToGo: 96, currentPosition: 997
+distanceToGo: 95, currentPosition: 998
+distanceToGo: 94, currentPosition: 999
+distanceToGo: 93, currentPosition: 1000
+distanceToGo: 92, currentPosition: 1001
+distanceToGo: 91, currentPosition: 1002
+distanceToGo: 90, currentPosition: 1003
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::MOVING_UNTIL_TARGET >>>>>>>>
+>>>>>>>> PhotoTimelapse::checkIsTargetReached() >>>>>>>>
+>>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>
+distanceToGo: 89, currentPosition: 1004
+distanceToGo: 88, currentPosition: 1005
+distanceToGo: 87, currentPosition: 1006
+distanceToGo: 86, currentPosition: 1007
+distanceToGo: 85, currentPosition: 1008
+distanceToGo: 84, currentPosition: 1009
+distanceToGo: 83, currentPosition: 1010
+distanceToGo: 82, currentPosition: 1011
+distanceToGo: 81, currentPosition: 1012
+distanceToGo: 80, currentPosition: 1013
+distanceToGo: 79, currentPosition: 1014
+distanceToGo: 78, currentPosition: 1015
+distanceToGo: 77, currentPosition: 1016
+distanceToGo: 76, currentPosition: 1017
+distanceToGo: 75, currentPosition: 1018
+distanceToGo: 74, currentPosition: 1019
+distanceToGo: 73, currentPosition: 1020
+distanceToGo: 72, currentPosition: 1021
+distanceToGo: 71, currentPosition: 1022
+distanceToGo: 70, currentPosition: 1023
+distanceToGo: 69, currentPosition: 1024
+distanceToGo: 68, currentPosition: 1025
+distanceToGo: 67, currentPosition: 1026
+distanceToGo: 66, currentPosition: 1027
+distanceToGo: 65, currentPosition: 1028
+distanceToGo: 64, currentPosition: 1029
+distanceToGo: 63, currentPosition: 1030
+distanceToGo: 62, currentPosition: 1031
+distanceToGo: 61, currentPosition: 1032
+distanceToGo: 60, currentPosition: 1033
+distanceToGo: 59, currentPosition: 1034
+distanceToGo: 58, currentPosition: 1035
+distanceToGo: 57, currentPosition: 1036
+distanceToGo: 56, currentPosition: 1037
+distanceToGo: 55, currentPosition: 1038
+distanceToGo: 54, currentPosition: 1039
+distanceToGo: 53, currentPosition: 1040
+distanceToGo: 52, currentPosition: 1041
+distanceToGo: 51, currentPosition: 1042
+>>>>>>>> PhotoTimelapse::onCaptureIntervalDelayTimeout() >>>>>>>>
+distanceToGo: 50, currentPosition: 1043
+distanceToGo: 49, currentPosition: 1044
+distanceToGo: 48, currentPosition: 1045
+distanceToGo: 47, currentPosition: 1046
+distanceToGo: 46, currentPosition: 1047
+distanceToGo: 45, currentPosition: 1048
+distanceToGo: 44, currentPosition: 1049
+distanceToGo: 43, currentPosition: 1050
+distanceToGo: 42, currentPosition: 1051
+distanceToGo: 41, currentPosition: 1052
+distanceToGo: 40, currentPosition: 1053
+distanceToGo: 39, currentPosition: 1054
+distanceToGo: 38, currentPosition: 1055
+distanceToGo: 37, currentPosition: 1056
+distanceToGo: 36, currentPosition: 1057
+distanceToGo: 35, currentPosition: 1058
+distanceToGo: 34, currentPosition: 1059
+distanceToGo: 33, currentPosition: 1060
+distanceToGo: 32, currentPosition: 1061
+distanceToGo: 31, currentPosition: 1062
+distanceToGo: 30, currentPosition: 1063
+distanceToGo: 29, currentPosition: 1064
+distanceToGo: 28, currentPosition: 1065
+distanceToGo: 27, currentPosition: 1066
+distanceToGo: 26, currentPosition: 1067
+distanceToGo: 25, currentPosition: 1068
+distanceToGo: 24, currentPosition: 1069
+distanceToGo: 23, currentPosition: 1070
+distanceToGo: 22, currentPosition: 1071
+distanceToGo: 21, currentPosition: 1072
+distanceToGo: 20, currentPosition: 1073
+distanceToGo: 19, currentPosition: 1074
+distanceToGo: 18, currentPosition: 1075
+distanceToGo: 17, currentPosition: 1076
+distanceToGo: 16, currentPosition: 1077
+distanceToGo: 15, currentPosition: 1078
+distanceToGo: 14, currentPosition: 1079
+distanceToGo: 13, currentPosition: 1080
+distanceToGo: 12, currentPosition: 1081
+distanceToGo: 11, currentPosition: 1082
+distanceToGo: 10, currentPosition: 1083
+distanceToGo: 9, currentPosition: 1084
+distanceToGo: 8, currentPosition: 1085
+distanceToGo: 7, currentPosition: 1086
+distanceToGo: 6, currentPosition: 1087
+distanceToGo: 5, currentPosition: 1088
+distanceToGo: 4, currentPosition: 1089
+distanceToGo: 3, currentPosition: 1090
+distanceToGo: 2, currentPosition: 1091
+distanceToGo: 1, currentPosition: 1092
+distanceToGo: 0, currentPosition: 1093
+--- Notif received by ActionManager::PhotoTimelapse ---
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+--- ActionManager: ActiveAction->run() ---
+>>>>>>>> State::TARGET_REACHED >>>>>>>>
+>>>>>>>> PhotoTimelapse::capturePhoto() >>>>>>>>
+>>>>>>>> ICamera_triggerCapture() >>>>>>>>
+--- Notif received by CaptureManager ---
+TAKE a CAPTURE
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
+distanceToGo: 0, currentPosition: 1093
