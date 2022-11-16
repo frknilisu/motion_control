@@ -66,7 +66,9 @@ void MotorManager::runLoop() {
     }
     this->onStepRun();
     Serial.print("distanceToGo: ");
-    Serial.println(this->stepper.distanceToGo());
+    Serial.print(this->stepper.distanceToGo());
+    Serial.print(", currentPosition: ");
+    Serial.println(this->stepper.currentPosition());
     if(this->stepper.distanceToGo() == 0) {
       xTaskNotifyGive(actionTaskHandle);
     }

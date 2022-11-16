@@ -43,6 +43,8 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
 void PhotoTimelapse::init() {
     Serial.println(">>>>>>>> PhotoTimelapse::init() >>>>>>>>");
 
+    this->capture_interval = 5;
+
     // create timer and its callback
     auto onTimer = [](xTimerHandle pxTimer){ 
         PhotoTimelapse* pt = static_cast<PhotoTimelapse*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
@@ -63,7 +65,7 @@ void PhotoTimelapse::init() {
     this->fps = 24;
     //this->shutter_speed = "1_500";
     this->number_of_photo = 720;
-    this->capture_interval = 5;
+    
 
     this->pa = 0;
     this->pb = 100*40*8;

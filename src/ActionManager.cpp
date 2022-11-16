@@ -50,9 +50,3 @@ void ActionManager::onMsgReceived() {
     }
   }
 }
-
-/*
-txJsonDoc["target"] = "MissionController";
-txJsonDoc["cmd"] = "ACTION_FINISH_MSG";
-xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
-*/
