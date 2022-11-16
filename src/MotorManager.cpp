@@ -69,8 +69,12 @@ void MotorManager::runLoop() {
     Serial.print(this->stepper.distanceToGo());
     Serial.print(", currentPosition: ");
     Serial.println(this->stepper.currentPosition());
-    if(this->stepper.distanceToGo() == 0) {
-      xTaskNotifyGive(actionTaskHandle);
+    if(this->stepper.distanceToGo() == 0 && this->targetState == "NEW_TARGET") {
+      Serial.println("-- DistanceToGo is 0, Notify ActionManager --");
+      this->targetState = "TARGET_REACHED";
+      uint32_t valueToSend = 32;
+      xTaskNotify(actionTaskHandle, valueToSend, eSetValueWithoutOverwrite);
+      this->targetState = "NO_TARGET";
     }
     vTaskDelay(100);
   }
@@ -101,17 +105,19 @@ void MotorManager::handleMsg() {
     controlType = "position";
 
     int targetPositionRelative = rxJsonDoc["relative"];
-    int speed = 500;
+    int speed = 1000;
     this->stepper.move(targetPositionRelative);
     this->stepper.setSpeed(speed);
+    this->targetState = "NEW_TARGET";
   } else if(cmd == "MOTOR_MOVE_TO_CMD") {
     Serial.println(">>>>>>>> MotorManager MOTOR_MOVE_TO_CMD >>>>>>>>");
     controlType = "position";
     
     int targetPositionAbsolute = rxJsonDoc["absolute"];
-    int speed = 500;
+    int speed = 1000;
     this->stepper.move(targetPositionAbsolute);
     this->stepper.setSpeed(speed);
+    this->targetState = "NEW_TARGET";
   }
   isNewMsgReceived = false;
   rxJsonDoc.clear();

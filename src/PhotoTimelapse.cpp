@@ -43,7 +43,7 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
 void PhotoTimelapse::init() {
     Serial.println(">>>>>>>> PhotoTimelapse::init() >>>>>>>>");
 
-    this->capture_interval = 5;
+    this->capture_interval = 15;
 
     // create timer and its callback
     auto onTimer = [](xTimerHandle pxTimer){ 
@@ -186,8 +186,9 @@ bool PhotoTimelapse::IMotor_checkMotorSyncNotification() {
     Serial.println(">>>>>>>> IMotor_checkMotorSyncNotification() >>>>>>>>");
 
     // wait until motor finish movement
-    xReturn = xTaskNotifyWait(0, 0, NULL, portMAX_DELAY);
-    if(xReturn == pdPASS) {
+    uint32_t receivedValue;
+    xReturn = xTaskNotifyWait(0, 0, &receivedValue, portMAX_DELAY);
+    if(xReturn == pdPASS && receivedValue == 32) {
       Serial.println("--- Notif received by ActionManager::PhotoTimelapse ---");
       return true;
     } else return false;

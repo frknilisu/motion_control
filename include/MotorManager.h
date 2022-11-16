@@ -43,6 +43,7 @@ class MotorManager {
     bool hasNewNotify = false;
     uint32_t currentStepPosition = 0;
     std::string stopReason;
+    std::string targetState = "NO_TARGET";
 
     bool isNewMsgReceived = false;
     StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
