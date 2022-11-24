@@ -57,12 +57,23 @@ messageSeq = [
     "motorStop"
 ]
 
+fpsList = [
+    "12", "24", "25", "30", "48", "50", "60", "96", "100", "120"
+]
+
+shutterSpeedList = [
+    "60", "30", "15", "8", "4", "2", "1", 
+    "1/2", "1/4", "1/8", "1/15", "1/30", "1/60", "1/80", 
+    "1/125", "1/250", "1/500", "1/1000", "1/2000", "1/4000", "1/8000"
+]
+
 class AsyncTk(Tk):
 
     def __init__(self):
         super().__init__()
         self.geometry('400x300')
         self.title('Slider Demo')
+        self.grid_columnconfigure((0, 1), weight=1)
 
         self.slider_value = tk.IntVar()
         self.next_msg = ""
@@ -77,13 +88,41 @@ class AsyncTk(Tk):
 
         self.slider.set(0)
         self.slider.bind('<ButtonRelease-1>', self.setZero)
-        self.slider.pack()
+        self.slider.grid(row=0, column=0, columnspan=5)
 
-        ttk.Button(self, text='Start Programming', command=lambda: self.assign_next_msg(0)).pack()
-        ttk.Button(self, text='SetA', command=lambda: self.assign_next_msg(1)).pack()
-        ttk.Button(self, text='SetB', command=lambda: self.assign_next_msg(2)).pack()
-        ttk.Button(self, text='Set Action Data', command=lambda: self.assign_next_msg(3)).pack()
-        ttk.Button(self, text='Finish Programming', command=lambda: self.assign_next_msg(4)).pack()
+        btn1 = ttk.Button(self, text='Start Programming', command=lambda: self.assign_next_msg(0))
+        btn2 = ttk.Button(self, text='SetA', command=lambda: self.assign_next_msg(1))
+        btn3 = ttk.Button(self, text='SetB', command=lambda: self.assign_next_msg(2))
+        btn4 = ttk.Button(self, text='Set Action Data', command=lambda: self.assign_next_msg(3))
+        btn5 = ttk.Button(self, text='Finish Programming', command=lambda: self.assign_next_msg(4))
+
+        label1 = ttk.Label(self, text="Timelapse Duration")
+        label2 = ttk.Label(self, text="FPS")
+        label3 = ttk.Label(self, text="Video Duration")
+        label4 = ttk.Label(self, text="Shutter Speed")
+        label5 = ttk.Label(self, text="Total Frames")
+
+        entry1 = ttk.Entry(self)
+        combo1 = ttk.Combobox(self, values = fpsList)
+        entry2 = ttk.Entry(self)
+        combo2 = ttk.Combobox(self, values = shutterSpeedList)
+        combo1.set("12")
+        combo2.set("1/500")
+
+        btn1.grid(row=1, column=0, columnspan=5)
+        btn2.grid(row=2, column=0, columnspan=5)
+        btn3.grid(row=3, column=0, columnspan=5)
+        label1.grid(row=4, column=0, sticky="e")
+        entry1.grid(row=4, column=1, sticky="w")
+        label2.grid(row=5, column=0, sticky="e")
+        combo1.grid(row=5, column=1, sticky="w")
+        label3.grid(row=6, column=0, sticky="e")
+        entry2.grid(row=6, column=1, sticky="w")
+        label4.grid(row=7, column=0, sticky="e")
+        combo2.grid(row=7, column=1, sticky="w")
+        label5.grid(row=8, column=0, sticky="e")
+        btn4.grid(row=9, column=0, columnspan=5)
+        btn5.grid(row=10, column=0, columnspan=5)
 
         self.running = True
         self.runners = [self.tk_loop()]
@@ -115,7 +154,7 @@ class App(AsyncTk):
     def __init__(self):
         super().__init__()
         #self.create_interface()
-        self.runners.append(self.uart_terminal())
+        #self.runners.append(self.uart_terminal())
 
     async def uart_terminal(self):
         print("uart_terminal")
