@@ -60,11 +60,11 @@ void PhotoTimelapse::init() {
 
     this->currentState = State::GOTO_NEXT;
 
-    this->record_duration = 60 * 60;
-    this->video_duration = 30;
-    this->fps = 24;
+    //this->record_duration = 60 * 60;
+    //this->video_duration = 30;
+    //this->fps = 24;
     //this->shutter_speed = "1_500";
-    this->number_of_photo = 720;
+    //this->number_of_photo = 720;
     
 
     this->pa = 0;
