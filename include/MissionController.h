@@ -28,7 +28,7 @@ class MissionController {
     int pa, pb, lastMotorPosition;
 
     bool isNewMsgReceived = false;
-    StaticJsonDocument<256> txJsonDoc, rxJsonDoc;
+    StaticJsonDocument<256> txJsonDoc, rxJsonDoc, rxJsonDocPosition;
 
     void setA();
     void setB();

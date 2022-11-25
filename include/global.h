@@ -2,7 +2,8 @@
 #define GLOBAL_H
 
 extern QueueHandle_t qMotorTask;
-extern QueueHandle_t qMissionTask;
+extern QueueHandle_t qMissionTaskData;
+extern QueueHandle_t qMissionTaskCmd;
 extern QueueHandle_t qCaptureTask;
 extern QueueHandle_t qBleTask;
 extern QueueHandle_t qActionTask;

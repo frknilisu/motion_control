@@ -36,7 +36,8 @@ void MissionController::init() {
   //Serial.println(">>>>>>>> MissionController::init() >>>>>>>>");
   ESP_LOGI(TAG, "");
 
-  qMissionTask = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
+  qMissionTaskData = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
+  qMissionTaskCmd = xQueueCreate(1, sizeof(StaticJsonDocument<256>));
 
   auto onTimer = [](xTimerHandle pxTimer){ 
     MissionController* mc = static_cast<MissionController*>(pvTimerGetTimerID(pxTimer)); // Retrieve the pointer to class
@@ -100,18 +101,25 @@ void MissionController::setFinishProgramming() {
 }
 
 void MissionController::onMsgReceived() {
-  if(uxQueueMessagesWaiting(qMissionTask) != 0) {
-    xReturn = xQueueReceive(qMissionTask, &rxJsonDoc, 0);
+  if(uxQueueMessagesWaiting(qMissionTaskData) != 0) {
+    xReturn = xQueueReceive(qMissionTaskData, &rxJsonDocPosition, 0);
     if(xReturn == pdTRUE) {
+      if(rxJsonDocPosition["msg"] == "motorPosition") {
+        lastMotorPosition = rxJsonDocPosition["data"];
+      }
+    }
+  }
+  
+  if(uxQueueMessagesWaiting(qMissionTaskCmd) != 0) {
+    xReturn = xQueueReceive(qMissionTaskCmd, &rxJsonDoc, 0);
+    if(xReturn == pdTRUE) {  
       isNewMsgReceived = true;
-      if(rxJsonDoc["msg"] == "motorPosition") {
-        lastMotorPosition = rxJsonDoc["data"];
-      } else if(rxJsonDoc["cmd"] == "SET_ACTION_DATA_CMD") {
+      if(rxJsonDoc["cmd"] == "SET_ACTION_DATA_CMD") {
         Serial.println("set action data");
         actionDataJson.clear();
         actionDataJson = rxJsonDoc;
       } else {
-        Serial.println("ELSE");
+        Serial.println((const char*)rxJsonDoc["cmd"]);
       }
     } else {
       isNewMsgReceived = false;

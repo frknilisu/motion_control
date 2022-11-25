@@ -208,6 +208,6 @@ void MotorManager::publishPosition() {
   txJsonDoc["msg"] = "motorPosition";
   txJsonDoc["data"] = currentStepPosition;
 
-  xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
+  xQueueSend(qMissionTaskData, &txJsonDoc, eSetValueWithOverwrite);
 }
 

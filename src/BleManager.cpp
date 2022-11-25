@@ -105,7 +105,7 @@ void BleManager::handleMsg(std::string receivedMsg) {
       txJsonDoc["target"] = "MissionController";
       txJsonDoc["cmd"] = "START_PROGRAMMING_CMD";
 
-      xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTaskCmd, &txJsonDoc, eSetValueWithOverwrite);
 
       break;
     case BLEMsgsEnum::msg_FinishProgramming:
@@ -114,7 +114,7 @@ void BleManager::handleMsg(std::string receivedMsg) {
       txJsonDoc["target"] = "MissionController";
       txJsonDoc["cmd"] = "FINISH_PROGRAMMING_CMD";
 
-      xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTaskCmd, &txJsonDoc, eSetValueWithOverwrite);
       
       break;
     case BLEMsgsEnum::msg_SetA:
@@ -123,7 +123,7 @@ void BleManager::handleMsg(std::string receivedMsg) {
       txJsonDoc["target"] = "MissionController";
       txJsonDoc["cmd"] = "SET_A_CMD";
 
-      xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTaskCmd, &txJsonDoc, eSetValueWithOverwrite);
 
       break;
     case BLEMsgsEnum::msg_SetB:
@@ -132,7 +132,7 @@ void BleManager::handleMsg(std::string receivedMsg) {
       txJsonDoc["target"] = "MissionController";
       txJsonDoc["cmd"] = "SET_B_CMD";
 
-      xQueueSend(qMissionTask, &txJsonDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTaskCmd, &txJsonDoc, eSetValueWithOverwrite);
 
       break;
     case BLEMsgsEnum::msg_SetActionData:
@@ -142,7 +142,7 @@ void BleManager::handleMsg(std::string receivedMsg) {
       receivedDoc["cmd"] = "SET_ACTION_DATA_CMD";
       //txJsonDoc["data"] = receivedDoc["data"];
 
-      xQueueSend(qMissionTask, &receivedDoc, eSetValueWithOverwrite);
+      xQueueSend(qMissionTaskCmd, &receivedDoc, eSetValueWithOverwrite);
 
       break;
     case BLEMsgsEnum::msg_MotorRun:

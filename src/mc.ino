@@ -10,7 +10,8 @@
 #include "esp_log.h"
 
 QueueHandle_t qMotorTask;
-QueueHandle_t qMissionTask;
+QueueHandle_t qMissionTaskData;
+QueueHandle_t qMissionTaskCmd;
 QueueHandle_t qCaptureTask;
 QueueHandle_t qBleTask;
 QueueHandle_t qActionTask;
