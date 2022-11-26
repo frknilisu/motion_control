@@ -8,11 +8,11 @@
 // Define the AccelStepper interface type
 #define MotorInterfaceType AccelStepper::DRIVER
 #define dirPin 26 // -> 19
-#define stepPin 25 // -> 18
-#define MS0 27 // -> 14
-#define MS1 16 // -> 27
-#define MS2 17 // -> 26
-#define enablePin 12 // -> 12
+#define stepPin 27 // -> 18
+#define MS0 33 // -> 14
+#define MS1 32 // -> 27
+#define MS2 35 // -> 26
+#define enablePin 25 // -> 12
 
 #define START_RUN_EVENT 0
 #define STOP_RUN_EVENT 1
