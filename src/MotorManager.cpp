@@ -76,7 +76,7 @@ void MotorManager::runLoop() {
       xTaskNotify(actionTaskHandle, valueToSend, eSetValueWithoutOverwrite);
       this->targetState = "NO_TARGET";
     }
-    vTaskDelay(100);
+    vTaskDelay(5);
   }
 }
 

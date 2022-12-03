@@ -13,12 +13,12 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
     motor_data = data["motor"];
     capture_data = data["capture"];
 
-    this->record_duration = capture_data["record_duration"]; // 60 * 60
-    this->video_duration = capture_data["video_duration"]; // 30
-    this->fps = capture_data["fps"]; // 24
+    this->record_duration = capture_data["record_duration"]; // 60
+    this->video_duration = capture_data["video_duration"]; // 2
+    this->fps = capture_data["fps"]; // 5
     this->shutter_speed = capture_data["shutter_speed"]; // "1_500"
-    this->number_of_photo = video_duration * fps; // 720
-    this->capture_interval = record_duration / number_of_photo; // 5
+    this->number_of_photo = video_duration * fps; // 10
+    this->capture_interval = record_duration / number_of_photo; // 6
     
     this->pa = motor_data["pa"];
     this->pb = motor_data["pb"];
@@ -26,7 +26,7 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
     Serial.println(this->pb);
     const char* s = motor_data["direction"]; 
     this->direction = s;
-    this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
+    this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb; // 2000
     this->step_interval = this->step_diff / this->number_of_photo;
 
     Serial.println(this->record_duration);
@@ -43,7 +43,7 @@ PhotoTimelapse::PhotoTimelapse(StaticJsonDocument<256> initParamsJson) {
 void PhotoTimelapse::init() {
     Serial.println(">>>>>>>> PhotoTimelapse::init() >>>>>>>>");
 
-    this->capture_interval = 15;
+    //this->capture_interval = 15;
 
     // create timer and its callback
     auto onTimer = [](xTimerHandle pxTimer){ 
@@ -67,11 +67,11 @@ void PhotoTimelapse::init() {
     //this->number_of_photo = 720;
     
 
-    this->pa = 0;
-    this->pb = 100*40*8;
-    this->direction = "a2b";
-    this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
-    this->step_interval = 100;
+    //this->pa = 0;
+    //this->pb = 100*40*8;
+    //this->direction = "a2b";
+    //this->step_diff = this->direction == "a2b" ? this->pb - this->pa : this->pa - this->pb;
+    //this->step_interval = 100;
 
 }
 
@@ -83,6 +83,7 @@ void PhotoTimelapse::run() {
     {
         case State::GOTO_NEXT:
             Serial.println(">>>>>>>> State::GOTO_NEXT >>>>>>>>");
+            ++iter_count;
             startCaptureIntervalDelayTimer();
             gotoNextTargetPosition();
             this->changeStateTo(State::MOVING_UNTIL_TARGET);
